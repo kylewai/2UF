@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "904441233679",
+    "firebase_url": "https://uf-0-bc8fe.firebaseio.com",
+    "project_id": "uf-0-bc8fe",
+    "storage_bucket": "uf-0-bc8fe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:904441233679:android:5c8a341067f3ace07a3e7a",
+        "android_client_info": {
+          "package_name": "com.example.kylewai.a2uf"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "904441233679-ohbm50ju6p3vka7v0ngp1hscp4lfau7o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBplk7qIjddImG_VPl9eM2PqQ2X7CJG_Fg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "904441233679-ohbm50ju6p3vka7v0ngp1hscp4lfau7o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
