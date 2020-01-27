@@ -1,18 +1,471 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
+    <TableLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:stretchColumns="*">
+        <TableRow style="@style/table_row">
+            <TextView
+                android:text="TIME"
+                style="@style/time_label_cell" />
+            <TextView
+                android:text="MON"
+                style="@style/day_label_cell" />
+            <TextView
+                android:text="TUE"
+                style="@style/day_label_cell" />
+            <TextView
+                android:text="WED"
+                style="@style/day_label_cell" />
+            <TextView
+                android:text="THU"
+                style="@style/day_label_cell" />
+            <TextView
+                android:text="FRI"
+                style="@style/day_label_cell" />
+            <TextView
+                android:text="SAT"
+                style="@style/day_label_cell" />
+        </TableRow>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TableRow style="@style/table_row">
+            <TextView
+                android:text="7:25-\n8:15"
+                style="@style/time_cell" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                style="@style/class_cell"
+                android:text="COP3503" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="COP3503" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="COP3503" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+        </TableRow>
+
+        <TableRow style="@style/table_row">
+            <TextView
+                android:text="7:25-\n8:15"
+                style="@style/time_cell" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="CDA3101" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="CDA3101" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+        </TableRow>
+
+        <TableRow style="@style/table_row">
+            <TextView
+                android:text="7:25-\n8:15"
+                style="@style/time_cell" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+        </TableRow>
+
+        <TableRow style="@style/table_row">
+            <TextView
+                android:text="7:25-\n8:15"
+                style="@style/time_cell" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+        </TableRow>
+
+        <TableRow style="@style/table_row">
+            <TextView
+                android:text="7:25-\n8:15"
+                style="@style/time_cell" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+        </TableRow>
+
+        <TableRow style="@style/table_row">
+            <TextView
+                android:text="7:25-\n8:15"
+                style="@style/time_cell" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+        </TableRow>
+
+        <TableRow style="@style/table_row">
+            <TextView
+                android:text="7:25-\n8:15"
+                style="@style/time_cell" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+        </TableRow>
+
+        <TableRow style="@style/table_row">
+            <TextView
+                android:text="7:25-\n8:15"
+                style="@style/time_cell" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+        </TableRow>
+
+        <TableRow style="@style/table_row">
+            <TextView
+                android:text="7:25-\n8:15"
+                style="@style/time_cell" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+        </TableRow>
+
+        <TableRow style="@style/table_row">
+            <TextView
+                android:text="7:25-\n8:15"
+                style="@style/time_cell" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+        </TableRow>
+
+        <TableRow style="@style/table_row">
+            <TextView
+                android:text="7:25-\n8:15"
+                style="@style/time_cell" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+        </TableRow>
+
+        <TableRow style="@style/table_row">
+            <TextView
+                android:text="7:25-\n8:15"
+                style="@style/time_cell" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+        </TableRow>
+
+        <TableRow style="@style/table_row">
+            <TextView
+                android:text="7:25-\n8:15"
+                style="@style/time_cell" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+        </TableRow>
+
+        <TableRow style="@style/table_row">
+            <TextView
+                android:text="7:25-\n8:15"
+                style="@style/time_cell" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                style="@style/class_cell"
+                android:text="" />
+
+        </TableRow>
+
+    </TableLayout>
+</ScrollView>
