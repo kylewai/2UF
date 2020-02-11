@@ -21,18 +21,19 @@ public class LoginActivity extends AppCompatActivity {
     private SharedPreferences sharedPref;
     private String sharedPrefFile = "com.example.kylewai.test";
     static final String EXTRA_EMAIL = "com.example.kylewai.email";
-    static final String EXTRA_PASSWORD = "com.example.kylewa.password";
+    static final String EXTRA_PASSWORD = "com.example.kylewai.password";
     static final String EXTRA_UID = "com.example.kylewai.uid";
     private TextView text_username;
     private TextView text_password;
     private FirebaseAuth mAuth;
     Intent intent_user_schedule;
     Intent register_intent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        intent_user_schedule = new Intent(this, UserScheduleActivity.class);
+        intent_user_schedule = new Intent(this, MainActivity.class);
         sharedPref = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
         mAuth = FirebaseAuth.getInstance();
         if(sharedPref.contains(EXTRA_EMAIL)){
@@ -55,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onPause();
         Log.d("LoginActivity", "HERE ON PAUSE!!!!**");
     }
+
 
     public void authenticate(View view){
         String email = text_username.getText().toString();
@@ -79,6 +81,7 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
+
     public void addSharedPreferences(String email, String password){
         if(!sharedPref.contains(EXTRA_EMAIL)) {
             SharedPreferences.Editor editor = sharedPref.edit();
@@ -96,6 +99,11 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
         addSharedPreferences(user.getEmail(), password);
+        start_user_activity(user);
+    }
+
+
+    public void start_user_activity(FirebaseUser user){
         Bundle extras = new Bundle();
         extras.putString(EXTRA_EMAIL, user.getEmail());
         extras.putString(EXTRA_UID, user.getUid());

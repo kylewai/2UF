@@ -24,6 +24,7 @@ public class RegisterActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     Intent intent_user_schedule;
     SharedPreferences sharedPref;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,16 +32,16 @@ public class RegisterActivity extends AppCompatActivity {
         text_username = findViewById(R.id.textView_username);
         text_password = findViewById(R.id.textView_password);
         mAuth = FirebaseAuth.getInstance();
-        intent_user_schedule = new Intent(this, UserScheduleActivity.class);
+        intent_user_schedule = new Intent(this, MainActivity.class);
         sharedPref = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
     }
 
 
     public void addSharedPreferences(String email, String password){
-        if(!sharedPref.contains(MainActivity.EXTRA_EMAIL)) {
+        if(!sharedPref.contains(LoginActivity.EXTRA_EMAIL)) {
             SharedPreferences.Editor editor = sharedPref.edit();
-            editor.putString(MainActivity.EXTRA_EMAIL, email);
-            editor.putString(MainActivity.EXTRA_PASSWORD, password);
+            editor.putString(LoginActivity.EXTRA_EMAIL, email);
+            editor.putString(LoginActivity.EXTRA_PASSWORD, password);
             editor.apply();
         }
         return;
@@ -53,11 +54,7 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
         addSharedPreferences(user.getEmail(), password);
-        Bundle extras = new Bundle();
-        extras.putString(MainActivity.EXTRA_EMAIL, user.getEmail());
-        extras.putString(MainActivity.EXTRA_UID, user.getUid());
-        intent_user_schedule.putExtras(extras);
-        startActivity(intent_user_schedule);
+        start_user_activity(user);
     }
 
 
@@ -67,6 +64,7 @@ public class RegisterActivity extends AppCompatActivity {
         String password = text_password.getText().toString();
         firebase_sign_in(email, password);
     }
+
 
     public void firebase_sign_in(String email, final String password){
         mAuth.createUserWithEmailAndPassword(email, password)
@@ -82,5 +80,14 @@ public class RegisterActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+
+    public void start_user_activity(FirebaseUser user){
+        Bundle extras = new Bundle();
+        extras.putString(LoginActivity.EXTRA_EMAIL, user.getEmail());
+        extras.putString(LoginActivity.EXTRA_UID, user.getUid());
+        intent_user_schedule.putExtras(extras);
+        startActivity(intent_user_schedule);
     }
 }

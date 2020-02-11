@@ -8,6 +8,11 @@
         android:minSdkVersion="26"
         android:targetSdkVersion="28" />
 
+    <!-- Although the *SdkVersion is captured in gradle build files, this is required for non gradle builds -->
+    <!-- <uses-sdk android:minSdkVersion="14" /> -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
@@ -18,15 +23,17 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/AppTheme" >
-        <activity android:name="com.example.kylewai.a2uf.LoginActivity" />
-        <activity android:name="com.example.kylewai.a2uf.RegisterActivity" />
-        <activity android:name="com.example.kylewai.a2uf.UserScheduleActivity" />
-        <activity android:name="com.example.kylewai.a2uf.MainActivity" >
+        <activity android:name="com.example.kylewai.a2uf.SplashScreenActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name="com.example.kylewai.a2uf.LoginActivity" />
+        <activity android:name="com.example.kylewai.a2uf.RegisterActivity" />
+        <activity android:name="com.example.kylewai.a2uf.UserScheduleActivity" />
+        <activity android:name="com.example.kylewai.a2uf.MainActivity" >
         </activity>
         <activity
             android:name="com.google.firebase.auth.internal.FederatedSignInActivity"
@@ -42,6 +49,9 @@
             android:exported="false" >
             <meta-data
                 android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
+                android:value="com.google.firebase.components.ComponentRegistrar" />
+            <meta-data
+                android:name="com.google.firebase.components:com.google.firebase.firestore.FirestoreRegistrar"
                 android:value="com.google.firebase.components.ComponentRegistrar" />
         </service>
 
