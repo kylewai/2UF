@@ -103,36 +103,40 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] C:\Users\Ky
 		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:6:9-35
 	android:theme
 		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:11:9-40
+activity#com.example.kylewai.a2uf.MockScheduleList
+ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:12:9-63
+	android:name
+		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:12:19-51
 activity#com.example.kylewai.a2uf.SplashScreenActivity
-ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:12:9-18:20
+ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:13:9-19:20
 	android:name
-		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:12:19-55
+		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:13:19-55
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:13:13-17:29
+ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:14:13-18:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:14:17-69
+ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:15:17-69
 	android:name
-		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:14:25-66
+		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:15:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:16:17-77
+ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:17:17-77
 	android:name
-		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:16:27-74
+		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:17:27-74
 activity#com.example.kylewai.a2uf.LoginActivity
-ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:19:9-51
+ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:20:9-51
 	android:name
-		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:19:19-48
+		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:20:19-48
 activity#com.example.kylewai.a2uf.RegisterActivity
-ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:20:9-54
+ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:21:9-54
 	android:name
-		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:20:19-51
+		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:21:19-51
 activity#com.example.kylewai.a2uf.UserScheduleActivity
-ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:21:9-58
+ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:22:9-58
 	android:name
-		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:21:19-55
+		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:22:19-55
 activity#com.example.kylewai.a2uf.MainActivity
-ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:22:9-23:20
+ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:23:9-59
 	android:name
-		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:22:19-47
+		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:23:19-47
 uses-sdk
 INJECTED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml

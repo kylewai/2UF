@@ -4,6 +4,7 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Other style attributes -->
         <item name="windowActionBar">false</item>
+        <item name="android:windowContentTransitions">true</item>
         <item name="windowNoTitle">true</item>
     </style>
 

@@ -39,7 +39,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         intent_sign_in = new Intent(this, LoginActivity.class);
 
         if(mAuth.getCurrentUser() != null){
-            startActivity(intent_user_schedule);
+            start_user_activity(mAuth.getCurrentUser());
         }
         else if(sharedPref.contains(EXTRA_EMAIL)){
             String email = "";

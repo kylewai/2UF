@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scene_root"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
     <TableLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:stretchColumns="*">
+        android:stretchColumns="*"
+        android:id="@+id/table_layout">
         <TableRow style="@style/table_row">
             <TextView
                 android:text="TIME"
@@ -35,30 +35,37 @@
 
         <TableRow style="@style/table_row">
             <TextView
-                android:text="7:25-\n8:15"
+                android:text="1"
                 style="@style/time_cell" />
 
             <TextView
+                android:id="@+id/M1"
                 style="@style/class_cell"
-                android:text="COP3503" />
+                android:transitionName="expand"
+                android:text="" />
 
             <TextView
+                android:id="@+id/T1"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
-                style="@style/class_cell"
-                android:text="COP3503" />
-
-            <TextView
+                android:id="@+id/W1"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/R1"
                 style="@style/class_cell"
-                android:text="COP3503" />
+                android:text="" />
 
             <TextView
+                android:id="@+id/F1"
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/S1"
                 style="@style/class_cell"
                 android:text="" />
 
@@ -66,30 +73,36 @@
 
         <TableRow style="@style/table_row">
             <TextView
-                android:text="7:25-\n8:15"
+                android:text="2"
                 style="@style/time_cell" />
 
             <TextView
+                android:id="@+id/M2"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
-                style="@style/class_cell"
-                android:text="CDA3101" />
-
-            <TextView
+                android:id="@+id/T2"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
-                style="@style/class_cell"
-                android:text="CDA3101" />
-
-            <TextView
+                android:id="@+id/W2"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/R2"
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/F2"
+                style="@style/class_cell"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/S2"
                 style="@style/class_cell"
                 android:text="" />
 
@@ -97,30 +110,36 @@
 
         <TableRow style="@style/table_row">
             <TextView
-                android:text="7:25-\n8:15"
+                android:text="3"
                 style="@style/time_cell" />
 
             <TextView
+                android:id="@+id/M3"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/T3"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/W3"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/R3"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/F3"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/S3"
                 style="@style/class_cell"
                 android:text="" />
 
@@ -128,30 +147,36 @@
 
         <TableRow style="@style/table_row">
             <TextView
-                android:text="7:25-\n8:15"
+                android:text="4"
                 style="@style/time_cell" />
 
             <TextView
+                android:id="@+id/M4"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/T4"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/W4"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/R4"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/F4"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/S4"
                 style="@style/class_cell"
                 android:text="" />
 
@@ -159,30 +184,36 @@
 
         <TableRow style="@style/table_row">
             <TextView
-                android:text="7:25-\n8:15"
+                android:text="5"
                 style="@style/time_cell" />
 
             <TextView
+                android:id="@+id/M5"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/T5"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/W5"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/R5"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/F5"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/S5"
                 style="@style/class_cell"
                 android:text="" />
 
@@ -190,30 +221,36 @@
 
         <TableRow style="@style/table_row">
             <TextView
-                android:text="7:25-\n8:15"
+                android:text="6"
                 style="@style/time_cell" />
 
             <TextView
+                android:id="@+id/M6"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/T6"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/W6"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/R6"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/F6"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/S6"
                 style="@style/class_cell"
                 android:text="" />
 
@@ -221,30 +258,36 @@
 
         <TableRow style="@style/table_row">
             <TextView
-                android:text="7:25-\n8:15"
+                android:text="7"
                 style="@style/time_cell" />
 
             <TextView
+                android:id="@+id/M7"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/T7"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/W7"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/R7"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/F7"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/S7"
                 style="@style/class_cell"
                 android:text="" />
 
@@ -252,30 +295,36 @@
 
         <TableRow style="@style/table_row">
             <TextView
-                android:text="7:25-\n8:15"
+                android:text="8"
                 style="@style/time_cell" />
 
             <TextView
+                android:id="@+id/M8"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/T8"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/W8"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/R8"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/F8"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/S8"
                 style="@style/class_cell"
                 android:text="" />
 
@@ -283,30 +332,36 @@
 
         <TableRow style="@style/table_row">
             <TextView
-                android:text="7:25-\n8:15"
+                android:text="9"
                 style="@style/time_cell" />
 
             <TextView
+                android:id="@+id/M9"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/T9"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/W9"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/R9"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/F9"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/S9"
                 style="@style/class_cell"
                 android:text="" />
 
@@ -314,30 +369,36 @@
 
         <TableRow style="@style/table_row">
             <TextView
-                android:text="7:25-\n8:15"
+                android:text="10"
                 style="@style/time_cell" />
 
             <TextView
+                android:id="@+id/M10"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/T10"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/W10"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/R10"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/F10"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/S10"
                 style="@style/class_cell"
                 android:text="" />
 
@@ -345,30 +406,37 @@
 
         <TableRow style="@style/table_row">
             <TextView
-                android:text="7:25-\n8:15"
+                android:text="11"
                 style="@style/time_cell" />
 
             <TextView
+                android:id="@+id/M11"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/T11"
+                style="@style/class_cell"
+                android:transitionName="expand"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/W11"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/R11"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/F11"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
-                style="@style/class_cell"
-                android:text="" />
-
-            <TextView
+                android:id="@+id/S11"
                 style="@style/class_cell"
                 android:text="" />
 
@@ -376,30 +444,36 @@
 
         <TableRow style="@style/table_row">
             <TextView
-                android:text="7:25-\n8:15"
+                android:text="E1"
                 style="@style/time_cell" />
 
             <TextView
+                android:id="@+id/ME1"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/TE1"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/WE1"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/RE1"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/FE1"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/SE1"
                 style="@style/class_cell"
                 android:text="" />
 
@@ -407,30 +481,36 @@
 
         <TableRow style="@style/table_row">
             <TextView
-                android:text="7:25-\n8:15"
+                android:text="E2"
                 style="@style/time_cell" />
 
             <TextView
+                android:id="@+id/ME2"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/TE2"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/WE2"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/RE2"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/FE2"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/SE2"
                 style="@style/class_cell"
                 android:text="" />
 
@@ -438,30 +518,36 @@
 
         <TableRow style="@style/table_row">
             <TextView
-                android:text="7:25-\n8:15"
+                android:text="E3"
                 style="@style/time_cell" />
 
             <TextView
+                android:id="@+id/ME3"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/TE3"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/WE3"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/RE3"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/FE3"
                 style="@style/class_cell"
                 android:text="" />
 
             <TextView
+                android:id="@+id/SE3"
                 style="@style/class_cell"
                 android:text="" />
 
