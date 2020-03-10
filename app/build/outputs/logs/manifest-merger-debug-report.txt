@@ -1,14 +1,17 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:2:1-26:12
-INJECTED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:2:1-26:12
-INJECTED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:2:1-26:12
-INJECTED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:2:1-26:12
+ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:2:1-35:12
+INJECTED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:2:1-35:12
+INJECTED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:2:1-35:12
+INJECTED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:2:1-35:12
 MERGED from [com.google.android.material:material:1.0.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\3f2791d3ecf41ed9e54a91eddcfa2ad3\material-1.0.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.appcompat:appcompat:1.0.2] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\322b93496bc0a8d8306a6c7db877b529\appcompat-1.0.2\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\81a362b35962fa2496d450cbee5c4ecc\constraintlayout-1.1.3\AndroidManifest.xml:2:1-11:12
 MERGED from [com.google.firebase:firebase-auth:19.2.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\1569b356ae21c59997606b87853bf436\firebase-auth-19.2.0\AndroidManifest.xml:17:1-42:12
+MERGED from [com.firebaseui:firebase-ui-firestore:6.2.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\39530ee2905fdbdc5a6473ddaf5657fd\firebase-ui-firestore-6.2.0\AndroidManifest.xml:2:1-13:12
 MERGED from [com.google.firebase:firebase-firestore:21.4.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\2d606b7af942f4ef21f2b8e7de1cbf3c\jetified-firebase-firestore-21.4.0\AndroidManifest.xml:2:1-26:12
+MERGED from [io.grpc:grpc-android:1.21.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\e784f8a678ea44afdc5d8546de0f1e45\grpc-android-1.21.0\AndroidManifest.xml:2:1-13:12
+MERGED from [com.android.volley:volley:1.1.1] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\9224dde779652821c0e94cab6dcfbc38\jetified-volley-1.1.1\AndroidManifest.xml:2:1-11:12
 MERGED from [androidx.legacy:legacy-support-v4:1.0.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\874c23737bb823accb64b8c68ad31d78\legacy-support-v4-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.firebase:firebase-auth-interop:19.0.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\95cac792b06b7c326f578201166b4b2b\firebase-auth-interop-19.0.0\AndroidManifest.xml:2:1-10:12
 MERGED from [com.google.android.gms:play-services-base:17.1.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\6d206c10dfcd7e4d261b33c292c090cb\play-services-base-17.1.0\AndroidManifest.xml:17:1-29:12
@@ -36,37 +39,45 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] C:\Users\Ky
 MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\bf49d1e9988754dbe0dc022e3b661608\cursoradapter-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\31e1e0ea40abf50bc1f09972fcda6618\localbroadcastmanager-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.firebase:firebase-components:16.0.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\396d752fdf8ba4b880d53e950f380b74\jetified-firebase-components-16.0.0\AndroidManifest.xml:15:1-23:12
+MERGED from [com.firebaseui:firebase-ui-common:6.2.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\29b31cd9ee88314406d2cc07c4b33c49\firebase-ui-common-6.2.0\AndroidManifest.xml:2:1-11:12
 MERGED from [androidx.cardview:cardview:1.0.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\d619842a7eaf1130694ae1c01f978c20\cardview-1.0.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\50f81140c264a8073fe592ddffff89df\lifecycle-runtime-2.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\a072b7027d050ba4a28e8ed0f5aedf24\documentfile-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.print:print:1.0.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\9a92904b990e3cb14e2f3d12a60bfcf2\print-1.0.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\8e0a48ec530e34b26a7ca3f155b641b5\lifecycle-viewmodel-2.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\eacaec61a98c327bdb4a7a1173d930da\lifecycle-runtime-2.1.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\3576101df1addecb45ee4a121a0809b3\lifecycle-viewmodel-2.1.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\5080ea4c3a94602e590d65de9668e7d9\interpolator-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\ba1ca6d966f0903bfbc154284174b676\lifecycle-livedata-2.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\cf1beec41d3606c2f878b1c5dd26a539\lifecycle-livedata-core-2.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\5e0444443ffb82f923834973bbf621d3\core-runtime-2.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.firebase:firebase-database-collection:17.0.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\7189998640d03cd8247a01f86409460d\firebase-database-collection-17.0.0\AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.firebase:protolite-well-known-types:17.0.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\dacab2ed7474744f5d85ca77b44b418e\protolite-well-known-types-17.0.0\AndroidManifest.xml:2:1-11:12
-MERGED from [io.grpc:grpc-android:1.21.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\e784f8a678ea44afdc5d8546de0f1e45\grpc-android-1.21.0\AndroidManifest.xml:2:1-13:12
-INJECTED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:2:1-26:12
-INJECTED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:2:1-26:12
-INJECTED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:2:1-26:12
+INJECTED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:2:1-35:12
+INJECTED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:2:1-35:12
+INJECTED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:2:1-35:12
 	package
 		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:3:5-39
 		INJECTED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:2:1-26:12
+		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:2:1-35:12
 		INJECTED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:2:1-26:12
+		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:2:1-35:12
 		INJECTED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:2:11-69
+uses-permission#android.permission.INTERNET
+ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:5:5-67
+MERGED from [com.firebaseui:firebase-ui-firestore:6.2.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\39530ee2905fdbdc5a6473ddaf5657fd\firebase-ui-firestore-6.2.0\AndroidManifest.xml:11:5-67
+MERGED from [com.firebaseui:firebase-ui-firestore:6.2.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\39530ee2905fdbdc5a6473ddaf5657fd\firebase-ui-firestore-6.2.0\AndroidManifest.xml:11:5-67
+MERGED from [com.google.firebase:firebase-firestore:21.4.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\2d606b7af942f4ef21f2b8e7de1cbf3c\jetified-firebase-firestore-21.4.0\AndroidManifest.xml:14:5-67
+MERGED from [com.google.firebase:firebase-firestore:21.4.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\2d606b7af942f4ef21f2b8e7de1cbf3c\jetified-firebase-firestore-21.4.0\AndroidManifest.xml:14:5-67
+	android:name
+		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:5:22-64
 application
-ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:5:5-24:19
+ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:7:5-33:19
 MERGED from [com.google.android.material:material:1.0.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\3f2791d3ecf41ed9e54a91eddcfa2ad3\material-1.0.0\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.0.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\3f2791d3ecf41ed9e54a91eddcfa2ad3\material-1.0.0\AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\81a362b35962fa2496d450cbee5c4ecc\constraintlayout-1.1.3\AndroidManifest.xml:9:5-20
@@ -75,6 +86,8 @@ MERGED from [com.google.firebase:firebase-auth:19.2.0] C:\Users\KyleWai\.gradle\
 MERGED from [com.google.firebase:firebase-auth:19.2.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\1569b356ae21c59997606b87853bf436\firebase-auth-19.2.0\AndroidManifest.xml:23:5-40:19
 MERGED from [com.google.firebase:firebase-firestore:21.4.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\2d606b7af942f4ef21f2b8e7de1cbf3c\jetified-firebase-firestore-21.4.0\AndroidManifest.xml:16:5-24:19
 MERGED from [com.google.firebase:firebase-firestore:21.4.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\2d606b7af942f4ef21f2b8e7de1cbf3c\jetified-firebase-firestore-21.4.0\AndroidManifest.xml:16:5-24:19
+MERGED from [com.android.volley:volley:1.1.1] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\9224dde779652821c0e94cab6dcfbc38\jetified-volley-1.1.1\AndroidManifest.xml:9:5-20
+MERGED from [com.android.volley:volley:1.1.1] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\9224dde779652821c0e94cab6dcfbc38\jetified-volley-1.1.1\AndroidManifest.xml:9:5-20
 MERGED from [com.google.firebase:firebase-auth-interop:19.0.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\95cac792b06b7c326f578201166b4b2b\firebase-auth-interop-19.0.0\AndroidManifest.xml:7:5-8:19
 MERGED from [com.google.firebase:firebase-auth-interop:19.0.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\95cac792b06b7c326f578201166b4b2b\firebase-auth-interop-19.0.0\AndroidManifest.xml:7:5-8:19
 MERGED from [com.google.android.gms:play-services-base:17.1.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\6d206c10dfcd7e4d261b33c292c090cb\play-services-base-17.1.0\AndroidManifest.xml:22:5-27:19
@@ -92,51 +105,57 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] C:\Users\Ky
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.0.1] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\75e70da198df93807ed751edcaee621f\core-1.0.1\AndroidManifest.xml:22:18-86
 	android:supportsRtl
-		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:10:9-35
+		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:12:9-35
 	android:label
-		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:8:9-41
+		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:10:9-41
 	android:roundIcon
-		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:9:9-54
+		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:11:9-54
 	android:icon
-		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:7:9-43
+		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:9:9-43
 	android:allowBackup
-		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:6:9-35
+		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:8:9-35
 	android:theme
-		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:11:9-40
-activity#com.example.kylewai.a2uf.MockScheduleList
-ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:12:9-63
-	android:name
-		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:12:19-51
-activity#com.example.kylewai.a2uf.SplashScreenActivity
-ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:13:9-19:20
-	android:name
-		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:13:19-55
-intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:14:13-18:29
-action#android.intent.action.MAIN
-ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:15:17-69
-	android:name
-		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:15:25-66
-category#android.intent.category.LAUNCHER
-ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:17:17-77
-	android:name
-		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:17:27-74
-activity#com.example.kylewai.a2uf.LoginActivity
-ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:20:9-51
-	android:name
-		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:20:19-48
-activity#com.example.kylewai.a2uf.RegisterActivity
-ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:21:9-54
-	android:name
-		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:21:19-51
-activity#com.example.kylewai.a2uf.UserScheduleActivity
-ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:22:9-58
-	android:name
-		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:22:19-55
+		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:13:9-40
 activity#com.example.kylewai.a2uf.MainActivity
-ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:23:9-59
+ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:14:9-50
 	android:name
-		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:23:19-47
+		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:14:19-47
+activity#com.example.kylewai.a2uf.individualMockActivity.MockScheduleActivity
+ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:15:9-23:20
+	android:parentActivityName
+		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:18:13-55
+	android:label
+		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:17:13-29
+	android:name
+		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:16:13-72
+meta-data#android.support.PARENT_ACTIVITY
+ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:19:13-22:63
+	android:value
+		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:21:17-92
+	android:name
+		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:20:17-63
+activity#com.example.kylewai.a2uf.SplashScreenActivity
+ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:24:9-30:20
+	android:name
+		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:24:19-55
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:25:13-29:29
+action#android.intent.action.MAIN
+ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:26:17-69
+	android:name
+		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:26:25-66
+category#android.intent.category.LAUNCHER
+ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:28:17-77
+	android:name
+		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:28:27-74
+activity#com.example.kylewai.a2uf.LoginActivity
+ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:31:9-51
+	android:name
+		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:31:19-48
+activity#com.example.kylewai.a2uf.RegisterActivity
+ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:32:9-54
+	android:name
+		ADDED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:32:19-51
 uses-sdk
 INJECTED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml
@@ -149,8 +168,14 @@ MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] C:\Users\KyleWai\
 MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\81a362b35962fa2496d450cbee5c4ecc\constraintlayout-1.1.3\AndroidManifest.xml:5:5-7:41
 MERGED from [com.google.firebase:firebase-auth:19.2.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\1569b356ae21c59997606b87853bf436\firebase-auth-19.2.0\AndroidManifest.xml:21:5-44
 MERGED from [com.google.firebase:firebase-auth:19.2.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\1569b356ae21c59997606b87853bf436\firebase-auth-19.2.0\AndroidManifest.xml:21:5-44
+MERGED from [com.firebaseui:firebase-ui-firestore:6.2.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\39530ee2905fdbdc5a6473ddaf5657fd\firebase-ui-firestore-6.2.0\AndroidManifest.xml:7:5-9:41
+MERGED from [com.firebaseui:firebase-ui-firestore:6.2.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\39530ee2905fdbdc5a6473ddaf5657fd\firebase-ui-firestore-6.2.0\AndroidManifest.xml:7:5-9:41
 MERGED from [com.google.firebase:firebase-firestore:21.4.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\2d606b7af942f4ef21f2b8e7de1cbf3c\jetified-firebase-firestore-21.4.0\AndroidManifest.xml:7:5-9:41
 MERGED from [com.google.firebase:firebase-firestore:21.4.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\2d606b7af942f4ef21f2b8e7de1cbf3c\jetified-firebase-firestore-21.4.0\AndroidManifest.xml:7:5-9:41
+MERGED from [io.grpc:grpc-android:1.21.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\e784f8a678ea44afdc5d8546de0f1e45\grpc-android-1.21.0\AndroidManifest.xml:7:5-9:41
+MERGED from [io.grpc:grpc-android:1.21.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\e784f8a678ea44afdc5d8546de0f1e45\grpc-android-1.21.0\AndroidManifest.xml:7:5-9:41
+MERGED from [com.android.volley:volley:1.1.1] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\9224dde779652821c0e94cab6dcfbc38\jetified-volley-1.1.1\AndroidManifest.xml:7:5-43
+MERGED from [com.android.volley:volley:1.1.1] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\9224dde779652821c0e94cab6dcfbc38\jetified-volley-1.1.1\AndroidManifest.xml:7:5-43
 MERGED from [androidx.legacy:legacy-support-v4:1.0.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\874c23737bb823accb64b8c68ad31d78\legacy-support-v4-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.legacy:legacy-support-v4:1.0.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\874c23737bb823accb64b8c68ad31d78\legacy-support-v4-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [com.google.firebase:firebase-auth-interop:19.0.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\95cac792b06b7c326f578201166b4b2b\firebase-auth-interop-19.0.0\AndroidManifest.xml:5:5-44
@@ -205,16 +230,18 @@ MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\User
 MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\31e1e0ea40abf50bc1f09972fcda6618\localbroadcastmanager-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [com.google.firebase:firebase-components:16.0.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\396d752fdf8ba4b880d53e950f380b74\jetified-firebase-components-16.0.0\AndroidManifest.xml:19:5-21:41
 MERGED from [com.google.firebase:firebase-components:16.0.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\396d752fdf8ba4b880d53e950f380b74\jetified-firebase-components-16.0.0\AndroidManifest.xml:19:5-21:41
+MERGED from [com.firebaseui:firebase-ui-common:6.2.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\29b31cd9ee88314406d2cc07c4b33c49\firebase-ui-common-6.2.0\AndroidManifest.xml:7:5-9:41
+MERGED from [com.firebaseui:firebase-ui-common:6.2.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\29b31cd9ee88314406d2cc07c4b33c49\firebase-ui-common-6.2.0\AndroidManifest.xml:7:5-9:41
 MERGED from [androidx.cardview:cardview:1.0.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\d619842a7eaf1130694ae1c01f978c20\cardview-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.cardview:cardview:1.0.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\d619842a7eaf1130694ae1c01f978c20\cardview-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\50f81140c264a8073fe592ddffff89df\lifecycle-runtime-2.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\50f81140c264a8073fe592ddffff89df\lifecycle-runtime-2.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\a072b7027d050ba4a28e8ed0f5aedf24\documentfile-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\a072b7027d050ba4a28e8ed0f5aedf24\documentfile-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.print:print:1.0.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\9a92904b990e3cb14e2f3d12a60bfcf2\print-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.print:print:1.0.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\9a92904b990e3cb14e2f3d12a60bfcf2\print-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\8e0a48ec530e34b26a7ca3f155b641b5\lifecycle-viewmodel-2.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\8e0a48ec530e34b26a7ca3f155b641b5\lifecycle-viewmodel-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\eacaec61a98c327bdb4a7a1173d930da\lifecycle-runtime-2.1.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\eacaec61a98c327bdb4a7a1173d930da\lifecycle-runtime-2.1.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\3576101df1addecb45ee4a121a0809b3\lifecycle-viewmodel-2.1.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\3576101df1addecb45ee4a121a0809b3\lifecycle-viewmodel-2.1.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\5080ea4c3a94602e590d65de9668e7d9\interpolator-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\5080ea4c3a94602e590d65de9668e7d9\interpolator-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\ba1ca6d966f0903bfbc154284174b676\lifecycle-livedata-2.0.0\AndroidManifest.xml:20:5-44
@@ -227,8 +254,6 @@ MERGED from [com.google.firebase:firebase-database-collection:17.0.0] C:\Users\K
 MERGED from [com.google.firebase:firebase-database-collection:17.0.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\7189998640d03cd8247a01f86409460d\firebase-database-collection-17.0.0\AndroidManifest.xml:5:5-44
 MERGED from [com.google.firebase:protolite-well-known-types:17.0.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\dacab2ed7474744f5d85ca77b44b418e\protolite-well-known-types-17.0.0\AndroidManifest.xml:7:5-9:41
 MERGED from [com.google.firebase:protolite-well-known-types:17.0.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\dacab2ed7474744f5d85ca77b44b418e\protolite-well-known-types-17.0.0\AndroidManifest.xml:7:5-9:41
-MERGED from [io.grpc:grpc-android:1.21.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\e784f8a678ea44afdc5d8546de0f1e45\grpc-android-1.21.0\AndroidManifest.xml:7:5-9:41
-MERGED from [io.grpc:grpc-android:1.21.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\e784f8a678ea44afdc5d8546de0f1e45\grpc-android-1.21.0\AndroidManifest.xml:7:5-9:41
 INJECTED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml
 INJECTED from C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml
 	android:targetSdkVersion
@@ -281,10 +306,6 @@ MERGED from [io.grpc:grpc-android:1.21.0] C:\Users\KyleWai\.gradle\caches\transf
 MERGED from [io.grpc:grpc-android:1.21.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\e784f8a678ea44afdc5d8546de0f1e45\grpc-android-1.21.0\AndroidManifest.xml:11:5-79
 	android:name
 		ADDED from [com.google.firebase:firebase-firestore:21.4.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\2d606b7af942f4ef21f2b8e7de1cbf3c\jetified-firebase-firestore-21.4.0\AndroidManifest.xml:13:22-76
-uses-permission#android.permission.INTERNET
-ADDED from [com.google.firebase:firebase-firestore:21.4.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\2d606b7af942f4ef21f2b8e7de1cbf3c\jetified-firebase-firestore-21.4.0\AndroidManifest.xml:14:5-67
-	android:name
-		ADDED from [com.google.firebase:firebase-firestore:21.4.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\2d606b7af942f4ef21f2b8e7de1cbf3c\jetified-firebase-firestore-21.4.0\AndroidManifest.xml:14:22-64
 meta-data#com.google.firebase.components:com.google.firebase.firestore.FirestoreRegistrar
 ADDED from [com.google.firebase:firebase-firestore:21.4.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\2d606b7af942f4ef21f2b8e7de1cbf3c\jetified-firebase-firestore-21.4.0\AndroidManifest.xml:20:13-22:85
 	android:value

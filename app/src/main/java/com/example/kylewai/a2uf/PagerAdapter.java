@@ -1,9 +1,13 @@
 package com.example.kylewai.a2uf;
 
+import com.example.kylewai.a2uf.SOC.SOCFragment;
+import com.example.kylewai.a2uf.forum.ForumFragment;
+import com.example.kylewai.a2uf.mockList.MockListFragment;
+import com.example.kylewai.a2uf.userSchedule.UserScheduleFragment;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.fragment.app.FragmentStatePagerAdapter;
 
 public class PagerAdapter extends FragmentPagerAdapter {
     int mNumOfTabs;
@@ -17,8 +21,8 @@ public class PagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         switch (position) {
-            case 0: return new UserScheduleFragment(uid);
-            case 1: return new MockListFragment();
+            case 0: return UserScheduleFragment.newInstance(uid);
+            case 1: return MockListFragment.newInstance(uid);
             case 2: return new SOCFragment();
             case 3: return new ForumFragment();
             default: return null;

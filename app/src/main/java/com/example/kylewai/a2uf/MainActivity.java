@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.viewpager.widget.ViewPager;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -25,16 +27,49 @@ import com.google.firebase.auth.FirebaseUser;
 public class MainActivity extends AppCompatActivity {
 
     private String uid;
+    private FirebaseUser currUser;
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        Log.d("MainC", "saved" + uid);
+        outState.putString("uid", uid);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d("MainC", "onStart");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d("MainC", "onStop");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d("MainC", "onDestroy");
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(savedInstanceState != null){
+            this.uid = savedInstanceState.getString("uid");
+            Log.d("MainC", uid);
+        }
+        else{
+            Intent intent = getIntent();
+            SharedPreferences pref = getSharedPreferences(LoginActivity.sharedPrefFile, MODE_PRIVATE);
+            boolean hasIntentData = intent.getStringExtra(LoginActivity.EXTRA_UID) != null;
+            currUser = FirebaseAuth.getInstance().getCurrentUser();
+            uid = hasIntentData? intent.getStringExtra(LoginActivity.EXTRA_UID) : currUser.getUid();
+        }
         ActivityCompat.postponeEnterTransition(this);
         setContentView(R.layout.activity_main);
-
-        Intent intent = getIntent();
-        uid = intent.getStringExtra(LoginActivity.EXTRA_UID);
-        Log.d("MainActivity", uid);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         TabLayout tabLayout = findViewById(R.id.tab_layout);
@@ -45,6 +80,9 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = findViewById(R.id.pager);
+        viewPager.setOffscreenPageLimit(4);
+        Log.d("MainC", "Yeahnew");
+        Log.d("MainC", uid);
         final PagerAdapter adapter = new PagerAdapter
                 (getSupportFragmentManager(), tabLayout.getTabCount(), uid);
 

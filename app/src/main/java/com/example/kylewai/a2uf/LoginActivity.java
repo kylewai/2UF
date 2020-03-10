@@ -19,7 +19,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
     private SharedPreferences sharedPref;
-    private String sharedPrefFile = "com.example.kylewai.test";
+    static String sharedPrefFile = "com.example.kylewai.test";
     static final String EXTRA_EMAIL = "com.example.kylewai.email";
     static final String EXTRA_PASSWORD = "com.example.kylewai.password";
     static final String EXTRA_UID = "com.example.kylewai.uid";
