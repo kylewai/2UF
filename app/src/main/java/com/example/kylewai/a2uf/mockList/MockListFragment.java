@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.kylewai.a2uf.R;
-import com.example.kylewai.a2uf.UserMock;
+import com.example.kylewai.a2uf.com.example.kylewai.firebasemodel.UserMock;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;

@@ -5,9 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.kylewai.a2uf.R;
+import com.example.kylewai.a2uf.com.example.kylewai.firebasemodel.UserMock;
 import com.google.android.material.tabs.TabLayout;
 
 //This activity displays the viewpager and tabs for an individual mock activity
@@ -16,6 +19,10 @@ public class MockScheduleActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Intent intent = getIntent();
+        UserMock data = intent.getExtras().getParcelable("userMock");
+        Log.i("MockScheduleActivity", data.getWeeklyMeetTimes().toString());
         setContentView(R.layout.activity_mock_schedule);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -31,7 +38,7 @@ public class MockScheduleActivity extends AppCompatActivity {
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = findViewById(R.id.pager);
-        final PagerAdapterAddClass adapter = new PagerAdapterAddClass(getSupportFragmentManager(), tabLayout.getTabCount());
+        final PagerAdapterAddClass adapter = new PagerAdapterAddClass(getSupportFragmentManager(), tabLayout.getTabCount(), data);
 
         viewPager.setAdapter(adapter);
 

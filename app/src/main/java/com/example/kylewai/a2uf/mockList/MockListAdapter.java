@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.example.kylewai.a2uf.individualMockActivity.MockScheduleActivity;
 import com.example.kylewai.a2uf.R;
-import com.example.kylewai.a2uf.UserMock;
+import com.example.kylewai.a2uf.com.example.kylewai.firebasemodel.UserMock;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
@@ -37,21 +37,13 @@ public class MockListAdapter extends FirestoreRecyclerAdapter<UserMock, MockList
 
 
 
-    class MockListViewHolder extends RecyclerView.ViewHolder{
+    class MockListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView nameView;
         TextView dateCreated;
         UserMock userMock;
         public MockListViewHolder(final View itemView){
             super(itemView);
-            itemView.setOnClickListener(new View.OnClickListener(){
-
-                @Override
-                public void onClick(View view) {
-                    Log.d("MockListAdapter", userMock.getMockName());
-                    Intent intent = new Intent(itemView.getContext(), MockScheduleActivity.class);
-                    itemView.getContext().startActivity(intent);
-                }
-            });
+            itemView.setOnClickListener(this);
             nameView = itemView.findViewById(R.id.name);
             dateCreated = itemView.findViewById(R.id.dateCreated);
         }
@@ -61,6 +53,13 @@ public class MockListAdapter extends FirestoreRecyclerAdapter<UserMock, MockList
             nameView.setText(userMock.getMockName());
             dateCreated.setText(userMock.getDateCreated().toString());
             //-----Parse date object!!!!
+        }
+
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(view.getContext(), MockScheduleActivity.class);
+            intent.putExtra("userMock", userMock);
+            view.getContext().startActivity(intent);
         }
     }
 }
