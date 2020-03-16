@@ -54,7 +54,8 @@ public class ScheduleFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         UserMock data = getArguments().getParcelable("userMock");
-        fillWeeklySchedule(data.getWeeklyMeetTimes());
+        HashMap<String, ArrayList<String>> course_cells = fillWeeklySchedule(data.getWeeklyMeetTimes());
+        getClassInfo(course_cells);
     }
 
     @Override
@@ -124,23 +125,23 @@ public class ScheduleFragment extends Fragment {
             docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    Log.d("UserSchedule", "Complete");
+                    Log.d("SchedFrag", "Complete");
                     if (task.isSuccessful()) {
                         DocumentSnapshot document = task.getResult();
                         if (document.exists()) {
-                            Log.d("UserSchedule", "got");
+                            Log.d("SchedFrag", "got");
                             Course course = document.toObject(Course.class);
-                            Log.d("UserSchedule", "Finally" + course.getCode());
+                            Log.d("SchedFrag", "Finally" + course.getCode());
 
                             for(String cell : cells){
                                 addCourseOnClickListener(course, cell);
                             }
 
                         } else {
-                            Log.d("UserSchedule", "No course for classnum");
+                            Log.d("SchedFrag", "No course for classnum");
                         }
                     } else {
-                        Log.d("UserSchedule", "Get course failed");
+                        Log.d("SchedFrag", "Get course failed");
                     }
                 }
             });
@@ -170,6 +171,7 @@ public class ScheduleFragment extends Fragment {
 
 //        TextView code = course_expand_view.findViewById(R.id.code);
 //        code.setText(courseCode);
+        Log.d("SchedFrag", "Added on click");
         cell_text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
