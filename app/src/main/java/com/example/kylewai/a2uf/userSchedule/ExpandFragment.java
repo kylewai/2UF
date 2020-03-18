@@ -43,6 +43,8 @@ public class ExpandFragment extends Fragment {
     TextView textView_meetTimes;
     TextView textView_examTime;
 
+    public ExpandFragment(){}
+
     public ExpandFragment(String courseCode, String name, String description,
                           String department, String prereqs, String coreqs,
                           List<String> instructors, List<Map<String, String>> meetTimes, String examTime) {

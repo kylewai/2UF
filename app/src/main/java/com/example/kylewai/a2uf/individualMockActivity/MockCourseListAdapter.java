@@ -1,4 +1,4 @@
-package com.example.kylewai.a2uf.SOC;
+package com.example.kylewai.a2uf.individualMockActivity;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -16,34 +16,11 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-//RecyclerView adapter for SOC
-public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.CourseViewHolder> {
+public class MockCourseListAdapter extends RecyclerView.Adapter<MockCourseViewHolder>{
     private final List<Section> sectionList;
     private LayoutInflater mInflater;
 
-    class CourseViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        public final TextView codeText;
-        public final TextView nameText;
-        public final TextView creditText;
-        final CourseListAdapter mAdapter;
-        private Section sectionObj;
-        public CourseViewHolder(View courseItemView, CourseListAdapter adapter){
-            super(courseItemView);
-            codeText = courseItemView.findViewById(R.id.code);
-            nameText = courseItemView.findViewById(R.id.name);
-            creditText = courseItemView.findViewById(R.id.credit);
-            this.mAdapter = adapter;
-            this.sectionObj = null;
-            courseItemView.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View view){
-
-        }
-    }
-
-    public CourseListAdapter(Context context, List<Section> sectionList){
+    public MockCourseListAdapter(Context context, List<Section> sectionList){
         this.sectionList = sectionList;
         mInflater = LayoutInflater.from(context);
     }
@@ -51,13 +28,13 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.Co
 
     @NonNull
     @Override
-    public CourseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MockCourseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View mItemView = mInflater.inflate(R.layout.course_item_view, parent, false);
-        return new CourseViewHolder(mItemView, this);
+        return new MockCourseViewHolder(mItemView, this);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CourseViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MockCourseViewHolder holder, int position) {
         Section mCurrent = this.sectionList.get(position);
         if(position % 2 == 0){
             holder.itemView.setBackgroundColor(Color.parseColor("#65a7f7"));
@@ -85,5 +62,29 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.Co
         this.sectionList.addAll(sectionList);
         Log.i("Adapter", this.sectionList.size() + "");
         notifyDataSetChanged();
+    }
+}
+
+class MockCourseViewHolder  extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+    public final TextView codeText;
+    public final TextView nameText;
+    public final TextView creditText;
+    final MockCourseListAdapter mAdapter;
+    public Section sectionObj;
+
+    public MockCourseViewHolder(View courseItemView, MockCourseListAdapter adapter) {
+        super(courseItemView);
+        codeText = courseItemView.findViewById(R.id.code);
+        nameText = courseItemView.findViewById(R.id.name);
+        creditText = courseItemView.findViewById(R.id.credit);
+        courseItemView.setOnClickListener(this);
+        this.mAdapter = adapter;
+        this.sectionObj = null;
+    }
+
+    @Override
+    public void onClick(View view) {
+
     }
 }
