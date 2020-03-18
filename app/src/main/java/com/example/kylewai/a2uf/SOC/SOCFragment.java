@@ -19,6 +19,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.kylewai.a2uf.R;
+import com.example.kylewai.a2uf.mockList.MockListAdapter;
 import com.example.kylewai.a2uf.volleypojo.Section;
 import com.example.kylewai.a2uf.volleypojo.UFCourse;
 import com.example.kylewai.a2uf.volleypojo.UFData;
@@ -37,7 +38,7 @@ public class SOCFragment extends Fragment {
     private List<Section> sectionList;
     private RequestQueue requestQueue;
     private RecyclerView mRecyclerView;
-    private CourseListAdapter mAdapter;
+    private SOCCourseListAdapter mAdapter;
     private Gson gson;
 
     public SOCFragment() {
@@ -52,7 +53,7 @@ public class SOCFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_soc, container, false);
         sectionList = new ArrayList<Section>();
         mRecyclerView = view.findViewById(R.id.reyclerview);
-        mAdapter = new CourseListAdapter(getContext(), sectionList);
+        mAdapter = new SOCCourseListAdapter(getContext(), sectionList);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(mAdapter);
 
