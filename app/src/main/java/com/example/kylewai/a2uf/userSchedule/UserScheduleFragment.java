@@ -193,7 +193,7 @@ public class UserScheduleFragment extends Fragment {
                             Log.d("UserSchedule", "Finally" + course.getCode());
 
                             for(String cell : cells){
-                                addCourseOnClickListener(course, cell);
+                                addCourseOnClickListener(course, cell, classNumber);
                             }
 
                         } else {
@@ -209,7 +209,8 @@ public class UserScheduleFragment extends Fragment {
     }
 
 
-    private void addCourseOnClickListener(Course course, final String cell){
+    private void addCourseOnClickListener(Course course, final String cell, String classNumber){
+        final String courseNumber = classNumber;
         final String courseCode = course.getCode();
         final String name = course.getName();
         final String description = course.getDescription();
@@ -240,7 +241,7 @@ public class UserScheduleFragment extends Fragment {
 //                Scene expand_scene = new Scene(sceneRoot, course_expand_view);
 //                Transition transition = TransitionInflater.from(getActivity()).inflateTransition(R.transition.expand_transition);
 //                TransitionManager.go(expand_scene, transition);
-                Fragment fr = new ExpandFragment(courseCode, name, description, department, prereqs, coreqs, instructors, meetTimes, examTime);
+                Fragment fr = new ExpandFragment(courseCode, name, description, department, prereqs, coreqs, instructors, meetTimes, examTime, courseNumber);
                 fr.setSharedElementEnterTransition(new ChangeBounds());
                 fr.setSharedElementReturnTransition(new ChangeBounds());
                 fr.setEnterTransition(new ChangeBounds());
