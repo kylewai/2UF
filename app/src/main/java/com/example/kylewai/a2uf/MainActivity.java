@@ -4,6 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.transition.ChangeBounds;
 import androidx.viewpager.widget.ViewPager;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -17,8 +20,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.kylewai.a2uf.userSchedule.AddCourseFragment;
+import com.example.kylewai.a2uf.userSchedule.ExpandFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -72,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        TabLayout tabLayout = findViewById(R.id.tab_layout);
+        final TabLayout tabLayout = findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_label1));
         tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_label2));
         tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_label3));
@@ -106,6 +112,56 @@ public class MainActivity extends AppCompatActivity {
            public void onTabReselected(TabLayout.Tab tab) {
            }
        });
+
+        /*
+        //Adding floating action button functionality
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                //FAB action
+
+                //Check to see what fragment we are in.
+                int tabPos = tabLayout.getSelectedTabPosition();
+
+                //Actions based on tab position
+                if(tabPos == 0)
+                {
+                    //User Schedule
+                    Toast toast = Toast.makeText(getApplicationContext(), "User Schedule", Toast.LENGTH_LONG);
+                    toast.show();
+                    Fragment fr = new AddCourseFragment();
+                    fr.setSharedElementEnterTransition(new ChangeBounds());
+                    fr.setSharedElementReturnTransition(new ChangeBounds());
+                    fr.setEnterTransition(new ChangeBounds());
+                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//                ft.addSharedElement(cell_text, "expand");
+                    ft.setReorderingAllowed(true).replace(R.id.scene_root, fr).addToBackStack("schedule").commit();
+                }
+                else if(tabPos == 1)
+                {
+                    //Mocks
+                    Toast toast = Toast.makeText(getApplicationContext(), "Mocks", Toast.LENGTH_LONG);
+                    toast.show();
+
+                }
+                else if(tabPos == 2)
+                {
+                    //SOC
+                    Toast toast = Toast.makeText(getApplicationContext(), "SOC", Toast.LENGTH_LONG);
+                    toast.show();
+                }
+                else
+                {
+                    //Forum
+                    Toast toast = Toast.makeText(getApplicationContext(), "Forum", Toast.LENGTH_LONG);
+                    toast.show();
+                }
+            }
+        });
+
+         */
 
     }
 }

@@ -24,6 +24,10 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.example.kylewai.a2uf.userSchedule.AddClassActivity"
+            android:label="@string/title_activity_add_class"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="com.example.kylewai.a2uf.MainActivity" />
         <activity
             android:name="com.example.kylewai.a2uf.individualMockActivity.MockScheduleActivity"

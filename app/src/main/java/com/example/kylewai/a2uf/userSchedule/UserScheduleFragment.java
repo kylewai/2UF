@@ -1,5 +1,6 @@
 package com.example.kylewai.a2uf.userSchedule;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,12 +15,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.kylewai.a2uf.R;
 import com.example.kylewai.a2uf.com.example.kylewai.firebasemodel.AppUser;
 import com.example.kylewai.a2uf.com.example.kylewai.firebasemodel.Course;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -33,9 +36,12 @@ import java.util.Map;
 //Fragment showing user weekly schedule
 public class UserScheduleFragment extends Fragment {
     private String uid;
+    public static String transferuid;
     FirebaseFirestore db;
     String[]periods = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "E1", "E2", "E3"};
     ViewGroup container;
+
+    String userID;
 
     public UserScheduleFragment() {
         // Required empty public constructor
@@ -55,6 +61,7 @@ public class UserScheduleFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         this.uid = getArguments().getString("uid");
+        transferuid = uid;
         db = FirebaseFirestore.getInstance();
         this.container = container;
         Log.d("UserScheduleFragment", "oncreate");
@@ -62,6 +69,24 @@ public class UserScheduleFragment extends Fragment {
         //up again.
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         View view = inflater.inflate(R.layout.fragment_user_schedule, container, false);
+
+        //Gets floating action button and gives it the functionality of opening a new
+        //activity for adding classes.
+        FloatingActionButton fab = view.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast toast = Toast.makeText(getActivity().getApplicationContext(), "User Schedule", Toast.LENGTH_LONG);
+                toast.show();
+
+                //Creating and opening a new activity for adding classes.
+                Intent intent = new Intent(getActivity(), AddClassActivity.class);
+                String message = uid;
+                Log.d("putID", "" + uid);
+                intent.putExtra("ID", message);
+                getContext().startActivity(intent);
+            }
+        });
         return view;
     }
 
@@ -194,6 +219,7 @@ public class UserScheduleFragment extends Fragment {
         final List<String> instructors = course.getInstructors();
         final List<Map<String, String>> meetTimes = course.getMeetTimes();
         final String examTime = course.getExamTime();
+        //final String courseID = course.getCourseID();
 //        LayoutInflater inflater = LayoutInflater.from(getActivity());
 //        final View course_expand_view = inflater.inflate(R.layout.fragment_course_expand, null);
 //

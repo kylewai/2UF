@@ -15,9 +15,14 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.kylewai.a2uf.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.w3c.dom.Text;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,6 +35,7 @@ public class ExpandFragment extends Fragment {
     String department;
     String prereqs;
     String coreqs;
+    String courseNumber;
     List<String> instructors;
     List<Map<String, String>> meetTimes;
     String examTime;
@@ -99,6 +105,35 @@ public class ExpandFragment extends Fragment {
         textView_meetTimes.setText(meetTimesString);
         textView_examTime = view.findViewById(R.id.examTime);
         textView_examTime.setText(this.examTime);
+
+        Button dropButton = view.findViewById(R.id.dropButton);
+        dropButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Map<String, String> dropClass = new HashMap<>();
+                //dropClass.put("classNumber", );
+                dropClass.put("course", courseCode);
+                dropClass.put("days", meetTimes.get(0).get("days"));
+                dropClass.put("periodBegin", meetTimes.get(0).get("periodBegin"));
+                dropClass.put("periodEnd", meetTimes.get(0).get("periodEnd"));
+
+                final FirebaseFirestore database = FirebaseFirestore.getInstance();
+                database.collection("users").document(UserScheduleFragment.transferuid).update("weeklyMeetTimes", FieldValue.arrayRemove(dropClass)).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("dbUpdate", "DocumentSnapshot successfully updated!");
+                    }
+                })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.w("dbUpdate", "Error updating document", e);
+                            }
+                        });
+            }
+        });
 
         return view;
     }
