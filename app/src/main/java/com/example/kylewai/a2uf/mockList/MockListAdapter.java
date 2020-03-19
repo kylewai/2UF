@@ -12,6 +12,9 @@ import com.example.kylewai.a2uf.R;
 import com.example.kylewai.a2uf.com.example.kylewai.firebasemodel.UserMock;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.Timestamp;
+
+import java.util.Date;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -51,7 +54,29 @@ public class MockListAdapter extends FirestoreRecyclerAdapter<UserMock, MockList
         void setMock(UserMock userMock){
             this.userMock = userMock;
             nameView.setText(userMock.getMockName());
-            dateCreated.setText(userMock.getDateCreated().toString());
+            Timestamp timeStamp = userMock.getDateCreated();
+            Date date = timeStamp.toDate();
+            Date currDate = new Date();
+            long millisElapsed = currDate.getTime() - date.getTime();
+            String timeElapsed;
+            long unitsElapsed = millisElapsed;
+            if((unitsElapsed = unitsElapsed / 1000) < 60){
+                timeElapsed = "Created " + unitsElapsed + "seconds ago";
+            }
+            else if((unitsElapsed = unitsElapsed / 60) < 60){
+                timeElapsed = "Created " + unitsElapsed + " minutes ago";
+            }
+            else if((unitsElapsed = unitsElapsed / 60) < 24){
+                timeElapsed = "Created " + unitsElapsed + " hours ago";
+            }
+            else if((unitsElapsed = unitsElapsed / 24) < 365){
+                timeElapsed = "Created " + unitsElapsed + " days ago";
+            }
+            else{
+                unitsElapsed = unitsElapsed / 365;
+                timeElapsed = "Created " + unitsElapsed + " years ago";
+            }
+            dateCreated.setText(timeElapsed);
             //-----Parse date object!!!!
         }
 
