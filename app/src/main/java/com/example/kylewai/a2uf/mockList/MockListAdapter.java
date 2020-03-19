@@ -28,7 +28,7 @@ public class MockListAdapter extends FirestoreRecyclerAdapter<UserMock, MockList
 
     @Override
     protected void onBindViewHolder(@NonNull MockListAdapter.MockListViewHolder holder, int position, @NonNull UserMock model) {
-        holder.setMock(model);
+        holder.setMock(model, getSnapshots().getSnapshot(position).getId());
     }
 
     @NonNull
@@ -44,6 +44,7 @@ public class MockListAdapter extends FirestoreRecyclerAdapter<UserMock, MockList
         TextView nameView;
         TextView dateCreated;
         UserMock userMock;
+        String mockId;
         public MockListViewHolder(final View itemView){
             super(itemView);
             itemView.setOnClickListener(this);
@@ -51,7 +52,8 @@ public class MockListAdapter extends FirestoreRecyclerAdapter<UserMock, MockList
             dateCreated = itemView.findViewById(R.id.dateCreated);
         }
 
-        void setMock(UserMock userMock){
+        void setMock(UserMock userMock, String mockId){
+            this.mockId = mockId;
             this.userMock = userMock;
             nameView.setText(userMock.getMockName());
             Timestamp timeStamp = userMock.getDateCreated();
@@ -84,6 +86,7 @@ public class MockListAdapter extends FirestoreRecyclerAdapter<UserMock, MockList
         public void onClick(View view) {
             Intent intent = new Intent(view.getContext(), MockScheduleActivity.class);
             intent.putExtra("userMock", userMock);
+            intent.putExtra("mockId", mockId);
             view.getContext().startActivity(intent);
         }
     }

@@ -22,7 +22,7 @@ public class MockScheduleActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         UserMock data = intent.getExtras().getParcelable("userMock");
-        Log.i("MockScheduleActivity", data.getWeeklyMeetTimes().toString());
+        String mockId = intent.getExtras().getString("mockId");
         setContentView(R.layout.activity_mock_schedule);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -38,7 +38,7 @@ public class MockScheduleActivity extends AppCompatActivity {
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = findViewById(R.id.pager);
-        final PagerAdapterAddClass adapter = new PagerAdapterAddClass(getSupportFragmentManager(), tabLayout.getTabCount(), data);
+        final PagerAdapterAddClass adapter = new PagerAdapterAddClass(getSupportFragmentManager(), tabLayout.getTabCount(), data, mockId);
 
         viewPager.setAdapter(adapter);
 

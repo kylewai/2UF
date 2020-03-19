@@ -29,7 +29,7 @@ import java.util.Map;
 //The fragment that pops up with class info when you select a cell with a class in the week schedule
 //TODO: Delete functionality, Formatting
 public class ExpandFragment extends Fragment {
-    String courseNumber;
+    String classNumber;
     String courseCode;
     String name;
     String description;
@@ -53,7 +53,7 @@ public class ExpandFragment extends Fragment {
 
     public ExpandFragment(String courseCode, String name, String description,
                           String department, String prereqs, String coreqs,
-                          List<String> instructors, List<Map<String, String>> meetTimes, String examTime, String courseNumber) {
+                          List<String> instructors, List<Map<String, String>> meetTimes, String examTime, String classNumber) {
         // Required empty public constructor
         this.courseCode = courseCode;
         this.name = name;
@@ -64,7 +64,7 @@ public class ExpandFragment extends Fragment {
         this.instructors = instructors;
         this.meetTimes = meetTimes;
         this.examTime = examTime;
-        this.courseNumber = courseNumber;
+        this.classNumber = classNumber;
     }
 
 
@@ -117,7 +117,7 @@ public class ExpandFragment extends Fragment {
             {
                 Map<String, String> dropClass = new HashMap<>();
                 //dropClass.put("classNumber", );
-                dropClass.put("classNumber", courseNumber);
+                dropClass.put("classNumber", classNumber);
                 dropClass.put("course", courseCode);
                 dropClass.put("days", meetTimes.get(0).get("days"));
                 dropClass.put("periodBegin", meetTimes.get(0).get("periodBegin"));

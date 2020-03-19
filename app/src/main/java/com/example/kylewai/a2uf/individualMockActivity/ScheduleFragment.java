@@ -41,11 +41,12 @@ public class ScheduleFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static ScheduleFragment newInstance(UserMock userMock) {
+    public static ScheduleFragment newInstance(UserMock userMock, String mockId) {
         // Required empty public constructor
         ScheduleFragment schedFrag = new ScheduleFragment();
         Bundle args = new Bundle();
         args.putParcelable("userMock", userMock);
+        args.putString("mockId", mockId);
         schedFrag.setArguments(args);
         return schedFrag;
     }
@@ -134,7 +135,7 @@ public class ScheduleFragment extends Fragment {
                             Log.d("SchedFrag", "Finally" + course.getCode());
 
                             for(String cell : cells){
-                                addCourseOnClickListener(course, cell);
+                                addCourseOnClickListener(course, cell, classNumber);
                             }
 
                         } else {
@@ -150,7 +151,8 @@ public class ScheduleFragment extends Fragment {
     }
 
 
-    private void addCourseOnClickListener(Course course, final String cell){
+    private void addCourseOnClickListener(Course course, final String cell, String classNum){
+        final String classNumber = classNum;
         final String courseCode = course.getCode();
         final String name = course.getName();
         final String description = course.getDescription();
@@ -181,7 +183,7 @@ public class ScheduleFragment extends Fragment {
 //                Scene expand_scene = new Scene(sceneRoot, course_expand_view);
 //                Transition transition = TransitionInflater.from(getActivity()).inflateTransition(R.transition.expand_transition);
 //                TransitionManager.go(expand_scene, transition);
-                Fragment fr = new ExpandFragment(courseCode, name, description, department, prereqs, coreqs, instructors, meetTimes, examTime);
+                Fragment fr = new MockCourseExpandFragment(courseCode, name, description, department, prereqs, coreqs, instructors, meetTimes, examTime, classNumber, getArguments().getString("mockId"));
                 fr.setSharedElementEnterTransition(new ChangeBounds());
                 fr.setSharedElementReturnTransition(new ChangeBounds());
                 fr.setEnterTransition(new ChangeBounds());
