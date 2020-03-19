@@ -148,7 +148,7 @@ public class UserScheduleFragment extends Fragment {
             //Set text for cells with cell id in cells_to_assign
             for(int k = 0; k < cells_to_assign.size(); k++){
                 String viewName = cells_to_assign.get(k);
-                cell = (TextView)getView().findViewById(getResources().getIdentifier(viewName, "id", getActivity().getPackageName()));
+                cell = getView().findViewById(getResources().getIdentifier(viewName, "id", getActivity().getPackageName()));
                 cell.setText(course);
             }
         }

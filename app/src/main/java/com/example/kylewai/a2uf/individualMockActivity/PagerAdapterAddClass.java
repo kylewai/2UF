@@ -1,5 +1,6 @@
 package com.example.kylewai.a2uf.individualMockActivity;
 
+import com.example.kylewai.a2uf.com.example.kylewai.firebasemodel.UserMock;
 import com.example.kylewai.a2uf.forum.ForumFragment;
 import com.example.kylewai.a2uf.SOC.SOCFragment;
 
@@ -10,19 +11,19 @@ import androidx.fragment.app.FragmentPagerAdapter;
 //This is the pager adapter for flipping between a weekly schedule and course selection
 public class PagerAdapterAddClass extends FragmentPagerAdapter {
     int mNumOfTabs;
+    UserMock userMock;
 //    private String uid;
-    public PagerAdapterAddClass(FragmentManager fm, int NumOfTabs) {
+    public PagerAdapterAddClass(FragmentManager fm, int NumOfTabs, UserMock userMock) {
         super(fm);
+        this.userMock = userMock;
         this.mNumOfTabs = NumOfTabs;
     }
 
     @Override
     public Fragment getItem(int position) {
         switch (position) {
-            case 0: return new ScheduleFragment();
+            case 0: return ScheduleFragment.newInstance(userMock);
             case 1: return new CourseSelectionFragment();
-            case 2: return new SOCFragment();
-            case 3: return new ForumFragment();
             default: return null;
         }
     }
