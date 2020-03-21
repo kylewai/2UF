@@ -50,6 +50,7 @@ public class SplashScreenActivity extends AppCompatActivity {
             firebase_sign_in(email, password);
         }
         else{
+            intent_sign_in.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent_sign_in);
         }
     }

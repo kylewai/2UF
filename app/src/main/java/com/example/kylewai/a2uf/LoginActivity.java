@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         setContentView(R.layout.activity_login);
 
-        text_username = findViewById(R.id.textView_username);
+        text_username = findViewById(R.id.textView_email);
         text_password = findViewById(R.id.textView_password);
         register_intent = new Intent(this, RegisterActivity.class);
 
@@ -59,8 +59,13 @@ public class LoginActivity extends AppCompatActivity {
 
 
     public void authenticate(View view){
-        String email = text_username.getText().toString();
+        String email = text_username.getText().toString().trim();
         String password = text_password.getText().toString();
+        Log.d("NoError?", email);
+        Log.d("NoError?", password);
+        if(email.equals("") || password.equals("")){
+            return;
+        }
         firebase_sign_in(email, password);
     }
 

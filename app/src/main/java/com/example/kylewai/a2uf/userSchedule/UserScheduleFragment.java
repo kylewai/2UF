@@ -110,8 +110,7 @@ public class UserScheduleFragment extends Fragment {
                     if(document.exists()){
                         AppUser user = document.toObject(AppUser.class);
                         List<Map<String, String>> meetings = user.getWeeklyMeetTimes();
-                        List<String> classNumbers = user.getClasses();
-                        HashMap<String, ArrayList<String>> course_cells = fillWeeklySchedule(meetings, classNumbers);
+                        HashMap<String, ArrayList<String>> course_cells = fillWeeklySchedule(meetings);
                         getClassInfo(course_cells);
                     }
                     else{
@@ -126,10 +125,9 @@ public class UserScheduleFragment extends Fragment {
     }
 
 
-    private HashMap<String, ArrayList<String>> fillWeeklySchedule(List<Map<String, String>> meetings, List<String> classNumbers){
+    private HashMap<String, ArrayList<String>> fillWeeklySchedule(List<Map<String, String>> meetings){
         HashMap<String, ArrayList<String>> course_cells = new HashMap<>();
         ArrayList<String> cells_to_assign;
-
         for(int i = 0; i < meetings.size(); i++){
             Map<String, String> meetTime = meetings.get(i);
             String course = meetTime.get("course");

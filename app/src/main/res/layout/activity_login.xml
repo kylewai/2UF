@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <AutoCompleteTextView
-        android:id="@+id/textView_username"
+        android:id="@+id/textView_email"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
@@ -43,7 +43,7 @@
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_username" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_email" />
 
     <Button
         android:id="@+id/button_login"
