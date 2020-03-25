@@ -1,5 +1,6 @@
 package com.example.kylewai.a2uf.forum;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,7 +34,6 @@ public class ForumFeedAdapter extends FirestoreRecyclerAdapter<Post, ForumFeedAd
     @Override
     public ForumFeedAdapter.FeedPostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.feed_post_item, parent, false);
-        Log.d("ForumFeedAdapt", "here");
         return new FeedPostViewHolder(view);
     }
 
@@ -89,7 +89,9 @@ public class ForumFeedAdapter extends FirestoreRecyclerAdapter<Post, ForumFeedAd
 
         @Override
         public void onClick(View view) {
-
+            Intent intent = new Intent(view.getContext(), PostActivity.class);
+            intent.putExtra("postObject", mPost);
+            view.getContext().startActivity(intent);
         }
     }
 }

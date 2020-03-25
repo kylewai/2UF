@@ -1,0 +1,613 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/scene_root"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:paddingLeft="13dp"
+                android:paddingTop="13dp"
+                android:paddingRight="13dp"
+                android:paddingBottom="0dp" />
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/author"
+                android:paddingLeft="13dp"
+                android:paddingTop="13dp"
+                android:paddingRight="13dp"
+                android:paddingBottom="26dp" />
+
+            <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/table_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/description"
+                android:minHeight="500dp"
+                android:stretchColumns="*">
+
+                <TableRow style="@style/table_row">
+
+                    <TextView
+                        style="@style/time_label_cell"
+                        android:text="TIME" />
+
+                    <TextView
+                        style="@style/day_label_cell"
+                        android:text="MON" />
+
+                    <TextView
+                        style="@style/day_label_cell"
+                        android:text="TUE" />
+
+                    <TextView
+                        style="@style/day_label_cell"
+                        android:text="WED" />
+
+                    <TextView
+                        style="@style/day_label_cell"
+                        android:text="THU" />
+
+                    <TextView
+                        style="@style/day_label_cell"
+                        android:text="FRI" />
+
+                    <TextView
+                        style="@style/day_label_cell"
+                        android:text="SAT" />
+                </TableRow>
+
+                <TableRow style="@style/table_row">
+
+                    <TextView
+                        style="@style/time_cell"
+                        android:text="1" />
+
+                    <TextView
+                        android:id="@+id/M1"
+                        style="@style/class_cell"
+                        android:text=""
+                        android:transitionName="expand" />
+
+                    <TextView
+                        android:id="@+id/T1"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/W1"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/R1"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/F1"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/S1"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                </TableRow>
+
+                <TableRow style="@style/table_row">
+
+                    <TextView
+                        style="@style/time_cell"
+                        android:text="2" />
+
+                    <TextView
+                        android:id="@+id/M2"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/T2"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/W2"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/R2"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/F2"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/S2"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                </TableRow>
+
+                <TableRow style="@style/table_row">
+
+                    <TextView
+                        style="@style/time_cell"
+                        android:text="3" />
+
+                    <TextView
+                        android:id="@+id/M3"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/T3"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/W3"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/R3"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/F3"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/S3"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                </TableRow>
+
+                <TableRow style="@style/table_row">
+
+                    <TextView
+                        style="@style/time_cell"
+                        android:text="4" />
+
+                    <TextView
+                        android:id="@+id/M4"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/T4"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/W4"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/R4"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/F4"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/S4"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                </TableRow>
+
+                <TableRow style="@style/table_row">
+
+                    <TextView
+                        style="@style/time_cell"
+                        android:text="5" />
+
+                    <TextView
+                        android:id="@+id/M5"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/T5"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/W5"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/R5"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/F5"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/S5"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                </TableRow>
+
+                <TableRow style="@style/table_row">
+
+                    <TextView
+                        style="@style/time_cell"
+                        android:text="6" />
+
+                    <TextView
+                        android:id="@+id/M6"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/T6"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/W6"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/R6"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/F6"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/S6"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                </TableRow>
+
+                <TableRow style="@style/table_row">
+
+                    <TextView
+                        style="@style/time_cell"
+                        android:text="7" />
+
+                    <TextView
+                        android:id="@+id/M7"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/T7"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/W7"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/R7"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/F7"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/S7"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                </TableRow>
+
+                <TableRow style="@style/table_row">
+
+                    <TextView
+                        style="@style/time_cell"
+                        android:text="8" />
+
+                    <TextView
+                        android:id="@+id/M8"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/T8"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/W8"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/R8"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/F8"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/S8"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                </TableRow>
+
+                <TableRow style="@style/table_row">
+
+                    <TextView
+                        style="@style/time_cell"
+                        android:text="9" />
+
+                    <TextView
+                        android:id="@+id/M9"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/T9"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/W9"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/R9"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/F9"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/S9"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                </TableRow>
+
+                <TableRow style="@style/table_row">
+
+                    <TextView
+                        style="@style/time_cell"
+                        android:text="10" />
+
+                    <TextView
+                        android:id="@+id/M10"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/T10"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/W10"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/R10"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/F10"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/S10"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                </TableRow>
+
+                <TableRow style="@style/table_row">
+
+                    <TextView
+                        style="@style/time_cell"
+                        android:text="11" />
+
+                    <TextView
+                        android:id="@+id/M11"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/T11"
+                        style="@style/class_cell"
+                        android:text=""
+                        android:transitionName="expand" />
+
+                    <TextView
+                        android:id="@+id/W11"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/R11"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/F11"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/S11"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                </TableRow>
+
+                <TableRow style="@style/table_row">
+
+                    <TextView
+                        style="@style/time_cell"
+                        android:text="E1" />
+
+                    <TextView
+                        android:id="@+id/ME1"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/TE1"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/WE1"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/RE1"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/FE1"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/SE1"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                </TableRow>
+
+                <TableRow style="@style/table_row">
+
+                    <TextView
+                        style="@style/time_cell"
+                        android:text="E2" />
+
+                    <TextView
+                        android:id="@+id/ME2"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/TE2"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/WE2"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/RE2"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/FE2"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/SE2"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                </TableRow>
+
+                <TableRow style="@style/table_row">
+
+                    <TextView
+                        style="@style/time_cell"
+                        android:text="E3" />
+
+                    <TextView
+                        android:id="@+id/ME3"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/TE3"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/WE3"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/RE3"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/FE3"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/SE3"
+                        style="@style/class_cell"
+                        android:text="" />
+
+                </TableRow>
+
+            </TableLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>
