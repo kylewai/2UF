@@ -68,6 +68,7 @@ public class PostScheduleFragment extends Fragment {
         // Inflate the layout for this fragment
         db = FirebaseFirestore.getInstance();
         data = getArguments().getParcelable("postObj");
+        Log.d("Help", data.getWeeklyMeetTimes().toString());
         View view = inflater.inflate(R.layout.fragment_post_schedule, container, false);
         text_description = view.findViewById(R.id.description);
         text_author = view.findViewById(R.id.author);

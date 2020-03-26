@@ -3,6 +3,7 @@ package com.example.kylewai.a2uf.com.example.kylewai.firebasemodel;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentId;
@@ -43,14 +44,16 @@ public class Post implements Parcelable {
         description = in.readString();
         author = in.readString();
         major = in.readString();
-        Bundle tempBundle = new Bundle();
         Map<String, String> tempMap;
         weeklyMeetTimes = new ArrayList<>();
-        for(int i = 0; i < in.readInt(); i++){
-            tempBundle = in.readBundle();
+        int arraySize = in.readInt();
+        for(int i = 0; i < arraySize; i++){
+            int size = in.readInt();
             tempMap = new HashMap<>();
-            for(String key : tempBundle.keySet()){
-                tempMap.put(key, tempBundle.getString(key));
+            for(int j = 0; j < size; j++){
+                String key = in.readString();
+                String val = in.readString();
+                tempMap.put(key, val);
             }
             weeklyMeetTimes.add(tempMap);
         }
@@ -114,10 +117,13 @@ public class Post implements Parcelable {
         parcel.writeString(author);
         parcel.writeString(major);
         parcel.writeInt(weeklyMeetTimes.size());
-        Bundle temp;
         for(int k = 0; k < weeklyMeetTimes.size(); k++){
-            temp = mapToBundle(weeklyMeetTimes.get(k));
-            parcel.writeBundle(temp);
+            Map<String, String> meetTime = weeklyMeetTimes.get(k);
+            parcel.writeInt(meetTime.size());
+            for(Map.Entry<String, String> entry : meetTime.entrySet()){
+                parcel.writeString(entry.getKey());
+                parcel.writeString(entry.getValue());
+            }
         }
     }
     private Bundle mapToBundle(Map<String, String> meetTime){

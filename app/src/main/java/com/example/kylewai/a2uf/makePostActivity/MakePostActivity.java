@@ -158,13 +158,15 @@ public class MakePostActivity extends AppCompatActivity{
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-                            ArrayList<String> mockList = new ArrayList<>();
+                            ArrayList<String> spinnerItems = new ArrayList<>();
+                            spinnerItems.add("My Schedule");
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 UserMock userMock = document.toObject(UserMock.class);
-                                mockList.add(userMock.getMockName());
+                                spinnerItems.add(userMock.getMockName());
                             }
+
                             ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>
-                                    (MakePostActivity.this, android.R.layout.simple_spinner_item, mockList);
+                                    (MakePostActivity.this, android.R.layout.simple_spinner_item, spinnerItems);
                             spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             spinner.setAdapter(spinnerArrayAdapter);
                         } else {
