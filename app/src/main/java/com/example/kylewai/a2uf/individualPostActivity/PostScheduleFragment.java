@@ -1,4 +1,4 @@
-package com.example.kylewai.a2uf.forum;
+package com.example.kylewai.a2uf.individualPostActivity;
 
 
 import android.os.Bundle;
@@ -18,14 +18,11 @@ import android.widget.TextView;
 import com.example.kylewai.a2uf.R;
 import com.example.kylewai.a2uf.com.example.kylewai.firebasemodel.Course;
 import com.example.kylewai.a2uf.com.example.kylewai.firebasemodel.Post;
-import com.example.kylewai.a2uf.individualMockActivity.MockCourseExpandFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -61,6 +58,7 @@ public class PostScheduleFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         HashMap<String, ArrayList<String>> course_cells = fillWeeklySchedule(data.getWeeklyMeetTimes());
+        getClassInfo(course_cells);
         setTextContent();
     }
 

@@ -1,4 +1,4 @@
-package com.example.kylewai.a2uf.forum;
+package com.example.kylewai.a2uf.individualPostActivity;
 
 
 import android.os.Bundle;

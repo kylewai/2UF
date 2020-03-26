@@ -26,7 +26,14 @@
         android:testOnly="true"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.example.kylewai.a2uf.forum.PostActivity"
+            android:name="com.example.kylewai.a2uf.makePostActivity.MakePostActivity"
+            android:parentActivityName="com.example.kylewai.a2uf.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.kylewai.a2uf.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.example.kylewai.a2uf.individualPostActivity.PostActivity"
             android:parentActivityName="com.example.kylewai.a2uf.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

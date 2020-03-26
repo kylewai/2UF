@@ -21,7 +21,7 @@
 15-->[com.google.firebase:firebase-firestore:21.4.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\2d606b7af942f4ef21f2b8e7de1cbf3c\jetified-firebase-firestore-21.4.0\AndroidManifest.xml:13:22-76
 16
 17    <application
-17-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:7:5-42:19
+17-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:7:5-51:19
 18        android:allowBackup="true"
 18-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:8:9-35
 19        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
@@ -40,8 +40,8 @@
 26-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:13:9-40
 27        <activity
 27-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:14:9-19:20
-28            android:name="com.example.kylewai.a2uf.forum.PostActivity"
-28-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:14:19-53
+28            android:name="com.example.kylewai.a2uf.makePostActivity.MakePostActivity"
+28-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:14:19-68
 29            android:parentActivityName="com.example.kylewai.a2uf.MainActivity" >
 29-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:15:13-55
 30            <meta-data
@@ -52,117 +52,130 @@
 32-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:18:17-70
 33        </activity>
 34        <activity
-34-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:20:9-23:59
-35            android:name="com.example.kylewai.a2uf.userSchedule.AddClassActivity"
-35-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:21:13-58
-36            android:label="@string/title_activity_add_class"
-36-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:22:13-61
-37            android:theme="@style/AppTheme.NoActionBar" />
-37-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:23:13-56
-38        <activity
-38-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:24:9-80
-39            android:name="com.example.kylewai.a2uf.MainActivity"
-39-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:24:19-47
-40            android:launchMode="singleTop" />
-40-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:24:48-78
+34-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:20:9-26:20
+35            android:name="com.example.kylewai.a2uf.individualPostActivity.PostActivity"
+35-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:21:13-64
+36            android:parentActivityName="com.example.kylewai.a2uf.MainActivity" >
+36-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:22:13-55
+37            <meta-data
+37-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:16:13-18:73
+38                android:name="android.support.PARENT_ACTIVITY"
+38-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:17:17-63
+39                android:value="com.example.kylewai.a2uf.MainActivity" />
+39-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:18:17-70
+40        </activity>
 41        <activity
-41-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:25:9-32:20
-42            android:name="com.example.kylewai.a2uf.individualMockActivity.MockScheduleActivity"
-42-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:26:13-72
-43            android:label=""
-43-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:27:13-29
-44            android:parentActivityName="com.example.kylewai.a2uf.MainActivity" >
-44-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:28:13-55
-45            <meta-data
-45-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:16:13-18:73
-46                android:name="android.support.PARENT_ACTIVITY"
-46-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:17:17-63
-47                android:value="com.example.kylewai.a2uf.MainActivity" />
-47-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:18:17-70
-48        </activity>
-49        <activity android:name="com.example.kylewai.a2uf.SplashScreenActivity" >
-49-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:33:9-39:20
-49-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:33:19-55
-50            <intent-filter>
-50-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:34:13-38:29
-51                <action android:name="android.intent.action.MAIN" />
-51-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:35:17-69
-51-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:35:25-66
-52
-53                <category android:name="android.intent.category.LAUNCHER" />
-53-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:37:17-77
-53-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:37:27-74
-54            </intent-filter>
+41-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:27:9-30:59
+42            android:name="com.example.kylewai.a2uf.userSchedule.AddClassActivity"
+42-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:28:13-58
+43            android:label="@string/title_activity_add_class"
+43-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:29:13-61
+44            android:theme="@style/AppTheme.NoActionBar" />
+44-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:30:13-56
+45        <activity
+45-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:31:9-33:46
+46            android:name="com.example.kylewai.a2uf.MainActivity"
+46-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:32:13-41
+47            android:launchMode="singleTop" />
+47-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:33:13-43
+48        <activity
+48-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:34:9-41:20
+49            android:name="com.example.kylewai.a2uf.individualMockActivity.MockScheduleActivity"
+49-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:35:13-72
+50            android:label=""
+50-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:36:13-29
+51            android:parentActivityName="com.example.kylewai.a2uf.MainActivity" >
+51-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:37:13-55
+52            <meta-data
+52-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:16:13-18:73
+53                android:name="android.support.PARENT_ACTIVITY"
+53-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:17:17-63
+54                android:value="com.example.kylewai.a2uf.MainActivity" />
+54-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:18:17-70
 55        </activity>
-56        <activity android:name="com.example.kylewai.a2uf.LoginActivity" />
-56-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:40:9-51
-56-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:40:19-48
-57        <activity android:name="com.example.kylewai.a2uf.RegisterActivity" />
-57-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:41:9-54
-57-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:41:19-51
-58        <activity
-58-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\1569b356ae21c59997606b87853bf436\firebase-auth-19.2.0\AndroidManifest.xml:24:9-31:50
-59            android:name="com.google.firebase.auth.internal.FederatedSignInActivity"
-59-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\1569b356ae21c59997606b87853bf436\firebase-auth-19.2.0\AndroidManifest.xml:25:13-85
-60            android:excludeFromRecents="true"
-60-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\1569b356ae21c59997606b87853bf436\firebase-auth-19.2.0\AndroidManifest.xml:26:13-46
-61            android:exported="true"
-61-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\1569b356ae21c59997606b87853bf436\firebase-auth-19.2.0\AndroidManifest.xml:27:13-36
-62            android:launchMode="singleTask"
-62-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\1569b356ae21c59997606b87853bf436\firebase-auth-19.2.0\AndroidManifest.xml:28:13-44
-63            android:permission="com.google.firebase.auth.api.gms.permission.LAUNCH_FEDERATED_SIGN_IN"
-63-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\1569b356ae21c59997606b87853bf436\firebase-auth-19.2.0\AndroidManifest.xml:29:13-102
-64            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-64-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\1569b356ae21c59997606b87853bf436\firebase-auth-19.2.0\AndroidManifest.xml:30:13-72
-65
-66        <service
-66-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\1569b356ae21c59997606b87853bf436\firebase-auth-19.2.0\AndroidManifest.xml:33:9-39:19
-67            android:name="com.google.firebase.components.ComponentDiscoveryService"
-67-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\1569b356ae21c59997606b87853bf436\firebase-auth-19.2.0\AndroidManifest.xml:34:13-84
-68            android:directBootAware="true"
-68-->[com.google.firebase:firebase-common:19.3.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\90d6733d16dd38ac3e16986dae6e7d41\jetified-firebase-common-19.3.0\AndroidManifest.xml:34:13-43
-69            android:exported="false" >
-69-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\1569b356ae21c59997606b87853bf436\firebase-auth-19.2.0\AndroidManifest.xml:35:13-37
-70            <meta-data
-70-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\1569b356ae21c59997606b87853bf436\firebase-auth-19.2.0\AndroidManifest.xml:36:13-38:85
-71                android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
-71-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\1569b356ae21c59997606b87853bf436\firebase-auth-19.2.0\AndroidManifest.xml:37:17-109
-72                android:value="com.google.firebase.components.ComponentRegistrar" />
-72-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\1569b356ae21c59997606b87853bf436\firebase-auth-19.2.0\AndroidManifest.xml:38:17-82
-73            <meta-data
-73-->[com.google.firebase:firebase-firestore:21.4.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\2d606b7af942f4ef21f2b8e7de1cbf3c\jetified-firebase-firestore-21.4.0\AndroidManifest.xml:20:13-22:85
-74                android:name="com.google.firebase.components:com.google.firebase.firestore.FirestoreRegistrar"
-74-->[com.google.firebase:firebase-firestore:21.4.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\2d606b7af942f4ef21f2b8e7de1cbf3c\jetified-firebase-firestore-21.4.0\AndroidManifest.xml:21:17-111
-75                android:value="com.google.firebase.components.ComponentRegistrar" />
-75-->[com.google.firebase:firebase-firestore:21.4.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\2d606b7af942f4ef21f2b8e7de1cbf3c\jetified-firebase-firestore-21.4.0\AndroidManifest.xml:22:17-82
-76        </service>
-77
-78        <activity
-78-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\6d206c10dfcd7e4d261b33c292c090cb\play-services-base-17.1.0\AndroidManifest.xml:23:9-26:75
-79            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-79-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\6d206c10dfcd7e4d261b33c292c090cb\play-services-base-17.1.0\AndroidManifest.xml:24:13-79
-80            android:exported="false"
-80-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\6d206c10dfcd7e4d261b33c292c090cb\play-services-base-17.1.0\AndroidManifest.xml:25:13-37
-81            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-81-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\6d206c10dfcd7e4d261b33c292c090cb\play-services-base-17.1.0\AndroidManifest.xml:26:13-72
-82
-83        <provider
-83-->[com.google.firebase:firebase-common:19.3.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\90d6733d16dd38ac3e16986dae6e7d41\jetified-firebase-common-19.3.0\AndroidManifest.xml:26:9-30:39
-84            android:name="com.google.firebase.provider.FirebaseInitProvider"
-84-->[com.google.firebase:firebase-common:19.3.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\90d6733d16dd38ac3e16986dae6e7d41\jetified-firebase-common-19.3.0\AndroidManifest.xml:27:13-77
-85            android:authorities="com.example.kylewai.a2uf.firebaseinitprovider"
-85-->[com.google.firebase:firebase-common:19.3.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\90d6733d16dd38ac3e16986dae6e7d41\jetified-firebase-common-19.3.0\AndroidManifest.xml:28:13-72
-86            android:exported="false"
-86-->[com.google.firebase:firebase-common:19.3.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\90d6733d16dd38ac3e16986dae6e7d41\jetified-firebase-common-19.3.0\AndroidManifest.xml:29:13-37
-87            android:initOrder="100" />
-87-->[com.google.firebase:firebase-common:19.3.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\90d6733d16dd38ac3e16986dae6e7d41\jetified-firebase-common-19.3.0\AndroidManifest.xml:30:13-36
-88
-89        <meta-data
-89-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\573c8ad38af8134fd61216f8b3fa2508\jetified-play-services-basement-17.0.0\AndroidManifest.xml:23:9-25:69
-90            android:name="com.google.android.gms.version"
-90-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\573c8ad38af8134fd61216f8b3fa2508\jetified-play-services-basement-17.0.0\AndroidManifest.xml:24:13-58
-91            android:value="@integer/google_play_services_version" />
-91-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\573c8ad38af8134fd61216f8b3fa2508\jetified-play-services-basement-17.0.0\AndroidManifest.xml:25:13-66
-92    </application>
-93
-94</manifest>
+56        <activity android:name="com.example.kylewai.a2uf.SplashScreenActivity" >
+56-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:42:9-48:20
+56-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:42:19-55
+57            <intent-filter>
+57-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:43:13-47:29
+58                <action android:name="android.intent.action.MAIN" />
+58-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:44:17-69
+58-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:44:25-66
+59
+60                <category android:name="android.intent.category.LAUNCHER" />
+60-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:46:17-77
+60-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:46:27-74
+61            </intent-filter>
+62        </activity>
+63        <activity android:name="com.example.kylewai.a2uf.LoginActivity" />
+63-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:49:9-51
+63-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:49:19-48
+64        <activity android:name="com.example.kylewai.a2uf.RegisterActivity" />
+64-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:50:9-54
+64-->C:\Users\KyleWai\AndroidStudioProjects\2UF\app\src\main\AndroidManifest.xml:50:19-51
+65        <activity
+65-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\1569b356ae21c59997606b87853bf436\firebase-auth-19.2.0\AndroidManifest.xml:24:9-31:50
+66            android:name="com.google.firebase.auth.internal.FederatedSignInActivity"
+66-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\1569b356ae21c59997606b87853bf436\firebase-auth-19.2.0\AndroidManifest.xml:25:13-85
+67            android:excludeFromRecents="true"
+67-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\1569b356ae21c59997606b87853bf436\firebase-auth-19.2.0\AndroidManifest.xml:26:13-46
+68            android:exported="true"
+68-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\1569b356ae21c59997606b87853bf436\firebase-auth-19.2.0\AndroidManifest.xml:27:13-36
+69            android:launchMode="singleTask"
+69-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\1569b356ae21c59997606b87853bf436\firebase-auth-19.2.0\AndroidManifest.xml:28:13-44
+70            android:permission="com.google.firebase.auth.api.gms.permission.LAUNCH_FEDERATED_SIGN_IN"
+70-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\1569b356ae21c59997606b87853bf436\firebase-auth-19.2.0\AndroidManifest.xml:29:13-102
+71            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+71-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\1569b356ae21c59997606b87853bf436\firebase-auth-19.2.0\AndroidManifest.xml:30:13-72
+72
+73        <service
+73-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\1569b356ae21c59997606b87853bf436\firebase-auth-19.2.0\AndroidManifest.xml:33:9-39:19
+74            android:name="com.google.firebase.components.ComponentDiscoveryService"
+74-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\1569b356ae21c59997606b87853bf436\firebase-auth-19.2.0\AndroidManifest.xml:34:13-84
+75            android:directBootAware="true"
+75-->[com.google.firebase:firebase-common:19.3.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\90d6733d16dd38ac3e16986dae6e7d41\jetified-firebase-common-19.3.0\AndroidManifest.xml:34:13-43
+76            android:exported="false" >
+76-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\1569b356ae21c59997606b87853bf436\firebase-auth-19.2.0\AndroidManifest.xml:35:13-37
+77            <meta-data
+77-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\1569b356ae21c59997606b87853bf436\firebase-auth-19.2.0\AndroidManifest.xml:36:13-38:85
+78                android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
+78-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\1569b356ae21c59997606b87853bf436\firebase-auth-19.2.0\AndroidManifest.xml:37:17-109
+79                android:value="com.google.firebase.components.ComponentRegistrar" />
+79-->[com.google.firebase:firebase-auth:19.2.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\1569b356ae21c59997606b87853bf436\firebase-auth-19.2.0\AndroidManifest.xml:38:17-82
+80            <meta-data
+80-->[com.google.firebase:firebase-firestore:21.4.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\2d606b7af942f4ef21f2b8e7de1cbf3c\jetified-firebase-firestore-21.4.0\AndroidManifest.xml:20:13-22:85
+81                android:name="com.google.firebase.components:com.google.firebase.firestore.FirestoreRegistrar"
+81-->[com.google.firebase:firebase-firestore:21.4.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\2d606b7af942f4ef21f2b8e7de1cbf3c\jetified-firebase-firestore-21.4.0\AndroidManifest.xml:21:17-111
+82                android:value="com.google.firebase.components.ComponentRegistrar" />
+82-->[com.google.firebase:firebase-firestore:21.4.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\2d606b7af942f4ef21f2b8e7de1cbf3c\jetified-firebase-firestore-21.4.0\AndroidManifest.xml:22:17-82
+83        </service>
+84
+85        <activity
+85-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\6d206c10dfcd7e4d261b33c292c090cb\play-services-base-17.1.0\AndroidManifest.xml:23:9-26:75
+86            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+86-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\6d206c10dfcd7e4d261b33c292c090cb\play-services-base-17.1.0\AndroidManifest.xml:24:13-79
+87            android:exported="false"
+87-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\6d206c10dfcd7e4d261b33c292c090cb\play-services-base-17.1.0\AndroidManifest.xml:25:13-37
+88            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+88-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\6d206c10dfcd7e4d261b33c292c090cb\play-services-base-17.1.0\AndroidManifest.xml:26:13-72
+89
+90        <provider
+90-->[com.google.firebase:firebase-common:19.3.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\90d6733d16dd38ac3e16986dae6e7d41\jetified-firebase-common-19.3.0\AndroidManifest.xml:26:9-30:39
+91            android:name="com.google.firebase.provider.FirebaseInitProvider"
+91-->[com.google.firebase:firebase-common:19.3.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\90d6733d16dd38ac3e16986dae6e7d41\jetified-firebase-common-19.3.0\AndroidManifest.xml:27:13-77
+92            android:authorities="com.example.kylewai.a2uf.firebaseinitprovider"
+92-->[com.google.firebase:firebase-common:19.3.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\90d6733d16dd38ac3e16986dae6e7d41\jetified-firebase-common-19.3.0\AndroidManifest.xml:28:13-72
+93            android:exported="false"
+93-->[com.google.firebase:firebase-common:19.3.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\90d6733d16dd38ac3e16986dae6e7d41\jetified-firebase-common-19.3.0\AndroidManifest.xml:29:13-37
+94            android:initOrder="100" />
+94-->[com.google.firebase:firebase-common:19.3.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\90d6733d16dd38ac3e16986dae6e7d41\jetified-firebase-common-19.3.0\AndroidManifest.xml:30:13-36
+95
+96        <meta-data
+96-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\573c8ad38af8134fd61216f8b3fa2508\jetified-play-services-basement-17.0.0\AndroidManifest.xml:23:9-25:69
+97            android:name="com.google.android.gms.version"
+97-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\573c8ad38af8134fd61216f8b3fa2508\jetified-play-services-basement-17.0.0\AndroidManifest.xml:24:13-58
+98            android:value="@integer/google_play_services_version" />
+98-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\KyleWai\.gradle\caches\transforms-2\files-2.1\573c8ad38af8134fd61216f8b3fa2508\jetified-play-services-basement-17.0.0\AndroidManifest.xml:25:13-66
+99    </application>
+100
+101</manifest>

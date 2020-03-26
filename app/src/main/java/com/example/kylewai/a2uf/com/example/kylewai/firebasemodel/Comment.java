@@ -16,8 +16,7 @@ public class Comment implements Parcelable {
 
     public Comment(){}
 
-    public Comment(String docId, String author, Timestamp dateCreated, String text, Integer likes){
-        this.docId = docId;
+    public Comment(String author, Timestamp dateCreated, String text, Integer likes){
         this.likes = likes;
         this.author = author;
         this.dateCreated = dateCreated;

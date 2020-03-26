@@ -1,4 +1,4 @@
-package com.example.kylewai.a2uf.forum;
+package com.example.kylewai.a2uf.individualPostActivity;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,7 +10,6 @@ import android.os.Bundle;
 
 import com.example.kylewai.a2uf.R;
 import com.example.kylewai.a2uf.com.example.kylewai.firebasemodel.Post;
-import com.example.kylewai.a2uf.individualMockActivity.PagerAdapterAddClass;
 import com.google.android.material.tabs.TabLayout;
 
 public class PostActivity extends AppCompatActivity {

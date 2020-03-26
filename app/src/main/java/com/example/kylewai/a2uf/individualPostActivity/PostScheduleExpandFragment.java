@@ -1,4 +1,4 @@
-package com.example.kylewai.a2uf.forum;
+package com.example.kylewai.a2uf.individualPostActivity;
 
 
 import android.os.Bundle;
@@ -50,16 +50,16 @@ public class PostScheduleExpandFragment extends Fragment {
 
     public PostScheduleExpandFragment(Course course, String postId) {
         this.postId = postId;
-        this.courseCode = courseCode;
-        this.name = name;
-        this.description = description;
-        this.department = department;
-        this.prereqs = prereqs;
-        this.coreqs = coreqs;
-        this.instructors = instructors;
-        this.meetTimes = meetTimes;
-        this.examTime = examTime;
-        this.classNumber = classNumber;
+        this.courseCode = course.getCode();
+        this.name = course.getName();
+        this.description = course.getDescription();
+        this.department = course.getDepartment();
+        this.prereqs = course.getPrereqs();
+        this.coreqs = course.getCoreqs();
+        this.instructors = course.getInstructors();
+        this.meetTimes = course.getMeetTimes();
+        this.examTime = course.getExamTime();
+        this.classNumber = course.getClassNumber();
     }
 
 

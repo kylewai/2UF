@@ -25,9 +25,8 @@ public class Post implements Parcelable {
 
     public Post(){}
 
-    public Post(String documentId, Timestamp dateCreated, String title, String description, String author,
+    public Post(Timestamp dateCreated, String title, String description, String author,
                 String major, List<Map<String, String>> weeklyMeetTimes, Integer likes){
-        this.documentId = documentId;
         this.dateCreated = dateCreated;
         this.title = title;
         this.description = description;
@@ -114,6 +113,7 @@ public class Post implements Parcelable {
         parcel.writeString(description);
         parcel.writeString(author);
         parcel.writeString(major);
+        parcel.writeInt(weeklyMeetTimes.size());
         Bundle temp;
         for(int k = 0; k < weeklyMeetTimes.size(); k++){
             temp = mapToBundle(weeklyMeetTimes.get(k));

@@ -11,7 +11,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".forum.PostActivity"
+        <activity android:name=".makePostActivity.MakePostActivity"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.kylewai.a2uf.MainActivity" />
+        </activity>
+        <activity
+            android:name=".individualPostActivity.PostActivity"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -21,7 +28,9 @@
             android:name=".userSchedule.AddClassActivity"
             android:label="@string/title_activity_add_class"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".MainActivity" android:launchMode="singleTop"/>
+        <activity
+            android:name=".MainActivity"
+            android:launchMode="singleTop" />
         <activity
             android:name=".individualMockActivity.MockScheduleActivity"
             android:label=""

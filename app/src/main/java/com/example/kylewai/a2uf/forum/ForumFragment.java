@@ -1,6 +1,7 @@
 package com.example.kylewai.a2uf.forum;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,10 +15,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.kylewai.a2uf.R;
 import com.example.kylewai.a2uf.com.example.kylewai.firebasemodel.Post;
 import com.example.kylewai.a2uf.com.example.kylewai.firebasemodel.UserMock;
+import com.example.kylewai.a2uf.makePostActivity.MakePostActivity;
 import com.example.kylewai.a2uf.mockList.MockListAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -38,6 +41,7 @@ public class ForumFragment extends Fragment {
     private FirebaseFirestore db;
     ForumFeedAdapter adapter;
     Spinner filter;
+    TextView makePost;
 
     public ForumFragment() {
         // Required empty public constructor
@@ -59,37 +63,35 @@ public class ForumFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_forum, container, false);
+        initRecyclerView(view);
+
+        makePost = view.findViewById(R.id.makePost);
+        makePost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), MakePostActivity.class);
+                startActivity(intent);
+            }
+        });
+        filter = view.findViewById(R.id.spinner);
+
+
+        return view;
+    }
+
+    private void initRecyclerView(View view){
         db = FirebaseFirestore.getInstance();
         Query query = db.collection("posts").orderBy("dateCreated", Query.Direction.DESCENDING);
         FirestoreRecyclerOptions<Post> firestoreRecyclerOptions = new FirestoreRecyclerOptions.Builder<Post>()
                 .setQuery(query, Post.class)
                 .build();
-
-        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful()){
-                    for(QueryDocumentSnapshot document : task.getResult()){
-                        Post post = document.toObject(Post.class);
-                        Log.d("ForumFrag", post.getTitle());
-                    }
-                }
-                else{
-                    Log.d("ForumFrag", "Query doesn't work");
-                }
-            }
-        });
         adapter = new ForumFeedAdapter(firestoreRecyclerOptions);
-        View view = inflater.inflate(R.layout.fragment_forum, container, false);
         recyclerView = view.findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getContext(), VERTICAL);
         recyclerView.addItemDecoration(dividerItemDecoration);
-
-        filter = view.findViewById(R.id.spinner);
-
-        return view;
     }
 
 }
