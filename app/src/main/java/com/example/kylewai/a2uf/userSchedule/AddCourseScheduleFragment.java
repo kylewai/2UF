@@ -1,29 +1,26 @@
 package com.example.kylewai.a2uf.userSchedule;
 
-import android.content.Intent;
+
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.transition.ChangeBounds;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.transition.ChangeBounds;
 
 import com.example.kylewai.a2uf.R;
 import com.example.kylewai.a2uf.com.example.kylewai.firebasemodel.AppUser;
 import com.example.kylewai.a2uf.com.example.kylewai.firebasemodel.Course;
-import com.example.kylewai.a2uf.individualMockActivity.MockScheduleActivity;
+import com.example.kylewai.a2uf.com.example.kylewai.firebasemodel.UserMock;
+import com.example.kylewai.a2uf.individualMockActivity.MockCourseExpandFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -34,100 +31,59 @@ import java.util.List;
 import java.util.Map;
 
 
-//Fragment showing user weekly schedule
-public class UserScheduleFragment extends Fragment {
-    private String uid;
-    public static String transferuid;
+//This is a fragment showing weekly schedule that is used in the viewpager of an add class activity
+public class AddCourseScheduleFragment extends Fragment {
+
     FirebaseFirestore db;
     String[]periods = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "E1", "E2", "E3"};
-    ViewGroup container;
+    static String userID;
 
-    String userID;
+    final FirebaseFirestore database = FirebaseFirestore.getInstance();
 
-    public UserScheduleFragment() {
+    public AddCourseScheduleFragment() {
         // Required empty public constructor
     }
 
-    public static UserScheduleFragment newInstance(String uid) {
+    public static AddCourseScheduleFragment newInstance(String uid) {
         // Required empty public constructor
-        UserScheduleFragment userFrag = new UserScheduleFragment();
+        AddCourseScheduleFragment schedFrag = new AddCourseScheduleFragment();
         Bundle args = new Bundle();
-        args.putString("uid", uid);
-        userFrag.setArguments(args);
-        return userFrag;
+        userID = uid;
+
+        return schedFrag;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        DocumentReference docRef = database.collection("users").document(userID);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Log.d("getCurrentSched", "DocumentSnapshot data: " + document.getData());
+                        List<Map<String, String>> currentUserSchedule = (List<Map<String, String>>) document.get("weeklyMeetTimes");
+                        HashMap<String, ArrayList<String>> course_cells = fillWeeklySchedule(currentUserSchedule);
+                        getClassInfo(course_cells);
+                    }
+                }
+            }
+        });
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        this.uid = getArguments().getString("uid");
-        transferuid = uid;
         db = FirebaseFirestore.getInstance();
-        this.container = container;
-        Log.d("UserScheduleFragment", "oncreate");
-        //Horrible workaround for having to use fragment transitions to prevent previous transitions from showing
-        //up again.
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        View view = inflater.inflate(R.layout.fragment_user_schedule, container, false);
-
-        //Gets floating action button and gives it the functionality of opening a new
-        //activity for adding classes.
-        FloatingActionButton fab = view.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast toast = Toast.makeText(getActivity().getApplicationContext(), "User Schedule", Toast.LENGTH_LONG);
-                toast.show();
-
-                //Creating and opening a new activity for adding classes.
-                Intent intent = new Intent(getActivity(), AddClassPager.class); //Was: AddClassActivity.class
-                String message = uid;
-                Log.d("putID", "" + uid);
-                intent.putExtra("ID", message);
-                getContext().startActivity(intent);
-            }
-        });
-        return view;
+        return inflater.inflate(R.layout.fragment_user_schedule, container, false);
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        getData(view);
-//        setSceneForTransition();
-    }
-
-    //Queries firebase for the data requried to render the user schedule
-    public void getData(View view){
-        DocumentReference docRef = db.collection("users").document(this.uid);
-
-        //Query firebase for AppUser object based on uid
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful()){
-                    DocumentSnapshot document = task.getResult();
-                    if(document.exists()){
-                        AppUser user = document.toObject(AppUser.class);
-                        List<Map<String, String>> meetings = user.getWeeklyMeetTimes();
-                        List<String> classNumbers = user.getClasses();
-                        HashMap<String, ArrayList<String>> course_cells = fillWeeklySchedule(meetings, classNumbers);
-                        getClassInfo(course_cells);
-                    }
-                    else{
-                        Log.d("UserSchedules", "Nothing");
-                    }
-                }
-                else{
-                    Log.d("UserSchedule", "get failed");
-                }
-            }
-        });
-    }
-
-
-    private HashMap<String, ArrayList<String>> fillWeeklySchedule(List<Map<String, String>> meetings, List<String> classNumbers){
+    private HashMap<String, ArrayList<String>> fillWeeklySchedule(List<Map<String, String>> meetings){
         HashMap<String, ArrayList<String>> course_cells = new HashMap<>();
         ArrayList<String> cells_to_assign;
 
@@ -136,6 +92,7 @@ public class UserScheduleFragment extends Fragment {
             String course = meetTime.get("course");
             String classNumber = meetTime.get("classNumber");
             String days = meetTime.get("days");
+            Log.i("Mister", days);
             String periodBegin = meetTime.get("periodBegin");
             String periodEnd = meetTime.get("periodEnd");
             cells_to_assign = getCellstoAssign(days, periodBegin, periodEnd);
@@ -149,7 +106,7 @@ public class UserScheduleFragment extends Fragment {
             //Set text for cells with cell id in cells_to_assign
             for(int k = 0; k < cells_to_assign.size(); k++){
                 String viewName = cells_to_assign.get(k);
-                cell = getView().findViewById(getResources().getIdentifier(viewName, "id", getActivity().getPackageName()));
+                cell = (TextView)getView().findViewById(getResources().getIdentifier(viewName, "id", getActivity().getPackageName()));
                 cell.setText(course);
             }
         }
@@ -185,23 +142,23 @@ public class UserScheduleFragment extends Fragment {
             docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    Log.d("UserSchedule", "Complete");
+                    Log.d("SchedFrag", "Complete");
                     if (task.isSuccessful()) {
                         DocumentSnapshot document = task.getResult();
                         if (document.exists()) {
-                            Log.d("UserSchedule", "got");
+                            Log.d("SchedFrag", "got");
                             Course course = document.toObject(Course.class);
-                            Log.d("UserSchedule", "Finally" + course.getCode());
+                            Log.d("SchedFrag", "Finally" + course.getCode());
 
                             for(String cell : cells){
                                 addCourseOnClickListener(course, cell, classNumber);
                             }
 
                         } else {
-                            Log.d("UserSchedule", "No course for classnum");
+                            Log.d("SchedFrag", "No course for classnum");
                         }
                     } else {
-                        Log.d("UserSchedule", "Get course failed");
+                        Log.d("SchedFrag", "Get course failed");
                     }
                 }
             });
@@ -221,7 +178,6 @@ public class UserScheduleFragment extends Fragment {
         final List<String> instructors = course.getInstructors();
         final List<Map<String, String>> meetTimes = course.getMeetTimes();
         final String examTime = course.getExamTime();
-        //final String courseID = course.getCourseID();
 //        LayoutInflater inflater = LayoutInflater.from(getActivity());
 //        final View course_expand_view = inflater.inflate(R.layout.fragment_course_expand, null);
 //
@@ -233,6 +189,7 @@ public class UserScheduleFragment extends Fragment {
 
 //        TextView code = course_expand_view.findViewById(R.id.code);
 //        code.setText(courseCode);
+        Log.d("SchedFrag", "Added on click");
         cell_text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -252,4 +209,5 @@ public class UserScheduleFragment extends Fragment {
             }
         });
     }
+
 }

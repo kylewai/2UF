@@ -8,5 +8,6 @@
     <string name="tab_label3">Schedule of Courses</string>
     <string name="tab_label4">Forum</string>
     <string name="title_activity_add_class">AddClassActivity</string>
+    <string name="title_activity_add_class_pager">AddClassPager</string>
 
 </resources>

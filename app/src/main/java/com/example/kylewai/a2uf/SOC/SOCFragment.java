@@ -41,6 +41,8 @@ public class SOCFragment extends Fragment {
     private SOCCourseListAdapter mAdapter;
     private Gson gson;
 
+    public int fragmentDecider;
+
     public SOCFragment() {
         // Required empty public constructor
     }
@@ -65,6 +67,9 @@ public class SOCFragment extends Fragment {
         gson = gsonBuilder.create();
 
         fetchPosts();
+
+        //For using different ExpandFragments depending on where it is accessed from.
+        mAdapter.fragmentDecider = fragmentDecider;
 
 
 

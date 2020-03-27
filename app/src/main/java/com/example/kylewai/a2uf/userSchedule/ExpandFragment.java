@@ -22,6 +22,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -115,27 +116,41 @@ public class ExpandFragment extends Fragment {
             @Override
             public void onClick(View view)
             {
-                Map<String, String> dropClass = new HashMap<>();
-                //dropClass.put("classNumber", );
-                dropClass.put("classNumber", classNumber);
-                dropClass.put("course", courseCode);
-                dropClass.put("days", meetTimes.get(0).get("days"));
-                dropClass.put("periodBegin", meetTimes.get(0).get("periodBegin"));
-                dropClass.put("periodEnd", meetTimes.get(0).get("periodEnd"));
+                List<Map<String, String>> dropList = new ArrayList<>();
+                for(Map<String, String> meetTime : meetTimes)
+                {
+                    Map<String, String> dropClass = new HashMap<>();
+                    //dropClass.put("classNumber", );
+                    dropClass.put("classNumber", classNumber);
+                    dropClass.put("course", courseCode);
+                    dropClass.put("days", meetTime.get("days"));
+                    dropClass.put("periodBegin", meetTime.get("periodBegin"));
+                    dropClass.put("periodEnd", meetTime.get("periodEnd"));
+
+                    dropList.add(dropClass);
+                }
 
                 final FirebaseFirestore database = FirebaseFirestore.getInstance();
-                database.collection("users").document(UserScheduleFragment.transferuid).update("weeklyMeetTimes", FieldValue.arrayRemove(dropClass)).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d("dbUpdate", "DocumentSnapshot successfully updated!");
-                    }
-                })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Log.w("dbUpdate", "Error updating document", e);
-                            }
-                        });
+
+                //Log.d("ArraySize", "Num Meets: " + dropList.size());
+                //Toast toasty = Toast.makeText(view.getContext(), "Num Meets" + dropList.size(), Toast.LENGTH_LONG);
+                //toasty.show();
+
+                for(Map<String, String> dropClass : dropList)
+                {
+                    database.collection("users").document(UserScheduleFragment.transferuid).update("weeklyMeetTimes", FieldValue.arrayRemove(dropClass)).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Log.d("dbUpdate", "DocumentSnapshot successfully updated!");
+                        }
+                    })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.w("dbUpdate", "Error updating document", e);
+                                }
+                            });
+                }
             }
         });
 

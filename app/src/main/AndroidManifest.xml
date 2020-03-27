@@ -12,9 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".userSchedule.AddClassPager"
+            android:label="@string/title_activity_add_class_pager"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".userSchedule.AddClassActivity"
             android:label="@string/title_activity_add_class"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".MainActivity" />
         <activity
             android:name=".individualMockActivity.MockScheduleActivity"

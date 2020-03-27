@@ -113,55 +113,6 @@ public class MainActivity extends AppCompatActivity {
            }
        });
 
-        /*
-        //Adding floating action button functionality
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                //FAB action
-
-                //Check to see what fragment we are in.
-                int tabPos = tabLayout.getSelectedTabPosition();
-
-                //Actions based on tab position
-                if(tabPos == 0)
-                {
-                    //User Schedule
-                    Toast toast = Toast.makeText(getApplicationContext(), "User Schedule", Toast.LENGTH_LONG);
-                    toast.show();
-                    Fragment fr = new AddCourseFragment();
-                    fr.setSharedElementEnterTransition(new ChangeBounds());
-                    fr.setSharedElementReturnTransition(new ChangeBounds());
-                    fr.setEnterTransition(new ChangeBounds());
-                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-//                ft.addSharedElement(cell_text, "expand");
-                    ft.setReorderingAllowed(true).replace(R.id.scene_root, fr).addToBackStack("schedule").commit();
-                }
-                else if(tabPos == 1)
-                {
-                    //Mocks
-                    Toast toast = Toast.makeText(getApplicationContext(), "Mocks", Toast.LENGTH_LONG);
-                    toast.show();
-
-                }
-                else if(tabPos == 2)
-                {
-                    //SOC
-                    Toast toast = Toast.makeText(getApplicationContext(), "SOC", Toast.LENGTH_LONG);
-                    toast.show();
-                }
-                else
-                {
-                    //Forum
-                    Toast toast = Toast.makeText(getApplicationContext(), "Forum", Toast.LENGTH_LONG);
-                    toast.show();
-                }
-            }
-        });
-
-         */
 
     }
 }
