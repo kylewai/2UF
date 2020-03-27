@@ -30,10 +30,26 @@
             android:label="@string/title_activity_add_class_pager"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name="com.example.kylewai.a2uf.makePostActivity.MakePostActivity"
+            android:parentActivityName="com.example.kylewai.a2uf.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.kylewai.a2uf.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.example.kylewai.a2uf.individualPostActivity.PostActivity"
+            android:parentActivityName="com.example.kylewai.a2uf.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.kylewai.a2uf.MainActivity" />
+        </activity>
+        <activity
             android:name="com.example.kylewai.a2uf.userSchedule.AddClassActivity"
             android:label="@string/title_activity_add_class"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="com.example.kylewai.a2uf.MainActivity" />
+        <activity
+            android:name="com.example.kylewai.a2uf.MainActivity"
+            android:launchMode="singleTop" />
         <activity
             android:name="com.example.kylewai.a2uf.individualMockActivity.MockScheduleActivity"
             android:label=""

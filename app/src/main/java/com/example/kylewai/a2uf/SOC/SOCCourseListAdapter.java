@@ -75,7 +75,6 @@ public class SOCCourseListAdapter extends RecyclerView.Adapter<SOCCourseViewHold
     }
 
     public void update(List<Section> sectionList){
-        Log.i("Adapter", sectionList.get(0).getCode());
         this.sectionList.addAll(sectionList);
         Log.i("Adapter", this.sectionList.size() + "");
         notifyDataSetChanged();

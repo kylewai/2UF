@@ -11,17 +11,28 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.kylewai.a2uf.com.example.kylewai.firebasemodel.AppUser;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
+    private TextView text_email;
     private TextView text_username;
     private TextView text_password;
     private String sharedPrefFile = "com.example.kylewai.test";
     private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
     Intent intent_user_schedule;
     SharedPreferences sharedPref;
 
@@ -29,8 +40,10 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        text_username = findViewById(R.id.textView_username);
+        text_email = findViewById(R.id.textView_email);
         text_password = findViewById(R.id.textView_password);
+        text_username = findViewById(R.id.textView_username);
+        db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
         intent_user_schedule = new Intent(this, MainActivity.class);
         sharedPref = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
@@ -53,6 +66,24 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(this, message, Toast.LENGTH_LONG).show();
             return;
         }
+        Map<String, Object> docData = new HashMap<>();
+        String username = text_username.getText().toString();
+        AppUser newUser = new AppUser(username, new ArrayList<>(), new ArrayList<Map<String, String>>());
+        db.collection("users").document(user.getUid())
+                .set(newUser)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("RegisterActivity", "Firestore user created");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d("RegisterActivity", "Failed to create Firestore user");
+                    }
+                });
+
         addSharedPreferences(user.getEmail(), password);
         start_user_activity(user);
     }
@@ -60,7 +91,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void firebase_register(View view){
         Log.d("Main", "Got here");
-        String email = text_username.getText().toString();
+        String email = text_email.getText().toString().trim();
         String password = text_password.getText().toString();
         firebase_sign_in(email, password);
     }

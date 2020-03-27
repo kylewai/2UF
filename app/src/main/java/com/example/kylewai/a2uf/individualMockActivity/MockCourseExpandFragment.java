@@ -42,6 +42,7 @@ public class MockCourseExpandFragment extends Fragment {
     List<String> instructors;
     List<Map<String, String>> meetTimes;
     String examTime;
+
     TextView textView_code;
     TextView textView_name;
     TextView textView_description;

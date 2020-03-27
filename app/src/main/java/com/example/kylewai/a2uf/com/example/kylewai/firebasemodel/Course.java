@@ -1,10 +1,14 @@
 package com.example.kylewai.a2uf.com.example.kylewai.firebasemodel;
 
+import com.google.firebase.firestore.DocumentId;
+
 import java.util.List;
 import java.util.Map;
 
 //This class is a model for the "course" collection
 public class Course {
+    @DocumentId
+    private String classNumber;
     private String code;
     private String name;
     private String prereqs;
@@ -21,9 +25,10 @@ public class Course {
     }
 
 
-    public Course(String code, String coreqs, String name, String prereqs,
+    public Course(String classNumber, String code, String coreqs, String name, String prereqs,
                   String department, String description, String examTime,
                   List<String> instructors, List<Map<String, String>> meetTimes){
+        this.classNumber = classNumber;
         this.code = code;
         this.name = name;
         this.prereqs = prereqs;
@@ -36,6 +41,10 @@ public class Course {
         this.meetTimes = meetTimes;
     }
 
+
+    public String getClassNumber() {
+        return classNumber;
+    }
 
     public String getCode() {
         return code;
