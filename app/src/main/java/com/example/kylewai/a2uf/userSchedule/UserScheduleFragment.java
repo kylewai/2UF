@@ -139,10 +139,14 @@ public class UserScheduleFragment extends Fragment {
             cells_to_assign = getCellstoAssign(days, periodBegin, periodEnd);
             if(course_cells.containsKey(classNumber)){
                 ArrayList<String> combined = course_cells.get(classNumber);
+                Log.d("cells_to_assign", classNumber + " before " + combined.toString());
                 combined.addAll(cells_to_assign);
+                Log.d("cells_to_assign", classNumber + " " + combined.toString());
                 course_cells.put(classNumber, combined);
             }
-            course_cells.put(classNumber, cells_to_assign);
+            else {
+                course_cells.put(classNumber, cells_to_assign);
+            }
             TextView cell;
             //Set text for cells with cell id in cells_to_assign
             for(int k = 0; k < cells_to_assign.size(); k++){
