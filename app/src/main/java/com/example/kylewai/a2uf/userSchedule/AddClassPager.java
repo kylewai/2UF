@@ -7,6 +7,7 @@ import com.example.kylewai.a2uf.PagerAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
@@ -25,14 +26,18 @@ public class AddClassPager extends AppCompatActivity {
         setContentView(R.layout.activity_add_class_pager);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        ActionBar bar = getSupportActionBar();
+
+        bar.setDisplayHomeAsUpEnabled(true);
+        bar.setTitle("Add a class");
 
         Intent intent = getIntent();
 
         String UserID = intent.getStringExtra("ID");
 
         final TabLayout tabLayout = findViewById(R.id.tab_layout);
+        tabLayout.addTab(tabLayout.newTab().setText("Schedule"));
         tabLayout.addTab(tabLayout.newTab().setText("Add Class"));
-        tabLayout.addTab(tabLayout.newTab().setText("Blank"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = findViewById(R.id.pager);

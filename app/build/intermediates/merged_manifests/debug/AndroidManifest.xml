@@ -41,11 +41,12 @@
         <activity
             android:name="com.example.kylewai.a2uf.userSchedule.AddClassPager"
             android:label="@string/title_activity_add_class_pager"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name="com.example.kylewai.a2uf.userSchedule.AddClassActivity"
-            android:label="@string/title_activity_add_class"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:parentActivityName="com.example.kylewai.a2uf.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.kylewai.a2uf.MainActivity" />
+        </activity>
         <activity
             android:name="com.example.kylewai.a2uf.MainActivity"
             android:launchMode="singleTop" />
