@@ -126,11 +126,4 @@ public class Post implements Parcelable {
             }
         }
     }
-    private Bundle mapToBundle(Map<String, String> meetTime){
-        Bundle bundle = new Bundle();
-        for(Map.Entry<String, String> entry : meetTime.entrySet()){
-            bundle.putString(entry.getKey(), entry.getValue());
-        }
-        return bundle;
-    }
 }

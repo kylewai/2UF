@@ -12,7 +12,6 @@ public class Course {
     private String code;
     private String name;
     private String prereqs;
-    private String coreqs;
     private String department;
     private String description;
     private String examTime;
@@ -25,14 +24,12 @@ public class Course {
     }
 
 
-    public Course(String classNumber, String code, String coreqs, String name, String prereqs,
+    public Course(String code, String name, String prereqs,
                   String department, String description, String examTime,
                   List<String> instructors, List<Map<String, String>> meetTimes){
-        this.classNumber = classNumber;
         this.code = code;
         this.name = name;
         this.prereqs = prereqs;
-        this.coreqs = coreqs;
         this.department = department;
         this.description = description;
         this.examTime = examTime;
@@ -46,6 +43,7 @@ public class Course {
         return classNumber;
     }
 
+
     public String getCode() {
         return code;
     }
@@ -58,11 +56,6 @@ public class Course {
 
     public String getPrereqs() {
         return prereqs;
-    }
-
-
-    public String getCoreqs() {
-        return coreqs;
     }
 
 

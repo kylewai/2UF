@@ -30,11 +30,12 @@ public class MockScheduleActivity extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
 
         // Enable the Up button
+        ab.setTitle("Add a class");
         ab.setDisplayHomeAsUpEnabled(true);
 
         TabLayout tabLayout = findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("Schedule"));
-        tabLayout.addTab(tabLayout.newTab().setText("Add Course"));
+        tabLayout.addTab(tabLayout.newTab().setText("Add Class"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = findViewById(R.id.pager);

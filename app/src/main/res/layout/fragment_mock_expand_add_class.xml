@@ -9,7 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorPrimary"
-        android:clickable="true"
         android:orientation="vertical">
 
         <TextView
@@ -93,15 +92,12 @@
             android:text="Close" />
 
         <Button
-            android:id="@+id/dropButton"
+            android:id="@+id/Add_Class_Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="2dp"
-            android:layout_marginBottom="182dp"
-            android:text="Drop" />
+            android:layout_marginEnd="97dp"
+            android:text="Add" />
     </RelativeLayout>
 </ScrollView>
