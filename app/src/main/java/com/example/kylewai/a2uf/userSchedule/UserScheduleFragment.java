@@ -139,9 +139,7 @@ public class UserScheduleFragment extends Fragment {
             cells_to_assign = getCellstoAssign(days, periodBegin, periodEnd);
             if(course_cells.containsKey(classNumber)){
                 ArrayList<String> combined = course_cells.get(classNumber);
-                Log.d("cells_to_assign", classNumber + " before " + combined.toString());
                 combined.addAll(cells_to_assign);
-                Log.d("cells_to_assign", classNumber + " " + combined.toString());
                 course_cells.put(classNumber, combined);
             }
             else {
@@ -219,7 +217,6 @@ public class UserScheduleFragment extends Fragment {
         final String description = course.getDescription();
         final String department = course.getDepartment();
         final String prereqs = course.getPrereqs();
-        final String coreqs = course.getCoreqs();
         final List<String> instructors = course.getInstructors();
         final List<Map<String, String>> meetTimes = course.getMeetTimes();
         final String examTime = course.getExamTime();
@@ -244,7 +241,7 @@ public class UserScheduleFragment extends Fragment {
 //                Scene expand_scene = new Scene(sceneRoot, course_expand_view);
 //                Transition transition = TransitionInflater.from(getActivity()).inflateTransition(R.transition.expand_transition);
 //                TransitionManager.go(expand_scene, transition);
-                Fragment fr = new ExpandFragment(courseCode, name, description, department, prereqs, coreqs, instructors, meetTimes, examTime, classNumber);
+                Fragment fr = new ExpandFragment(courseCode, name, description, department, prereqs, instructors, meetTimes, examTime, classNumber);
                 fr.setSharedElementEnterTransition(new ChangeBounds());
                 fr.setSharedElementReturnTransition(new ChangeBounds());
                 fr.setEnterTransition(new ChangeBounds());

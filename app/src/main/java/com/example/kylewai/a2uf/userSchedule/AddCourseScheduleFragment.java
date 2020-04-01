@@ -174,7 +174,6 @@ public class AddCourseScheduleFragment extends Fragment {
         final String description = course.getDescription();
         final String department = course.getDepartment();
         final String prereqs = course.getPrereqs();
-        final String coreqs = course.getCoreqs();
         final List<String> instructors = course.getInstructors();
         final List<Map<String, String>> meetTimes = course.getMeetTimes();
         final String examTime = course.getExamTime();
@@ -199,7 +198,7 @@ public class AddCourseScheduleFragment extends Fragment {
 //                Scene expand_scene = new Scene(sceneRoot, course_expand_view);
 //                Transition transition = TransitionInflater.from(getActivity()).inflateTransition(R.transition.expand_transition);
 //                TransitionManager.go(expand_scene, transition);
-                Fragment fr = new ExpandFragment(courseCode, name, description, department, prereqs, coreqs, instructors, meetTimes, examTime, classNumber);
+                Fragment fr = new ExpandFragment(courseCode, name, description, department, prereqs, instructors, meetTimes, examTime, classNumber);
                 fr.setSharedElementEnterTransition(new ChangeBounds());
                 fr.setSharedElementReturnTransition(new ChangeBounds());
                 fr.setEnterTransition(new ChangeBounds());

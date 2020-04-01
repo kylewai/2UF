@@ -21,6 +21,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,7 +39,6 @@ public class MockCourseExpandFragment extends Fragment {
     String description;
     String department;
     String prereqs;
-    String coreqs;
     List<String> instructors;
     List<Map<String, String>> meetTimes;
     String examTime;
@@ -56,7 +56,7 @@ public class MockCourseExpandFragment extends Fragment {
     public MockCourseExpandFragment(){}
 
     public MockCourseExpandFragment(String courseCode, String name, String description,
-                          String department, String prereqs, String coreqs,
+                          String department, String prereqs,
                           List<String> instructors, List<Map<String, String>> meetTimes, String examTime, String classNumber, String mockId) {
         // Required empty public constructor
         this.mockId = mockId;
@@ -65,7 +65,6 @@ public class MockCourseExpandFragment extends Fragment {
         this.description = description;
         this.department = department;
         this.prereqs = prereqs;
-        this.coreqs = coreqs;
         this.instructors = instructors;
         this.meetTimes = meetTimes;
         this.examTime = examTime;
@@ -87,9 +86,6 @@ public class MockCourseExpandFragment extends Fragment {
         textView_prereqs = view.findViewById(R.id.prereqs);
         String prereqsString = "Prereqs: " + this.prereqs;
         textView_prereqs.setText(prereqsString);
-        textView_coreqs = view.findViewById(R.id.coreqs);
-        String coreqsString = "Coreqs: " + this.coreqs;
-        textView_coreqs.setText(coreqsString);
         textView_instructors = view.findViewById(R.id.instructors);
         String instructorString = "Instructors:";
         for(String instructor : instructors){
@@ -120,28 +116,36 @@ public class MockCourseExpandFragment extends Fragment {
             @Override
             public void onClick(View view)
             {
+                List<Map<String, String>> meetTimesToDrop = new ArrayList<>();
                 Map<String, String> dropClass = new HashMap<>();
                 //dropClass.put("classNumber", );
-                dropClass.put("classNumber", classNumber);
-                dropClass.put("course", courseCode);
-                dropClass.put("days", meetTimes.get(0).get("days"));
-                dropClass.put("periodBegin", meetTimes.get(0).get("periodBegin"));
-                dropClass.put("periodEnd", meetTimes.get(0).get("periodEnd"));
-
-                Log.d("dbUpdate", dropClass.toString());
-                final FirebaseFirestore database = FirebaseFirestore.getInstance();
-                database.collection("userMocks").document(UserScheduleFragment.transferuid).collection("mockInfo").document(mockId).update("weeklyMeetTimes", FieldValue.arrayRemove(dropClass)).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d("dbUpdate", "DocumentSnapshot successfully updated!");
-                    }
-                })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Log.w("dbUpdate", "Error updating document", e);
-                            }
-                        });
+                for(Map<String, String> meetTime : meetTimes) {
+                    dropClass.clear();
+                    dropClass.put("classNumber", classNumber);
+                    dropClass.put("course", courseCode);
+                    dropClass.put("days", meetTime.get("days"));
+                    dropClass.put("periodBegin", meetTime.get("periodBegin"));
+                    dropClass.put("periodEnd", meetTime.get("periodEnd"));
+                    Log.d("dbUpdate", dropClass.toString());
+                    final FirebaseFirestore database = FirebaseFirestore.getInstance();
+                    database.collection("userMocks")
+                            .document(UserScheduleFragment.transferuid)
+                            .collection("mockInfo")
+                            .document(mockId)
+                            .update("weeklyMeetTimes", FieldValue.arrayRemove(dropClass))
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Log.d("dbUpdate", "DocumentSnapshot successfully updated!");
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.w("dbUpdate", "Error updating document", e);
+                                }
+                            });
+                }
             }
         });
 

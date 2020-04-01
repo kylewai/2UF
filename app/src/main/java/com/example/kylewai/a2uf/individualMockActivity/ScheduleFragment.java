@@ -85,7 +85,9 @@ public class ScheduleFragment extends Fragment {
                 combined.addAll(cells_to_assign);
                 course_cells.put(classNumber, combined);
             }
-            course_cells.put(classNumber, cells_to_assign);
+            else {
+                course_cells.put(classNumber, cells_to_assign);
+            }
             TextView cell;
             //Set text for cells with cell id in cells_to_assign
             for(int k = 0; k < cells_to_assign.size(); k++){
@@ -158,7 +160,6 @@ public class ScheduleFragment extends Fragment {
         final String description = course.getDescription();
         final String department = course.getDepartment();
         final String prereqs = course.getPrereqs();
-        final String coreqs = course.getCoreqs();
         final List<String> instructors = course.getInstructors();
         final List<Map<String, String>> meetTimes = course.getMeetTimes();
         final String examTime = course.getExamTime();
@@ -183,7 +184,7 @@ public class ScheduleFragment extends Fragment {
 //                Scene expand_scene = new Scene(sceneRoot, course_expand_view);
 //                Transition transition = TransitionInflater.from(getActivity()).inflateTransition(R.transition.expand_transition);
 //                TransitionManager.go(expand_scene, transition);
-                Fragment fr = new MockCourseExpandFragment(courseCode, name, description, department, prereqs, coreqs, instructors, meetTimes, examTime, classNumber, getArguments().getString("mockId"));
+                Fragment fr = new MockCourseExpandFragment(courseCode, name, description, department, prereqs, instructors, meetTimes, examTime, classNumber, getArguments().getString("mockId"));
                 fr.setSharedElementEnterTransition(new ChangeBounds());
                 fr.setSharedElementReturnTransition(new ChangeBounds());
                 fr.setEnterTransition(new ChangeBounds());

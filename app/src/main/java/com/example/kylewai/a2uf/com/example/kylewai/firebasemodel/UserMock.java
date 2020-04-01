@@ -33,14 +33,16 @@ public class UserMock implements Parcelable {
         dateCreated = in.readParcelable(Timestamp.class.getClassLoader());
         mockId = in.readString();
         mockName = in.readString();
-        Bundle tempBundle = new Bundle();
         Map<String, String> tempMap;
         weeklyMeetTimes = new ArrayList<>();
-        for(int i = 0; i < in.readInt(); i++){
-            tempBundle = in.readBundle();
+        int arraySize = in.readInt();
+        for(int i = 0; i < arraySize; i++){
+            int size = in.readInt();
             tempMap = new HashMap<>();
-            for(String key : tempBundle.keySet()){
-                tempMap.put(key, tempBundle.getString(key));
+            for(int j = 0; j < size; j++){
+                String key = in.readString();
+                String val = in.readString();
+                tempMap.put(key, val);
             }
             weeklyMeetTimes.add(tempMap);
         }
@@ -90,18 +92,14 @@ public class UserMock implements Parcelable {
         parcel.writeString(mockId);
         parcel.writeString(mockName);
         parcel.writeInt(weeklyMeetTimes.size());
-        Bundle temp;
         for(int k = 0; k < weeklyMeetTimes.size(); k++){
-            temp = mapToBundle(weeklyMeetTimes.get(k));
-            parcel.writeBundle(temp);
+            Map<String, String> meetTime = weeklyMeetTimes.get(k);
+            parcel.writeInt(meetTime.size());
+            for(Map.Entry<String, String> entry : meetTime.entrySet()){
+                parcel.writeString(entry.getKey());
+                parcel.writeString(entry.getValue());
+            }
         }
     }
 
-    private Bundle mapToBundle(Map<String, String> meetTime){
-        Bundle bundle = new Bundle();
-        for(Map.Entry<String, String> entry : meetTime.entrySet()){
-            bundle.putString(entry.getKey(), entry.getValue());
-        }
-        return bundle;
-    }
 }

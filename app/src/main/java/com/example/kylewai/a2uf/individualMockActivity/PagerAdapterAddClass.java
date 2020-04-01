@@ -25,7 +25,11 @@ public class PagerAdapterAddClass extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0: return ScheduleFragment.newInstance(userMock, mockId);
-            case 1: return new CourseSelectionFragment();
+            case 1:
+                SOCFragment newFrag = new SOCFragment();
+                newFrag.fragmentDecider = 2;
+                newFrag.mockId = mockId;
+                return newFrag; //Was new CourseSelectionFragment();;
             default: return null;
         }
     }

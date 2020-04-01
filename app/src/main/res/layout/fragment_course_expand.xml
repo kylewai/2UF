@@ -1,103 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/root"
-    android:background="@color/colorPrimary"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 
-    <TextView
-        android:transitionName="expand"
-        android:id="@+id/code"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:text="Code"
-        android:textSize="36sp" />
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
+        android:clickable="true"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_below="@id/code"
-        android:text="Name"
-        android:textSize="20sp" />
+        <TextView
+            android:id="@+id/code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:text="Code"
+            android:textSize="36sp"
+            android:transitionName="expand" />
 
-    <TextView
-        android:id="@+id/description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_below="@id/name"
-        android:text="description"
-        android:textSize="20sp" />
-    <TextView
-        android:id="@+id/department"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_below="@id/description"
-        android:text="department"
-        android:textSize="20sp" />
-    <TextView
-        android:id="@+id/prereqs"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_below="@id/department"
-        android:text="prereqs"
-        android:textSize="20sp" />
-    <TextView
-        android:id="@+id/coreqs"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_below="@id/prereqs"
-        android:text="coreqs"
-        android:textSize="20sp" />
-    <TextView
-        android:id="@+id/instructors"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_below="@id/coreqs"
-        android:text="instructors"
-        android:textSize="20sp" />
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/code"
+            android:layout_marginTop="8dp"
+            android:text="Name"
+            android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/meetTimes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_below="@id/instructors"
-        android:text="meetTimes"
-        android:textSize="20sp" />
-    <TextView
-        android:id="@+id/examTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_below="@id/meetTimes"
-        android:text="examTime"
-        android:textSize="20sp" />
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/name"
+            android:layout_marginTop="8dp"
+            android:text="description"
+            android:textSize="20sp" />
 
-    <Button
-        android:id="@+id/close"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:text="Close" />
+        <TextView
+            android:id="@+id/department"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/description"
+            android:layout_marginTop="8dp"
+            android:text="department"
+            android:textSize="20sp" />
 
-    <Button
-        android:id="@+id/dropButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
+        <TextView
+            android:id="@+id/prereqs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/department"
+            android:layout_marginTop="8dp"
+            android:text="prereqs"
+            android:textSize="20sp" />
 
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="2dp"
-        android:layout_marginBottom="182dp"
-        android:text="Drop" />
-</RelativeLayout>
+        <TextView
+            android:id="@+id/instructors"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/prereqs"
+            android:layout_marginTop="32dp"
+            android:text="instructors"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/meetTimes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/instructors"
+            android:layout_marginTop="8dp"
+            android:text="meetTimes"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/examTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/meetTimes"
+            android:layout_marginTop="8dp"
+            android:text="examTime"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:text="Close" />
+
+        <Button
+            android:id="@+id/dropButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="2dp"
+            android:layout_marginBottom="182dp"
+            android:text="Drop" />
+    </RelativeLayout>
+</ScrollView>

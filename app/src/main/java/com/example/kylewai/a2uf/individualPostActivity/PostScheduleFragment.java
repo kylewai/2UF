@@ -93,7 +93,6 @@ public class PostScheduleFragment extends Fragment {
             String course = meetTime.get("course");
             String classNumber = meetTime.get("classNumber");
             String days = meetTime.get("days");
-            Log.i("Mister", days);
             String periodBegin = meetTime.get("periodBegin");
             String periodEnd = meetTime.get("periodEnd");
             cells_to_assign = getCellstoAssign(days, periodBegin, periodEnd);
@@ -102,7 +101,9 @@ public class PostScheduleFragment extends Fragment {
                 combined.addAll(cells_to_assign);
                 course_cells.put(classNumber, combined);
             }
-            course_cells.put(classNumber, cells_to_assign);
+            else {
+                course_cells.put(classNumber, cells_to_assign);
+            }
             TextView cell;
             //Set text for cells with cell id in cells_to_assign
             for(int k = 0; k < cells_to_assign.size(); k++){
@@ -169,16 +170,15 @@ public class PostScheduleFragment extends Fragment {
 
 
     private void addCourseOnClickListener(Course course, final String cell){
-        final String classNumber = course.getClassNumber();
-        final String courseCode = course.getCode();
-        final String name = course.getName();
-        final String description = course.getDescription();
-        final String department = course.getDepartment();
-        final String prereqs = course.getPrereqs();
-        final String coreqs = course.getCoreqs();
-        final List<String> instructors = course.getInstructors();
-        final List<Map<String, String>> meetTimes = course.getMeetTimes();
-        final String examTime = course.getExamTime();
+//        final String classNumber = course.getClassNumber();
+//        final String courseCode = course.getCode();
+//        final String name = course.getName();
+//        final String description = course.getDescription();
+//        final String department = course.getDepartment();
+//        final String prereqs = course.getPrereqs();
+//        final List<String> instructors = course.getInstructors();
+//        final List<Map<String, String>> meetTimes = course.getMeetTimes();
+//        final String examTime = course.getExamTime();
 //        LayoutInflater inflater = LayoutInflater.from(getActivity());
 //        final View course_expand_view = inflater.inflate(R.layout.fragment_course_expand, null);
 //

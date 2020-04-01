@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.kylewai.a2uf.MainActivity;
 import com.example.kylewai.a2uf.R;
+import com.example.kylewai.a2uf.individualMockActivity.MockExpandAddClassFragment;
 import com.example.kylewai.a2uf.userSchedule.ExpandFragment;
 import com.example.kylewai.a2uf.userSchedule.ExpandFragmentAddClass;
 import com.example.kylewai.a2uf.volleypojo.Instructor;
@@ -35,6 +36,7 @@ public class SOCCourseListAdapter extends RecyclerView.Adapter<SOCCourseViewHold
     private final List<Section> sectionList;
     private LayoutInflater mInflater;
     public int fragmentDecider = 0;
+    public String mockId;
 
     public SOCCourseListAdapter(Context context, List<Section> sectionList){
         this.sectionList = sectionList;
@@ -134,15 +136,18 @@ class SOCCourseViewHolder extends RecyclerView.ViewHolder implements View.OnClic
         {
             instructors.add(instructor.getName());
         }
-        Fragment fr = new ExpandFragment(sectionObj.getCode(), sectionObj.getName(), sectionObj.getDescription(), sectionObj.getDeptName(), sectionObj.getPrerequisites(), sectionObj.getPrerequisites(), instructors, meetTimes, sectionObj.getFinalExam(), sectionObj.getClassNumber());
+        Fragment fr;
 
         if(fragmentDecider == 1)
         {
             fr = new ExpandFragmentAddClass(sectionObj.getCode(), sectionObj.getName(), sectionObj.getDescription(), sectionObj.getDeptName(), sectionObj.getPrerequisites(), sectionObj.getPrerequisites(), instructors, meetTimes, sectionObj.getFinalExam(), sectionObj.getClassNumber());
         }
+        else if(fragmentDecider == 2){
+            fr = new MockExpandAddClassFragment(sectionObj, mAdapter.mockId);
+        }
         else
         {
-            fr = new ExpandFragment(sectionObj.getCode(), sectionObj.getName(), sectionObj.getDescription(), sectionObj.getDeptName(), sectionObj.getPrerequisites(), sectionObj.getPrerequisites(), instructors, meetTimes, sectionObj.getFinalExam(), sectionObj.getClassNumber());
+            fr = new ExpandFragment(sectionObj.getCode(), sectionObj.getName(), sectionObj.getDescription(), sectionObj.getDeptName(), sectionObj.getPrerequisites(), instructors, meetTimes, sectionObj.getFinalExam(), sectionObj.getClassNumber());
         }
 
         //Fragment fr = new ExpandFragment(sectionObj.getCode(), sectionObj.getName(), sectionObj.getDescription(), sectionObj.getDeptName(), sectionObj.getPrerequisites(), sectionObj.getPrerequisites(), instructors, meetTimes, sectionObj.getFinalExam(), sectionObj.getClassNumber());

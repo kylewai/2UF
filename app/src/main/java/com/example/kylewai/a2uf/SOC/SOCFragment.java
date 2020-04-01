@@ -43,6 +43,7 @@ public class SOCFragment extends Fragment {
     private Gson gson;
 
     public int fragmentDecider;
+    public String mockId;
 
     public SOCFragment() {
         // Required empty public constructor
@@ -71,7 +72,7 @@ public class SOCFragment extends Fragment {
 
         //For using different ExpandFragments depending on where it is accessed from.
         mAdapter.fragmentDecider = fragmentDecider;
-
+        mAdapter.mockId = mockId;
 
 
         // Inflate the layout for this fragment
