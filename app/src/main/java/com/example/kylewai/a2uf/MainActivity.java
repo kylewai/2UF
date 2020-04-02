@@ -37,7 +37,8 @@ public class MainActivity extends AppCompatActivity {
 
     private String uid;
     private FirebaseUser currUser;
-
+    private ViewPager viewPager;
+    public void onlistener(){}
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         Log.d("MainC", "saved" + uid);
@@ -110,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_label4));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        final ViewPager viewPager = findViewById(R.id.pager);
+        viewPager = findViewById(R.id.pager);
         viewPager.setOffscreenPageLimit(4);
         Log.d("MainC", "Yeahnew");
         Log.d("MainC", uid);

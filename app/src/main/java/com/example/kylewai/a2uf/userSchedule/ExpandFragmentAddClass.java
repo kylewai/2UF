@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.kylewai.a2uf.R;
+import com.example.kylewai.a2uf.com.example.kylewai.firebasemodel.Course;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -102,57 +103,57 @@ public class ExpandFragmentAddClass extends Fragment {
         for(Map<String, String> meetTime : meetTimes){
             meetTimesString += "\n" + meetTime.get("days");
             meetTimesString += "\n" + meetTime.get("periodBegin");
-            meetTimesString += "\n" + meetTime.get("periodEnd");
+            meetTimesString += " - " + meetTime.get("periodEnd");
             meetTimesString += "\n" + meetTime.get("building");
-            meetTimesString += "\n" + meetTime.get("days");
+            meetTimesString += " " + meetTime.get("room");
         }
         textView_meetTimes.setText(meetTimesString);
         textView_examTime = view.findViewById(R.id.examTime);
         textView_examTime.setText(this.examTime);
 
-        Button dropButton = view.findViewById(R.id.dropButton);
-        dropButton.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                List<Map<String, String>> dropList = new ArrayList<>();
-                for(Map<String, String> meetTime : meetTimes)
-                {
-                    Map<String, String> dropClass = new HashMap<>();
-                    //dropClass.put("classNumber", );
-                    dropClass.put("classNumber", classNumber);
-                    dropClass.put("course", courseCode);
-                    dropClass.put("days", meetTime.get("days"));
-                    dropClass.put("periodBegin", meetTime.get("periodBegin"));
-                    dropClass.put("periodEnd", meetTime.get("periodEnd"));
-
-                    dropList.add(dropClass);
-                }
-
-                final FirebaseFirestore database = FirebaseFirestore.getInstance();
-
-                //Log.d("ArraySize", "Num Meets: " + dropList.size());
-                //Toast toasty = Toast.makeText(view.getContext(), "Num Meets" + dropList.size(), Toast.LENGTH_LONG);
-                //toasty.show();
-
-                for(Map<String, String> dropClass : dropList)
-                {
-                    database.collection("users").document(UserScheduleFragment.transferuid).update("weeklyMeetTimes", FieldValue.arrayRemove(dropClass)).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            Log.d("dbUpdate", "DocumentSnapshot successfully updated!");
-                        }
-                    })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Log.w("dbUpdate", "Error updating document", e);
-                                }
-                            });
-                }
-            }
-        });
+//        Button dropButton = view.findViewById(R.id.dropButton);
+//        dropButton.setOnClickListener(new View.OnClickListener()
+//        {
+//            @Override
+//            public void onClick(View view)
+//            {
+//                List<Map<String, String>> dropList = new ArrayList<>();
+//                for(Map<String, String> meetTime : meetTimes)
+//                {
+//                    Map<String, String> dropClass = new HashMap<>();
+//                    //dropClass.put("classNumber", );
+//                    dropClass.put("classNumber", classNumber);
+//                    dropClass.put("course", courseCode);
+//                    dropClass.put("days", meetTime.get("days"));
+//                    dropClass.put("periodBegin", meetTime.get("periodBegin"));
+//                    dropClass.put("periodEnd", meetTime.get("periodEnd"));
+//
+//                    dropList.add(dropClass);
+//                }
+//
+//                final FirebaseFirestore database = FirebaseFirestore.getInstance();
+//
+//                //Log.d("ArraySize", "Num Meets: " + dropList.size());
+//                //Toast toasty = Toast.makeText(view.getContext(), "Num Meets" + dropList.size(), Toast.LENGTH_LONG);
+//                //toasty.show();
+//
+//                for(Map<String, String> dropClass : dropList)
+//                {
+//                    database.collection("users").document(UserScheduleFragment.transferuid).update("weeklyMeetTimes", FieldValue.arrayRemove(dropClass)).addOnSuccessListener(new OnSuccessListener<Void>() {
+//                        @Override
+//                        public void onSuccess(Void aVoid) {
+//                            Log.d("dbUpdate", "DocumentSnapshot successfully updated!");
+//                        }
+//                    })
+//                            .addOnFailureListener(new OnFailureListener() {
+//                                @Override
+//                                public void onFailure(@NonNull Exception e) {
+//                                    Log.w("dbUpdate", "Error updating document", e);
+//                                }
+//                            });
+//                }
+//            }
+//        });
 
         Button addButton = view.findViewById(R.id.Add_Class_Button);
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -189,15 +190,12 @@ public class ExpandFragmentAddClass extends Fragment {
                         if (task.isSuccessful()) {
                             DocumentSnapshot document = task.getResult();
                             if (document.exists()) {
-                                Log.d("getCurrentSched", "DocumentSnapshot data: " + document.getData());
+
                                 List<Map<String, String>> currentUserSchedule = (List<Map<String, String>>) document.get("weeklyMeetTimes");
-                                Log.d("firstClass", currentUserSchedule.get(0).get("classNumber"));
 
                                 for (Map<String, String> course : currentUserSchedule) {
                                     //Check courseNumber
-                                    Log.d("classChecks", "" + course.get("classNumber") + classNumber);
                                     if (course.get("classNumber").equals(classNumber)) {
-                                        Log.d("classChecks", "Inside classNumber");
                                         Toast toast = Toast.makeText(view.getContext(), "Add Course Failure: Already Registered for this Class", Toast.LENGTH_LONG);
                                         toast.show();
                                         //flagCheck.set(0, true);
@@ -205,41 +203,49 @@ public class ExpandFragmentAddClass extends Fragment {
                                     }
 
                                     //Check course code
-                                    Log.d("classChecks", "" + course.get("course") + courseCode);
                                     if (course.get("course").equals(courseCode)) {
-                                        Log.d("classChecks", "Inside courseCode");
                                         Toast toast = Toast.makeText(view.getContext(), "Add Course Failure: Already Registered for this Class", Toast.LENGTH_LONG);
                                         toast.show();
                                         return;
                                     }
 
                                     //Check all times if meetDays are the same.
+                                    Map<Character, Integer> dayComparison = new HashMap<>();
+                                    boolean checkTimes;
                                     for(Map<String, String> meetTime : toAddWeeklyMeets)
                                     {
-                                        if (course.get("days").equals(meetTime.get("days"))) {
+                                        checkTimes = false;
+                                        //Day comparison done to see if there are matching characters between
+                                        //the two day strings. This catches a case like "TR" and "T", which conflict.
+                                        dayComparison.clear();
+                                        String meetDays = course.get("days");
+                                        String toAddMeetDays = meetTime.get("days");
+                                        for(int i = 0; i < meetDays.length(); i++){
+                                            dayComparison.put(meetDays.charAt(i), 1);
+                                        }
+                                        for(int i = 0; i < toAddMeetDays.length(); i++){
+                                            if(dayComparison.containsKey(toAddMeetDays.charAt(i))){
+                                                checkTimes = true;
+                                                break;
+                                            }
+                                        }
+                                        //If there is a day conflict, check for time conflicts
+                                        if (checkTimes) {
                                             Log.d("classChecks", "Inside MeetTimes");
-                                            int beginTime = Integer.parseInt(course.get("periodBegin"));
-                                            int endTime = Integer.parseInt(course.get("periodBegin"));
+                                            int beginTime = periodToInt(course.get("periodBegin"));
+                                            int endTime = periodToInt(course.get("periodEnd"));
 
-                                            int toAddBeginTime = Integer.parseInt(meetTime.get("periodBegin"));
-                                            int toAddEndTime = Integer.parseInt(meetTime.get("periodEnd"));
+                                            int toAddBeginTime = periodToInt(meetTime.get("periodBegin"));
+                                            int toAddEndTime = periodToInt(meetTime.get("periodEnd"));
 
-                                            for (int i = beginTime; i <= endTime + 1; i++) {
-                                                for (int j = toAddBeginTime; j <= toAddEndTime + 1; j++) {
-                                                    if (i == j) {
-                                                        Log.d("classChecks", "" + i + " " + j);
-                                                        Toast toast = Toast.makeText(view.getContext(), "Add Course Failure: Conflicting Times", Toast.LENGTH_LONG);
-                                                        toast.show();
-                                                        //flagCheck.set(0, true);
-                                                        return;
-
-
-                                                    }
-                                                }
+                                            if(beginTime <= toAddEndTime && toAddBeginTime <= endTime) {
+                                                Toast toast = Toast.makeText(view.getContext(), "Add Course Failure: Conflicting Times", Toast.LENGTH_LONG);
+                                                toast.show();
+                                                //flagCheck.set(0, true);
+                                                return;
                                             }
                                         }
                                     }
-
 
                                 }
 
@@ -267,26 +273,13 @@ public class ExpandFragmentAddClass extends Fragment {
                                     }
 
                                     Map<String, Object> addClass = new HashMap<>();
-                                    List<String> instructorList = new ArrayList<>();
-                                    //instructorList.add(instructors);
-                                    instructorList = instructors;
 
-                                    List<Map<String, String>> meetTimes = new ArrayList<>();
                                     //meetTimes.add(addWeeklyMeetTime);
-                                    meetTimes = toAddWeeklyMeets;
+                                    Course course = new Course(courseCode, name, prereqs, department, description, examTime, instructors, meetTimes);
 
-                                    //Need more variables here.
-                                    addClass.put("code", courseCode);
-                                    addClass.put("coreqs", coreqs);
-                                    addClass.put("department", department);
-                                    addClass.put("description", "");
-                                    addClass.put("examTime", examTime);
-                                    addClass.put("instructors", instructorList);
-                                    addClass.put("meetTimes", meetTimes);
-                                    addClass.put("name", "");
-                                    addClass.put("prereqs", "");
 
-                                    database.collection("classes").document(classNumber).set(addClass);
+                                    //Store class info
+                                    database.collection("classes").document(classNumber).set(course);
                                 }
 
                             } else {
@@ -303,6 +296,16 @@ public class ExpandFragmentAddClass extends Fragment {
 
 
         return view;
+    }
+
+
+    private int periodToInt(String period){
+        switch(period){
+            case "E1": return 12;
+            case "E2": return 13;
+            case "E3": return 14;
+            default: return Integer.parseInt(period);
+        }
     }
 
     @Override
