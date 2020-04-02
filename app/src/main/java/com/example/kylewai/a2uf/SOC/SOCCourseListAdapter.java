@@ -126,7 +126,7 @@ class SOCCourseViewHolder extends RecyclerView.ViewHolder implements View.OnClic
             toAdd.put("periodBegin", meet.getMeetPeriodBegin());
             toAdd.put("periodEnd", meet.getMeetPeriodEnd());
             toAdd.put("building", meet.getMeetBuilding());
-
+            toAdd.put("room", meet.getMeetRoom());
             meetTimes.add(toAdd);
         }
 
@@ -147,7 +147,8 @@ class SOCCourseViewHolder extends RecyclerView.ViewHolder implements View.OnClic
         }
         else
         {
-            fr = new ExpandFragment(sectionObj.getCode(), sectionObj.getName(), sectionObj.getDescription(), sectionObj.getDeptName(), sectionObj.getPrerequisites(), instructors, meetTimes, sectionObj.getFinalExam(), sectionObj.getClassNumber());
+            int fragmentSelector = 1;
+            fr = new ExpandFragment(sectionObj.getCode(), sectionObj.getName(), sectionObj.getDescription(), sectionObj.getDeptName(), sectionObj.getPrerequisites(), instructors, meetTimes, sectionObj.getFinalExam(), sectionObj.getClassNumber(), fragmentSelector);
         }
 
         //Fragment fr = new ExpandFragment(sectionObj.getCode(), sectionObj.getName(), sectionObj.getDescription(), sectionObj.getDeptName(), sectionObj.getPrerequisites(), sectionObj.getPrerequisites(), instructors, meetTimes, sectionObj.getFinalExam(), sectionObj.getClassNumber());

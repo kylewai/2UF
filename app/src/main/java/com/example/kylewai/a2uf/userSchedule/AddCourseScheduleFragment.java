@@ -1,6 +1,7 @@
 package com.example.kylewai.a2uf.userSchedule;
 
 
+import android.net.sip.SipSession;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,7 +24,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.ListenerRegistration;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,6 +43,7 @@ public class AddCourseScheduleFragment extends Fragment {
     static String userID;
 
     final FirebaseFirestore database = FirebaseFirestore.getInstance();
+    private ListenerRegistration userScheduleListener;
 
     public AddCourseScheduleFragment() {
         // Required empty public constructor
@@ -51,6 +56,15 @@ public class AddCourseScheduleFragment extends Fragment {
         userID = uid;
 
         return schedFrag;
+    }
+
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        db = FirebaseFirestore.getInstance();
+        return inflater.inflate(R.layout.fragment_user_schedule, container, false);
     }
 
     @Override
@@ -72,16 +86,45 @@ public class AddCourseScheduleFragment extends Fragment {
                 }
             }
         });
+        listenForUpdates();
 
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        db = FirebaseFirestore.getInstance();
-        return inflater.inflate(R.layout.fragment_user_schedule, container, false);
+    public void onPause() {
+        userScheduleListener.remove();
+        super.onPause();
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        listenForUpdates();
+    }
+
+    private void listenForUpdates(){
+        DocumentReference docRef = db.collection("users").document(userID);
+        userScheduleListener = docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirebaseFirestoreException e) {
+                if(e != null){
+                    Log.d("UserScheduleFragment", "Error listening for update");
+                    return;
+                }
+                if (snapshot != null && snapshot.exists()) {
+                    AppUser user = snapshot.toObject(AppUser.class);
+                    if(getContext() != null) {
+                        List<Map<String, String>> meetings = user.getWeeklyMeetTimes();
+                        HashMap<String, ArrayList<String>> course_cells = fillWeeklySchedule(meetings);
+                        getClassInfo(course_cells);
+                    }
+                } else {
+                    Log.d("UserScheduleFragment", "Current data: null");
+                }
+            }
+        });
+    }
+
 
     private HashMap<String, ArrayList<String>> fillWeeklySchedule(List<Map<String, String>> meetings){
         HashMap<String, ArrayList<String>> course_cells = new HashMap<>();
@@ -101,7 +144,9 @@ public class AddCourseScheduleFragment extends Fragment {
                 combined.addAll(cells_to_assign);
                 course_cells.put(classNumber, combined);
             }
-            course_cells.put(classNumber, cells_to_assign);
+            else {
+                course_cells.put(classNumber, cells_to_assign);
+            }
             TextView cell;
             //Set text for cells with cell id in cells_to_assign
             for(int k = 0; k < cells_to_assign.size(); k++){
@@ -198,7 +243,8 @@ public class AddCourseScheduleFragment extends Fragment {
 //                Scene expand_scene = new Scene(sceneRoot, course_expand_view);
 //                Transition transition = TransitionInflater.from(getActivity()).inflateTransition(R.transition.expand_transition);
 //                TransitionManager.go(expand_scene, transition);
-                Fragment fr = new ExpandFragment(courseCode, name, description, department, prereqs, instructors, meetTimes, examTime, classNumber);
+                int fragmentSelector = 2;
+                Fragment fr = new ExpandFragment(courseCode, name, description, department, prereqs, instructors, meetTimes, examTime, classNumber, fragmentSelector);
                 fr.setSharedElementEnterTransition(new ChangeBounds());
                 fr.setSharedElementReturnTransition(new ChangeBounds());
                 fr.setEnterTransition(new ChangeBounds());

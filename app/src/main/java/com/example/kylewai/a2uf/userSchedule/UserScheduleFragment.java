@@ -1,5 +1,6 @@
 package com.example.kylewai.a2uf.userSchedule;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -17,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.kylewai.a2uf.PagerAdapter;
 import com.example.kylewai.a2uf.R;
 import com.example.kylewai.a2uf.com.example.kylewai.firebasemodel.AppUser;
 import com.example.kylewai.a2uf.com.example.kylewai.firebasemodel.Course;
@@ -26,7 +28,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.ListenerRegistration;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,18 +46,29 @@ public class UserScheduleFragment extends Fragment {
     FirebaseFirestore db;
     String[]periods = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "E1", "E2", "E3"};
     ViewGroup container;
+    PagerAdapter.FirstFragmentListener listener;
 
     String userID;
+    private ListenerRegistration userScheduleListener;
 
     public UserScheduleFragment() {
         // Required empty public constructor
+        Log.d("userscheda", "wtf?");
     }
 
-    public static UserScheduleFragment newInstance(String uid) {
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        Log.d("userscheda", "onAttach");
+    }
+
+    public static UserScheduleFragment newInstance(String uid, PagerAdapter.FirstFragmentListener listener) {
         // Required empty public constructor
         UserScheduleFragment userFrag = new UserScheduleFragment();
         Bundle args = new Bundle();
         args.putString("uid", uid);
+        userFrag.listener = listener;
+        Log.d("userscheda", "man");
         userFrag.setArguments(args);
         return userFrag;
     }
@@ -65,7 +81,7 @@ public class UserScheduleFragment extends Fragment {
         transferuid = uid;
         db = FirebaseFirestore.getInstance();
         this.container = container;
-        Log.d("UserScheduleFragment", "oncreate");
+        Log.d("userscheda", "oncreate");
         //Horrible workaround for having to use fragment transitions to prevent previous transitions from showing
         //up again.
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -83,7 +99,6 @@ public class UserScheduleFragment extends Fragment {
                 //Creating and opening a new activity for adding classes.
                 Intent intent = new Intent(getActivity(), AddClassPager.class); //Was: AddClassActivity.class
                 String message = uid;
-                Log.d("putID", "" + uid);
                 intent.putExtra("ID", message);
                 getContext().startActivity(intent);
             }
@@ -92,12 +107,64 @@ public class UserScheduleFragment extends Fragment {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        Log.d("userscheda", "onStrat");
+    }
+
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getData(view);
+        Log.d("userscheda", "onviewcreated");
+        listenForUpdates();
 //        setSceneForTransition();
     }
 
+    @Override
+    public void onPause() {
+        userScheduleListener.remove();
+        super.onPause();
+        Log.d("userscheda", "onPauseddd");
+        Log.d("userscheda", "removed!");
+    }
+
+    @Override
+    public void onDestroy() {
+        userScheduleListener.remove();
+        super.onDestroy();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d("userscheda", "onResume");
+        listenForUpdates();
+    }
+
+    private void listenForUpdates(){
+        DocumentReference docRef = db.collection("users").document(this.uid);
+        Log.d("userscheda", "ListeningForUpdates");
+        userScheduleListener = docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirebaseFirestoreException e) {
+                if(e != null){
+                    Log.d("UserScheduleFragment", "Error listening for update");
+                    return;
+                }
+                if (snapshot != null && snapshot.exists()) {
+                    AppUser user = snapshot.toObject(AppUser.class);
+                    if(getContext() != null) {
+                        List<Map<String, String>> meetings = user.getWeeklyMeetTimes();
+                        HashMap<String, ArrayList<String>> course_cells = fillWeeklySchedule(meetings);
+                        getClassInfo(course_cells);
+                    }
+                } else {
+                    Log.d("UserScheduleFragment", "Current data: null");
+                }
+            }
+        });
+    }
     //Queries firebase for the data requried to render the user schedule
     public void getData(View view){
         DocumentReference docRef = db.collection("users").document(this.uid);
@@ -149,7 +216,7 @@ public class UserScheduleFragment extends Fragment {
             //Set text for cells with cell id in cells_to_assign
             for(int k = 0; k < cells_to_assign.size(); k++){
                 String viewName = cells_to_assign.get(k);
-                cell = getView().findViewById(getResources().getIdentifier(viewName, "id", getActivity().getPackageName()));
+                cell = getView().findViewById(getResources().getIdentifier(viewName, "id", getContext().getPackageName()));
                 cell.setText(course);
             }
         }
@@ -241,13 +308,17 @@ public class UserScheduleFragment extends Fragment {
 //                Scene expand_scene = new Scene(sceneRoot, course_expand_view);
 //                Transition transition = TransitionInflater.from(getActivity()).inflateTransition(R.transition.expand_transition);
 //                TransitionManager.go(expand_scene, transition);
-                Fragment fr = new ExpandFragment(courseCode, name, description, department, prereqs, instructors, meetTimes, examTime, classNumber);
-                fr.setSharedElementEnterTransition(new ChangeBounds());
-                fr.setSharedElementReturnTransition(new ChangeBounds());
-                fr.setEnterTransition(new ChangeBounds());
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-//                ft.addSharedElement(cell_text, "expand");
-                ft.setReorderingAllowed(true).replace(R.id.scene_root, fr).addToBackStack("schedule").commit();
+
+                listener.onSwitch(courseCode, name, description, department, prereqs, instructors, meetTimes, examTime, classNumber);
+
+//                Fragment fr = new ExpandFragment(courseCode, name, description, department, prereqs, instructors, meetTimes, examTime, classNumber);
+//                fr.setSharedElementEnterTransition(new ChangeBounds());
+//                fr.setSharedElementReturnTransition(new ChangeBounds());
+//                fr.setEnterTransition(new ChangeBounds());
+//                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+////                ft.addSharedElement(cell_text, "expand");
+//                userScheduleListener.remove();
+//                ft.setReorderingAllowed(true).replace(R.id.scene_root, fr).addToBackStack("schedule").commit();
             }
         });
     }
