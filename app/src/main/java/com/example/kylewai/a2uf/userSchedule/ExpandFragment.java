@@ -50,7 +50,7 @@ public class ExpandFragment extends Fragment {
     TextView textView_instructors;
     TextView textView_meetTimes;
     TextView textView_examTime;
-    PagerAdapter.FirstFragmentListener listener;
+    static PagerAdapter.FirstFragmentListener listener;
     int fragmentSelector;
 
     public ExpandFragment(){}
@@ -76,7 +76,7 @@ public class ExpandFragment extends Fragment {
                           List<String> instructors, List<Map<String, String>> meetTimes, String examTime, String classNumber,
                           PagerAdapter.FirstFragmentListener listener) {
         // Required empty public constructor
-        this.listener = listener;
+        ExpandFragment.listener = listener;
         this.courseCode = courseCode;
         this.name = name;
         this.description = description;

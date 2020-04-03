@@ -46,7 +46,7 @@ public class UserScheduleFragment extends Fragment {
     FirebaseFirestore db;
     String[]periods = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "E1", "E2", "E3"};
     ViewGroup container;
-    PagerAdapter.FirstFragmentListener listener;
+    static PagerAdapter.FirstFragmentListener listener;
 
     String userID;
     private ListenerRegistration userScheduleListener;
@@ -67,7 +67,7 @@ public class UserScheduleFragment extends Fragment {
         UserScheduleFragment userFrag = new UserScheduleFragment();
         Bundle args = new Bundle();
         args.putString("uid", uid);
-        userFrag.listener = listener;
+        UserScheduleFragment.listener = listener;
         Log.d("userscheda", "man");
         userFrag.setArguments(args);
         return userFrag;

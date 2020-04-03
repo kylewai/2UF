@@ -6,8 +6,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.transition.ChangeBounds;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,14 +14,19 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.kylewai.a2uf.R;
+import com.example.kylewai.a2uf.com.example.kylewai.firebasemodel.AppUser;
 import com.example.kylewai.a2uf.com.example.kylewai.firebasemodel.Course;
 import com.example.kylewai.a2uf.com.example.kylewai.firebasemodel.UserMock;
-import com.example.kylewai.a2uf.userSchedule.ExpandFragment;
+import com.example.kylewai.a2uf.userSchedule.UserScheduleFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.ListenerRegistration;
+import com.google.firebase.firestore.auth.User;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,17 +39,20 @@ public class ScheduleFragment extends Fragment {
 
     FirebaseFirestore db;
     String[]periods = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "E1", "E2", "E3"};
+    static MockAddClassPagerAdapter.FirstFragmentListener mListener;
+    ListenerRegistration mockListener;
 
     public ScheduleFragment() {
         // Required empty public constructor
     }
 
-    public static ScheduleFragment newInstance(UserMock userMock, String mockId) {
+    public static ScheduleFragment newInstance(UserMock userMock, String mockId, MockAddClassPagerAdapter.FirstFragmentListener listener) {
         // Required empty public constructor
         ScheduleFragment schedFrag = new ScheduleFragment();
         Bundle args = new Bundle();
         args.putParcelable("userMock", userMock);
         args.putString("mockId", mockId);
+        mListener = listener;
         schedFrag.setArguments(args);
         return schedFrag;
     }
@@ -66,6 +72,48 @@ public class ScheduleFragment extends Fragment {
         db = FirebaseFirestore.getInstance();
         return inflater.inflate(R.layout.fragment_user_schedule, container, false);
     }
+
+    @Override
+    public void onPause() {
+        mockListener.remove();
+        super.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        mockListener.remove();
+        super.onDestroy();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        listenForUpdates();
+    }
+
+    private void listenForUpdates(){
+        DocumentReference docRef = db.collection("userMocks").document(UserScheduleFragment.transferuid).collection("mockInfo").document(getArguments().getString("mockId"));
+        mockListener = docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirebaseFirestoreException e) {
+                if(e != null){
+                    Log.d("ScheduleFragmentlisten", "Error listening for update");
+                    return;
+                }
+                if (snapshot != null && snapshot.exists()) {
+                    UserMock mock = snapshot.toObject(UserMock.class);
+                    if(getContext() != null) {
+                        List<Map<String, String>> meetings = mock.getWeeklyMeetTimes();
+                        HashMap<String, ArrayList<String>> course_cells = fillWeeklySchedule(meetings);
+                        getClassInfo(course_cells);
+                    }
+                } else {
+                    Log.d("UserScheduleFragment", "Current data: null");
+                }
+            }
+        });
+    }
+
 
     private HashMap<String, ArrayList<String>> fillWeeklySchedule(List<Map<String, String>> meetings){
         HashMap<String, ArrayList<String>> course_cells = new HashMap<>();
@@ -178,19 +226,21 @@ public class ScheduleFragment extends Fragment {
         cell_text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d("Schedafrag", "woe");
+                mListener.onSwitch(courseCode, name, description, department, prereqs, instructors, meetTimes, examTime, classNumber);
 //                ViewGroup sceneRoot = (ViewGroup) getActivity().findViewById(R.id.scene_root).getParent().getParent();
 //                TableLayout tableLayout = getView().findViewById(R.id.table_layout);
 //                Scene schedule_scene = new Scene(container, tableLayout);
 //                Scene expand_scene = new Scene(sceneRoot, course_expand_view);
 //                Transition transition = TransitionInflater.from(getActivity()).inflateTransition(R.transition.expand_transition);
 //                TransitionManager.go(expand_scene, transition);
-                Fragment fr = new MockCourseExpandFragment(courseCode, name, description, department, prereqs, instructors, meetTimes, examTime, classNumber, getArguments().getString("mockId"));
-                fr.setSharedElementEnterTransition(new ChangeBounds());
-                fr.setSharedElementReturnTransition(new ChangeBounds());
-                fr.setEnterTransition(new ChangeBounds());
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-//                ft.addSharedElement(cell_text, "expand");
-                ft.setReorderingAllowed(true).replace(R.id.scene_root, fr).addToBackStack("schedule").commit();
+//                Fragment fr = new MockCourseExpandFragment(courseCode, name, description, department, prereqs, instructors, meetTimes, examTime, classNumber, getArguments().getString("mockId"));
+//                fr.setSharedElementEnterTransition(new ChangeBounds());
+//                fr.setSharedElementReturnTransition(new ChangeBounds());
+//                fr.setEnterTransition(new ChangeBounds());
+//                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+////                ft.addSharedElement(cell_text, "expand");
+//                ft.setReorderingAllowed(true).replace(R.id.scene_root, fr).addToBackStack("schedule").commit();
             }
         });
     }

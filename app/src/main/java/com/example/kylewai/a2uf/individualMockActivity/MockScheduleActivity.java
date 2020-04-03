@@ -7,7 +7,6 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.example.kylewai.a2uf.R;
 import com.example.kylewai.a2uf.com.example.kylewai.firebasemodel.UserMock;
@@ -39,7 +38,7 @@ public class MockScheduleActivity extends AppCompatActivity {
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = findViewById(R.id.pager);
-        final PagerAdapterAddClass adapter = new PagerAdapterAddClass(getSupportFragmentManager(), tabLayout.getTabCount(), data, mockId);
+        final MockAddClassPagerAdapter adapter = new MockAddClassPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount(), data, mockId);
 
         viewPager.setAdapter(adapter);
 
