@@ -21,6 +21,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.kylewai.a2uf.R;
 import com.example.kylewai.a2uf.mockList.MockListAdapter;
+import com.example.kylewai.a2uf.userSchedule.UserScheduleFragment;
 import com.example.kylewai.a2uf.volleypojo.Section;
 import com.example.kylewai.a2uf.volleypojo.UFCourse;
 import com.example.kylewai.a2uf.volleypojo.UFData;
@@ -49,6 +50,23 @@ public class SOCFragment extends Fragment {
         // Required empty public constructor
     }
 
+    public static SOCFragment newInstance(int fragmentDecider){
+        SOCFragment soc = new SOCFragment();
+        Bundle args = new Bundle();
+        args.putInt("fragmentDecider", fragmentDecider);
+        soc.setArguments(args);
+        return soc;
+    }
+
+    public static SOCFragment newInstance(int fragmentDecider, String mockId){
+        SOCFragment soc = new SOCFragment();
+        Bundle args = new Bundle();
+        args.putInt("fragmentDecider", fragmentDecider);
+        args.putString("mockId", mockId);
+        soc.setArguments(args);
+        return soc;
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -71,6 +89,8 @@ public class SOCFragment extends Fragment {
         fetchPosts();
 
         //For using different ExpandFragments depending on where it is accessed from.
+        fragmentDecider = getArguments().getInt("fragmentDecider");
+        mockId = getArguments().getString("mockId");
         mAdapter.fragmentDecider = fragmentDecider;
         mAdapter.mockId = mockId;
 

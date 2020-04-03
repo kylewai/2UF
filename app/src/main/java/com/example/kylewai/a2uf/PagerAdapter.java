@@ -20,6 +20,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
     private String uid;
     FragmentManager fm;
     Fragment firstFragment;
+    FirstFragmentListener listener;
     public final class FirstFragmentListener{
         public void onSwitch(String courseCode, String name, String description,
                              String department, String prereqs,
@@ -37,8 +38,6 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
             notifyDataSetChanged();
         }
     }
-
-    FirstFragmentListener listener;
 
 
 
@@ -60,7 +59,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
                 }
                 return firstFragment;
             case 1: return MockListFragment.newInstance(uid);
-            case 2: return new SOCFragment();
+            case 2: return SOCFragment.newInstance(0);
             case 3: return new ForumFragment();
             default: return null;
         }

@@ -52,13 +52,16 @@ public class MockCourseExpandFragment extends Fragment {
     TextView textView_instructors;
     TextView textView_meetTimes;
     TextView textView_examTime;
+    static MockAddClassPagerAdapter.FirstFragmentListener mListener;
 
     public MockCourseExpandFragment(){}
 
     public MockCourseExpandFragment(String courseCode, String name, String description,
-                          String department, String prereqs,
-                          List<String> instructors, List<Map<String, String>> meetTimes, String examTime, String classNumber, String mockId) {
+                                    String department, String prereqs,
+                                    List<String> instructors, List<Map<String, String>> meetTimes, String examTime, String classNumber, String mockId,
+                                    MockAddClassPagerAdapter.FirstFragmentListener listener) {
         // Required empty public constructor
+        mListener = listener;
         this.mockId = mockId;
         this.courseCode = courseCode;
         this.name = name;
@@ -164,7 +167,7 @@ public class MockCourseExpandFragment extends Fragment {
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().getSupportFragmentManager().popBackStack();
+                mListener.onSwitch(courseCode, name, description, department, prereqs, instructors, meetTimes, examTime, classNumber);
             }
         });
     }
