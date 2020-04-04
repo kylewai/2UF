@@ -11,6 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".individualPostActivity.MakeCommentActivity"
+            android:parentActivityName=".individualPostActivity.PostActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.kylewai.a2uf.individualPostActivity.PostActivity" />
+        </activity>
         <activity
             android:name=".makePostActivity.MakePostActivity"
             android:parentActivityName=".MainActivity">
@@ -20,7 +26,8 @@
         </activity>
         <activity
             android:name=".individualPostActivity.PostActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:launchMode="singleTop" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.kylewai.a2uf.MainActivity" />
