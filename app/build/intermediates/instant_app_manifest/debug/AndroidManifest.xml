@@ -25,6 +25,7 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/AppTheme" >
+        <activity android:name="com.example.kylewai.a2uf.mockList.NewMockActivity" />
         <activity
             android:name="com.example.kylewai.a2uf.makePostActivity.MakePostActivity"
             android:parentActivityName="com.example.kylewai.a2uf.MainActivity" >

@@ -28,8 +28,8 @@
         <activity
             android:name=".userSchedule.AddClassPager"
             android:label="@string/title_activity_add_class_pager"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.kylewai.a2uf.MainActivity" />
