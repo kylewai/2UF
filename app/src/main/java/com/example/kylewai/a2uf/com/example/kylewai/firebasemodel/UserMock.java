@@ -14,7 +14,7 @@ import java.util.Map;
 public class UserMock implements Parcelable {
     List<String> classes;
     Timestamp dateCreated;
-    String mockId;
+    String mockId; //NOT USED!!!
     String mockName;
     List<Map<String, String>> weeklyMeetTimes;
 
