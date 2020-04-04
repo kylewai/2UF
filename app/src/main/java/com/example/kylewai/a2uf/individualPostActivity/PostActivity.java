@@ -7,6 +7,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 
 import com.example.kylewai.a2uf.R;
 import com.example.kylewai.a2uf.com.example.kylewai.firebasemodel.Post;
@@ -14,13 +15,32 @@ import com.google.android.material.tabs.TabLayout;
 
 public class PostActivity extends AppCompatActivity {
 
+    Post post;
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putParcelable("postObject", post);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        this.post = savedInstanceState.getParcelable("postObject");
+        super.onRestoreInstanceState(savedInstanceState);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
 
-        Intent intent = getIntent();
-        Post post = intent.getParcelableExtra("postObject");
+        if(savedInstanceState != null){
+            this.post = savedInstanceState.getParcelable("postObject");
+        }
+        else {
+            Intent intent = getIntent();
+            this.post = intent.getParcelableExtra("postObject");
+        }
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar bar = getSupportActionBar();
