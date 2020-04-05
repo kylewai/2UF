@@ -11,7 +11,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".individualPostActivity.MakeCommentActivity"
+        <activity android:name=".myPosts.PostActivity"
+            android:parentActivityName=".myPosts.MyPostsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.kylewai.a2uf.myPosts.MyPostsActivity" />
+        </activity>
+        <activity android:name=".myPosts.MyPostsActivity"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.kylewai.a2uf.MainActivity" />
+        </activity>
+        <activity
+            android:name=".individualPostActivity.MakeCommentActivity"
             android:parentActivityName=".individualPostActivity.PostActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -26,8 +39,8 @@
         </activity>
         <activity
             android:name=".individualPostActivity.PostActivity"
-            android:parentActivityName=".MainActivity"
-            android:launchMode="singleTop" >
+            android:launchMode="singleTop"
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.kylewai.a2uf.MainActivity" />
