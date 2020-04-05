@@ -23,6 +23,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.kylewai.a2uf.myPosts.MyPostsActivity;
 import com.example.kylewai.a2uf.userSchedule.AddCourseFragment;
 import com.example.kylewai.a2uf.userSchedule.ExpandFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -38,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
     private String uid;
     private FirebaseUser currUser;
     private ViewPager viewPager;
-    public void onlistener(){}
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         Log.d("MainC", "saved" + uid);
@@ -69,6 +69,10 @@ public class MainActivity extends AppCompatActivity {
             editor.clear().commit();
             startActivity(intent);
 
+        }
+        if(item.getItemId() == R.id.my_posts){
+            Intent intent = new Intent(this, MyPostsActivity.class);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
