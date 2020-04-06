@@ -1,28 +1,81 @@
 package com.example.kylewai.a2uf.forum;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.kylewai.a2uf.MainActivity;
 import com.example.kylewai.a2uf.R;
 import com.example.kylewai.a2uf.com.example.kylewai.firebasemodel.Post;
 import com.example.kylewai.a2uf.individualPostActivity.PostActivity;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.ActionMode;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ForumFeedAdapter extends FirestoreRecyclerAdapter<Post, ForumFeedAdapter.FeedPostViewHolder> {
 
-    public ForumFeedAdapter(@NonNull FirestoreRecyclerOptions<Post> options) {
+    private boolean multipleSelection = false;
+    private List<String> selected = new ArrayList<>();
+    private ActionMode.Callback contextualOptions;
+    private Context context;
+
+    public ForumFeedAdapter(@NonNull FirestoreRecyclerOptions<Post> options, Context context) {
         super(options);
+        this.context = context;
+        initContextualOptions();
+    }
+
+    private void initContextualOptions(){
+        contextualOptions = new ActionMode.Callback() {
+            @Override
+            public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+                menu.add("Favorite");
+                return true;
+            }
+
+            @Override
+            public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+                return false;
+            }
+
+            @Override
+            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+                if(item.getItemId() == R.id.favorite_post){
+                    for(String postId : selected){
+                        //Add to favorites
+                    }
+                }
+                mode.finish();
+                return true;
+            }
+
+            @Override
+            public void onDestroyActionMode(ActionMode mode) {
+                selected.clear();
+                multipleSelection = false;
+                notifyDataSetChanged();
+            }
+        };
     }
 
     @Override
@@ -43,16 +96,28 @@ public class ForumFeedAdapter extends FirestoreRecyclerAdapter<Post, ForumFeedAd
         TextView description;
         TextView major;
         TextView dateCreated;
+        TextView likes;
+        ImageView thumbs;
         Post mPost;
 
         public FeedPostViewHolder(@NonNull View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
+//            itemView.setOnLongClickListener(this);
             title = itemView.findViewById(R.id.title);
             author = itemView.findViewById(R.id.author);
             description = itemView.findViewById(R.id.description);
             major = itemView.findViewById(R.id.major);
             dateCreated = itemView.findViewById(R.id.dateCreated);
+            likes = itemView.findViewById(R.id.num_likes);
+            thumbs = itemView.findViewById(R.id.like_button);
+            thumbs.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+                    db.collection("posts").document(mPost.getDocumentId()).update("likes", FieldValue.increment(1));
+                }
+            });
         }
 
         void setPost(Post post){
@@ -61,6 +126,7 @@ public class ForumFeedAdapter extends FirestoreRecyclerAdapter<Post, ForumFeedAd
             author.setText("@" + post.getAuthor());
             description.setText(post.getDescription());
             major.setText(post.getMajor());
+            likes.setText(String.valueOf(post.getLikes()));
 
             Timestamp timeStamp = post.getDateCreated();
             Date date = timeStamp.toDate();

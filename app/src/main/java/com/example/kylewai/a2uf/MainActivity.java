@@ -11,6 +11,7 @@ import androidx.viewpager.widget.ViewPager;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -81,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.options_menu, menu);
+        MenuItem favoriteItem = menu.findItem(R.id.favorite_post);
+        favoriteItem.setVisible(false);
         return super.onCreateOptionsMenu(menu);
     }
 

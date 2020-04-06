@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/post_view"
     android:layout_width="match_parent"
-    android:background="#bef2f7"
     android:layout_height="wrap_content"
-    android:foreground="?android:attr/selectableItemBackground">
+    android:background="#bef2f7"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
         android:id="@+id/title"
@@ -15,21 +17,21 @@
         android:layout_marginStart="13dp"
         android:layout_marginTop="13dp"
         android:ellipsize="end"
-        android:maxWidth="270dp"
+        android:maxWidth="230dp"
         android:maxLines="2"
-        android:text="This is my titleeddddddddddddddddddddddddddddddddddd"
+        android:text="Is this schedule too hard?"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/author"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="\@thismyusername"
-        app:layout_constraintStart_toStartOf="@+id/title"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+        <TextView
+            android:id="@+id/author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="\@thismyusername"
+            app:layout_constraintStart_toStartOf="@+id/title"
+            app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <TextView
         android:id="@+id/description"
@@ -37,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="13dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="13dp"
+        android:layout_marginEnd="64dp"
         android:layout_marginBottom="13dp"
         android:ellipsize="end"
         android:maxLines="3"
@@ -51,22 +53,44 @@
         android:id="@+id/major"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="8dp"
         android:ellipsize="end"
-        android:maxWidth="100dp"
-        android:maxLines="3"
-        android:text="Computer Science and engineer"
+        android:maxWidth="110dp"
+        android:maxLines="2"
+        android:text="Computer Science"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/dateCreated"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Posted 3 hours ago"
+            app:layout_constraintStart_toEndOf="@+id/author"
+            app:layout_constraintTop_toTopOf="@+id/author" />
+
+    <ImageView
+        android:id="@+id/like_button"
+        android:layout_width="47dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="4dp"
+        android:padding="5dp"
+        app:layout_constraintBottom_toTopOf="@id/num_likes"
+        app:layout_constraintEnd_toEndOf="@id/num_likes"
+        app:layout_constraintStart_toStartOf="@id/num_likes"
+        app:srcCompat="@drawable/like" />
+
     <TextView
-        android:id="@+id/dateCreated"
+        android:id="@+id/num_likes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="Posted 3 hours ago"
-        app:layout_constraintStart_toEndOf="@+id/author"
-        app:layout_constraintTop_toTopOf="@+id/author" />
-
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="1000"
+        android:textSize="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

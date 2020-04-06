@@ -3,8 +3,20 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/my_posts"
         android:title="My posts"
-        app:showAsAction="always" />
+        android:orderInCategory="1"
+        app:showAsAction="ifRoom" />
     <item android:id="@+id/sign_out"
         android:title="Sign out"
-        app:showAsAction="always" />
+        android:orderInCategory="2"
+        app:showAsAction="ifRoom" />
+    <item android:id="@+id/delete_post"
+        android:title="Delete post"
+        android:icon="@drawable/delete_icon"
+        android:orderInCategory="2"
+        app:showAsAction="ifRoom" />
+    <item android:id="@+id/favorite_post"
+        android:title="Favorite"
+        android:icon="@drawable/delete_icon"
+        android:orderInCategory="2"
+        app:showAsAction="ifRoom" />
 </menu>

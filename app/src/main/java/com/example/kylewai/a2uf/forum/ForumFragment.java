@@ -14,12 +14,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.kylewai.a2uf.R;
 import com.example.kylewai.a2uf.com.example.kylewai.firebasemodel.Post;
-import com.example.kylewai.a2uf.com.example.kylewai.firebasemodel.UserMock;
+import com.example.kylewai.a2uf.com.example.kylewai.firebasemodel.Post;
 import com.example.kylewai.a2uf.makePostActivity.MakePostActivity;
 import com.example.kylewai.a2uf.mockList.MockListAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -29,6 +31,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
 
 import static android.widget.GridLayout.VERTICAL;
 
@@ -40,7 +44,7 @@ public class ForumFragment extends Fragment {
     RecyclerView recyclerView;
     private FirebaseFirestore db;
     ForumFeedAdapter adapter;
-    Spinner filter;
+    Spinner spinner;
     TextView makePost;
 
     public ForumFragment() {
@@ -66,6 +70,50 @@ public class ForumFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_forum, container, false);
         initRecyclerView(view);
 
+        spinner = view.findViewById(R.id.spinner);
+        ArrayList<String> filters = new ArrayList<>();
+        filters.add("Latest");
+        filters.add("Top");
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, filters);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(arrayAdapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String name = adapterView.getItemAtPosition(i).toString();
+                if(name.equals("Latest")){
+                    Log.i("MockListFrag", "latest");
+                    Query query = db.collection("posts").orderBy("dateCreated", Query.Direction.DESCENDING);
+                    FirestoreRecyclerOptions<Post> firestoreRecyclerOptions = new FirestoreRecyclerOptions.Builder<Post>()
+                            .setQuery(query, Post.class)
+                            .build();
+                    adapter.stopListening();
+                    adapter = new ForumFeedAdapter(firestoreRecyclerOptions, getContext());
+                    adapter.startListening();
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                    recyclerView.setAdapter(adapter);
+                }
+                else{
+                    Log.i("MockListFrag", "fav");
+                    Query query = db.collection("posts").orderBy("likes", Query.Direction.DESCENDING);
+
+                    FirestoreRecyclerOptions<Post> firestoreRecyclerOptions = new FirestoreRecyclerOptions.Builder<Post>()
+                            .setQuery(query, Post.class)
+                            .build();
+                    adapter.stopListening();
+                    adapter = new ForumFeedAdapter(firestoreRecyclerOptions, getContext());
+                    adapter.startListening();
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                    recyclerView.setAdapter(adapter);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         makePost = view.findViewById(R.id.makePost);
         makePost.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,7 +122,6 @@ public class ForumFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        filter = view.findViewById(R.id.spinner);
 
 
         return view;
@@ -86,7 +133,7 @@ public class ForumFragment extends Fragment {
         FirestoreRecyclerOptions<Post> firestoreRecyclerOptions = new FirestoreRecyclerOptions.Builder<Post>()
                 .setQuery(query, Post.class)
                 .build();
-        adapter = new ForumFeedAdapter(firestoreRecyclerOptions);
+        adapter = new ForumFeedAdapter(firestoreRecyclerOptions, getContext());
         recyclerView = view.findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
