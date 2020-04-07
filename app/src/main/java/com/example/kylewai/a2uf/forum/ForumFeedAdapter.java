@@ -10,8 +10,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.kylewai.a2uf.MainActivity;
 import com.example.kylewai.a2uf.R;
@@ -19,7 +21,10 @@ import com.example.kylewai.a2uf.com.example.kylewai.firebasemodel.Post;
 import com.example.kylewai.a2uf.individualPostActivity.PostActivity;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -29,6 +34,7 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.view.ActionMode;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -37,11 +43,17 @@ public class ForumFeedAdapter extends FirestoreRecyclerAdapter<Post, ForumFeedAd
     private boolean multipleSelection = false;
     private List<String> selected = new ArrayList<>();
     private ActionMode.Callback contextualOptions;
+    static ActionMode actionMode;
+    private boolean favoritesFilter;
     private Context context;
 
-    public ForumFeedAdapter(@NonNull FirestoreRecyclerOptions<Post> options, Context context) {
+    public ForumFeedAdapter(@NonNull FirestoreRecyclerOptions<Post> options, Context context, boolean favorites) {
         super(options);
         this.context = context;
+        this.favoritesFilter = favorites;
+        if(actionMode != null){
+            actionMode.finish();
+        }
         initContextualOptions();
     }
 
@@ -49,7 +61,8 @@ public class ForumFeedAdapter extends FirestoreRecyclerAdapter<Post, ForumFeedAd
         contextualOptions = new ActionMode.Callback() {
             @Override
             public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-                menu.add("Favorite");
+                MenuItem fav_item = menu.add("Favorite");
+                fav_item.setIcon(AppCompatResources.getDrawable(context, R.drawable.favorite_icon));
                 return true;
             }
 
@@ -60,9 +73,34 @@ public class ForumFeedAdapter extends FirestoreRecyclerAdapter<Post, ForumFeedAd
 
             @Override
             public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-                if(item.getItemId() == R.id.favorite_post){
-                    for(String postId : selected){
-                        //Add to favorites
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                if(item.getTitle() == "Favorite"){
+                    //Unfavorite
+                    if(favoritesFilter) {
+                        for(String postId : selected) {
+                            db.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .update("favoritePosts", FieldValue.arrayRemove(postId))
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            notifyDataSetChanged();
+                                        }
+                                    });
+                        }
+                        Toast.makeText(context, "Unfavorited", Toast.LENGTH_LONG).show();
+                    }
+                    //Favorite
+                    else {
+                        for (String postId : selected) {
+                            //Add to favorites
+                            db.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .update("favoritePosts", FieldValue.arrayUnion(postId))
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                        }
+                                    });
+                        }
                     }
                 }
                 mode.finish();
@@ -90,7 +128,7 @@ public class ForumFeedAdapter extends FirestoreRecyclerAdapter<Post, ForumFeedAd
         return new FeedPostViewHolder(view);
     }
 
-    class FeedPostViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    class FeedPostViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
         TextView title;
         TextView author;
         TextView description;
@@ -98,12 +136,13 @@ public class ForumFeedAdapter extends FirestoreRecyclerAdapter<Post, ForumFeedAd
         TextView dateCreated;
         TextView likes;
         ImageView thumbs;
+        CheckBox checkBox;
         Post mPost;
 
         public FeedPostViewHolder(@NonNull View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
-//            itemView.setOnLongClickListener(this);
+            itemView.setOnLongClickListener(this);
             title = itemView.findViewById(R.id.title);
             author = itemView.findViewById(R.id.author);
             description = itemView.findViewById(R.id.description);
@@ -111,17 +150,25 @@ public class ForumFeedAdapter extends FirestoreRecyclerAdapter<Post, ForumFeedAd
             dateCreated = itemView.findViewById(R.id.dateCreated);
             likes = itemView.findViewById(R.id.num_likes);
             thumbs = itemView.findViewById(R.id.like_button);
-            thumbs.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    FirebaseFirestore db = FirebaseFirestore.getInstance();
-                    db.collection("posts").document(mPost.getDocumentId()).update("likes", FieldValue.increment(1));
-                }
-            });
+            checkBox = itemView.findViewById(R.id.checkBox);
         }
 
         void setPost(Post post){
             mPost = post;
+            if(multipleSelection == false) {
+                checkBox.setVisibility(View.INVISIBLE);
+            }
+            else {
+                if(selected.contains(mPost.getDocumentId())){
+                    Log.d("MyPosty", "Why here");
+                    checkBox.setVisibility(View.VISIBLE);
+                    checkBox.setChecked(true);
+                }
+                else{
+                    checkBox.setVisibility(View.INVISIBLE);
+                    checkBox.setChecked(false);
+                }
+            }
             title.setText(post.getTitle());
             author.setText("@" + post.getAuthor());
             description.setText(post.getDescription());
@@ -155,9 +202,41 @@ public class ForumFeedAdapter extends FirestoreRecyclerAdapter<Post, ForumFeedAd
 
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(view.getContext(), PostActivity.class);
-            intent.putExtra("postObject", mPost);
-            view.getContext().startActivity(intent);
+            if(multipleSelection){
+                addSelected(mPost.getDocumentId());
+            }
+            else {
+                Intent intent = new Intent(view.getContext(), PostActivity.class);
+                intent.putExtra("postObject", mPost);
+                view.getContext().startActivity(intent);
+            }
+        }
+
+        @Override
+        public boolean onLongClick(View view) {
+            if(!multipleSelection) {
+                actionMode = ((AppCompatActivity) view.getContext()).startSupportActionMode(contextualOptions);
+                multipleSelection = true;
+                addSelected(mPost.getDocumentId());
+            }
+            else{
+                addSelected(mPost.getDocumentId());
+            }
+            return true;
+        }
+
+        private void addSelected(String postId){
+
+            if(selected.contains(postId)){
+                selected.remove(postId);
+                checkBox.setChecked(false);
+                checkBox.setVisibility(View.INVISIBLE);
+            }
+            else{
+                selected.add(postId);
+                checkBox.setChecked(true);
+                checkBox.setVisibility(View.VISIBLE);
+            }
         }
     }
 }

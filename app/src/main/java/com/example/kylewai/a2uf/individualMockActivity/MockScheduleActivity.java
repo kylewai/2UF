@@ -29,7 +29,7 @@ public class MockScheduleActivity extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
 
         // Enable the Up button
-        ab.setTitle("Add a class");
+        ab.setTitle(data.getMockName());
         ab.setDisplayHomeAsUpEnabled(true);
 
         TabLayout tabLayout = findViewById(R.id.tab_layout);

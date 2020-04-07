@@ -11,13 +11,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".myPosts.PostActivity"
+        <activity android:name=".SOC.SOCSearchActivity"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.kylewai.a2uf.MainActivity" />
+        </activity>
+        <activity
+            android:name=".myPosts.PostActivity"
             android:parentActivityName=".myPosts.MyPostsActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.kylewai.a2uf.myPosts.MyPostsActivity" />
         </activity>
-        <activity android:name=".myPosts.MyPostsActivity"
+        <activity
+            android:name=".myPosts.MyPostsActivity"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.kylewai.a2uf.R;
@@ -20,8 +21,10 @@ import com.example.kylewai.a2uf.com.example.kylewai.firebasemodel.Course;
 import com.example.kylewai.a2uf.com.example.kylewai.firebasemodel.Post;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -38,6 +41,7 @@ public class PostScheduleFragment extends Fragment {
     TextView text_description;
     TextView text_author;
     FirebaseFirestore db;
+    ImageView thumbs;
     String[]periods = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "E1", "E2", "E3"};
 
     public PostScheduleFragment() {
@@ -72,8 +76,50 @@ public class PostScheduleFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_post_schedule, container, false);
         text_description = view.findViewById(R.id.description);
         text_author = view.findViewById(R.id.author);
+        thumbs = view.findViewById(R.id.like_button);
+        setLikeListener();
         setTextContent();
         return view;
+    }
+
+    private void setLikeListener(){
+        db.collection("users")
+                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .collection("likedPosts")
+                .document(data.getDocumentId())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if(task.isSuccessful()){
+                            DocumentSnapshot doc = task.getResult();
+                            if(doc.exists()){
+                                thumbs.setImageResource(R.drawable.like);
+                            }
+                            else{
+                                thumbs.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        FirebaseFirestore db = FirebaseFirestore.getInstance();
+                                        db.collection("posts").document(data.getDocumentId()).update("likes", FieldValue.increment(1));
+                                        db.collection("users")
+                                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                .collection("likedPosts")
+                                                .document(data.getDocumentId())
+                                                .set(new HashMap<>())
+                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                        thumbs.setImageResource(R.drawable.like);
+                                                        thumbs.setOnClickListener(null);
+                                                    }
+                                                });
+                                    }
+                                });
+                            }
+                        }
+                    }
+                });
     }
 
     private void setTextContent(){

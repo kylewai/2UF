@@ -2,22 +2,35 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/scene_root">
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
 
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/like_button"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="4dp"
+                android:padding="10dp"
+                app:srcCompat="@drawable/before_like" />
 
             <TextView
                 android:id="@+id/author"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
+                android:layout_alignBottom="@id/like_button"
                 android:paddingLeft="13dp"
                 android:paddingTop="13dp"
                 android:paddingRight="13dp"

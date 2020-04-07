@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
     android:color="#bfbfbd">
-    <item android:drawable="@drawable/rectangle_black_border" />
+    <item android:drawable="@drawable/make_post_bubble" />
 </ripple>

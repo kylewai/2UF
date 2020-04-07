@@ -66,9 +66,9 @@ public class SOCCourseListAdapter extends RecyclerView.Adapter<SOCCourseViewHold
         String credit = mCurrent.getCredits();
         holder.codeText.setText(code);
         holder.nameText.setText(name);
+        holder.classNumberText.setText("(" + mCurrent.getClassNumber() + ")");
         holder.creditText.setText("Credits " + credit);
         holder.fragmentDecider = fragmentDecider;
-        Log.i("Adapter", code);
     }
 
     @Override
@@ -77,9 +77,11 @@ public class SOCCourseListAdapter extends RecyclerView.Adapter<SOCCourseViewHold
     }
 
     public void update(List<Section> sectionList){
+        this.sectionList.clear();
+        Log.i("Adapter", sectionList.size() + "");
         this.sectionList.addAll(sectionList);
         Log.i("Adapter", this.sectionList.size() + "");
-        notifyDataSetChanged();
+        this.notifyDataSetChanged();
     }
 }
 
@@ -88,6 +90,7 @@ class SOCCourseViewHolder extends RecyclerView.ViewHolder implements View.OnClic
     public final TextView codeText;
     public final TextView nameText;
     public final TextView creditText;
+    public final TextView classNumberText;
     final SOCCourseListAdapter mAdapter;
     public Section sectionObj;
     public int fragmentDecider = 0;
@@ -97,6 +100,7 @@ class SOCCourseViewHolder extends RecyclerView.ViewHolder implements View.OnClic
         codeText = courseItemView.findViewById(R.id.code);
         nameText = courseItemView.findViewById(R.id.name);
         creditText = courseItemView.findViewById(R.id.credit);
+        classNumberText = courseItemView.findViewById(R.id.classNum);
         courseItemView.setOnClickListener(this);
         this.mAdapter = adapter;
         this.sectionObj = null;

@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.kylewai.a2uf.MainActivity;
 import com.example.kylewai.a2uf.individualMockActivity.MockScheduleActivity;
@@ -43,11 +44,17 @@ public class MockListAdapter extends FirestoreRecyclerAdapter<UserMock, MockList
     private List<String> selected = new ArrayList<>();
     private ActionMode.Callback contextualOptions;
     private Context context;
+    boolean favoritesFilter;
+    static ActionMode actionMode;
 
 
-    public MockListAdapter(@NonNull FirestoreRecyclerOptions<UserMock> options, Context context) {
+    public MockListAdapter(@NonNull FirestoreRecyclerOptions<UserMock> options, Context context, boolean favorites) {
         super(options);
+        if(actionMode != null){
+            actionMode.finish();
+        }
         this.context = context;
+        this.favoritesFilter =favorites;
         initContextualOptions();
     }
 
@@ -71,24 +78,48 @@ public class MockListAdapter extends FirestoreRecyclerAdapter<UserMock, MockList
             public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
                 if(item.getTitle() == "Favorite"){
-                    for(String id : selected){
-                        //Add to favorites
-                        db.collection("userMocks").document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                .collection("mockInfo")
-                                .document(id)
-                                .update("favorite", true)
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
+                    if(favoritesFilter){
+                        for(String id : selected){
+                            //Add to favorites
+                            db.collection("userMocks").document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .collection("mockInfo")
+                                    .document(id)
+                                    .update("favorite", false)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            notifyDataSetChanged();
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
 
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
+                                        }
+                                    });
+                        }
+                        Toast.makeText(context, "Unfavorited", Toast.LENGTH_LONG).show();
+                    }
+                    else {
+                        for (String id : selected) {
+                            //Add to favorites
+                            db.collection("userMocks").document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .collection("mockInfo")
+                                    .document(id)
+                                    .update("favorite", true)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
 
-                                    }
-                                });
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+
+                                        }
+                                    });
+                        }
                     }
                 }
                 else if(item.getTitle() == "Delete"){
@@ -154,8 +185,21 @@ public class MockListAdapter extends FirestoreRecyclerAdapter<UserMock, MockList
         }
 
         void setMock(UserMock userMock, String mockId){
-            checkBox.setVisibility(View.INVISIBLE);
             this.mockId = mockId;
+
+            if(multipleSelection == false) {
+                checkBox.setVisibility(View.INVISIBLE);
+            }
+            else {
+                if(selected.contains(mockId)){
+                    checkBox.setVisibility(View.VISIBLE);
+                    checkBox.setChecked(true);
+                }
+                else{
+                    checkBox.setVisibility(View.INVISIBLE);
+                    checkBox.setChecked(false);
+                }
+            }
             this.userMock = userMock;
             nameView.setText(userMock.getMockName());
 
@@ -200,9 +244,14 @@ public class MockListAdapter extends FirestoreRecyclerAdapter<UserMock, MockList
 
         @Override
         public boolean onLongClick(View view) {
-            ((AppCompatActivity)view.getContext()).startSupportActionMode(contextualOptions);
-            multipleSelection = true;
-            addSelected(mockId);
+            if(!multipleSelection) {
+                actionMode = ((AppCompatActivity) view.getContext()).startSupportActionMode(contextualOptions);
+                multipleSelection = true;
+                addSelected(mockId);
+            }
+            else{
+                addSelected(mockId);
+            }
             return true;
         }
 

@@ -16,7 +16,7 @@
         android:padding="3dp"
         android:text="Make a Post"
         android:clickable="true"
-        android:background="@drawable/rectangle_black_border"
+        android:background="@drawable/make_post_bubble"
         android:foreground="?android:attr/selectableItemBackground"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,9 +27,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
+        android:layout_marginEnd="6dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/makePost"
-        app:layout_constraintTop_toBottomOf="@+id/makePost" />
+        app:layout_constraintTop_toBottomOf="@+id/makePost"
+        style="@style/Widget.AppCompat.Spinner.Underlined"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
