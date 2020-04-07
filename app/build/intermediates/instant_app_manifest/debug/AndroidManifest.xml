@@ -26,6 +26,13 @@
         android:testOnly="true"
         android:theme="@style/AppTheme" >
         <activity
+            android:name="com.example.kylewai.a2uf.SOC.SOCSearchActivity"
+            android:parentActivityName="com.example.kylewai.a2uf.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.kylewai.a2uf.MainActivity" />
+        </activity>
+        <activity
             android:name="com.example.kylewai.a2uf.myPosts.PostActivity"
             android:parentActivityName="com.example.kylewai.a2uf.myPosts.MyPostsActivity" >
             <meta-data

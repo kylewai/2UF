@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
+import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -107,7 +108,7 @@ public class MockListFragment extends Fragment {
             .build();
 
         Log.d("MockListFragment","done");
-        adapter = new MockListAdapter(firestoreRecyclerOptions, getContext());
+        adapter = new MockListAdapter(firestoreRecyclerOptions, getContext(), false);
 
         adapter.startListening();
         recyclerView = view.findViewById(R.id.recyclerview);
@@ -115,6 +116,7 @@ public class MockListFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getContext(), VERTICAL);
         recyclerView.addItemDecoration(dividerItemDecoration);
+
         Log.i("MockListFrag", "firstAdapter");
         spinner = view.findViewById(R.id.spinner);
         ArrayList<String> filters = new ArrayList<>();
@@ -136,7 +138,7 @@ public class MockListFragment extends Fragment {
                             .setQuery(query, UserMock.class)
                             .build();
                     adapter.stopListening();
-                    adapter = new MockListAdapter(firestoreRecyclerOptions, getContext());
+                    adapter = new MockListAdapter(firestoreRecyclerOptions, getContext(), false);
                     adapter.startListening();
                     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                     recyclerView.setAdapter(adapter);
@@ -152,7 +154,7 @@ public class MockListFragment extends Fragment {
                             .setQuery(query, UserMock.class)
                             .build();
                     adapter.stopListening();
-                    adapter = new MockListAdapter(firestoreRecyclerOptions, getContext());
+                    adapter = new MockListAdapter(firestoreRecyclerOptions, getContext(), true);
                     adapter.startListening();
                     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                     recyclerView.setAdapter(adapter);

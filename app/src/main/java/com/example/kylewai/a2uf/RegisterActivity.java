@@ -68,7 +68,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
         Map<String, Object> docData = new HashMap<>();
         String username = text_username.getText().toString();
-        AppUser newUser = new AppUser(username, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<Map<String, String>>());
+        AppUser newUser = new AppUser(username, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<Map<String, String>>());
         db.collection("users").document(user.getUid())
                 .set(newUser)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
