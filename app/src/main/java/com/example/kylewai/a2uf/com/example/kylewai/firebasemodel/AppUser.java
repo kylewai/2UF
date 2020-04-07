@@ -7,6 +7,8 @@ import java.util.Map;
 //This class is a model for the "user" collection
 public class AppUser {
     private String username;
+    private List<String> favoritePosts;
+    private List<String> favoriteMocks;
     private List<String> posts;
     private List<Map<String, String>> weeklyMeetTimes;
 
@@ -15,10 +17,21 @@ public class AppUser {
         //Required empty constructor
     }
 
-    public AppUser(String username, List<String> posts, List<Map<String, String>> weeklyMeetTimes){
+    public AppUser(String username, List<String> favoriteMocks, List<String> favoritePosts, List<String> posts, List<Map<String, String>> weeklyMeetTimes){
         this.username = username;
+        this.favoritePosts = favoritePosts;
+        this.favoriteMocks = favoriteMocks;
         this.posts = posts;
         this.weeklyMeetTimes = weeklyMeetTimes;
+    }
+
+
+    public List<String> getFavoriteMocks() {
+        return favoriteMocks;
+    }
+
+    public List<String> getFavoritePosts() {
+        return favoritePosts;
     }
 
     public String getUsername() {
