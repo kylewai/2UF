@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryLight"
     tools:context=".forum.ForumFragment">
 
     <TextView
@@ -13,11 +14,14 @@
         android:layout_marginStart="64dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="64dp"
+        android:background="@drawable/rectangle_black_border"
+        android:backgroundTint="@color/colorSecondaryLight"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
         android:padding="3dp"
         android:text="Make a Post"
-        android:clickable="true"
-        android:background="@drawable/rectangle_black_border"
-        android:foreground="?android:attr/selectableItemBackground"
+        android:textAlignment="center"
+        android:textColor="@color/textOnSecondary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

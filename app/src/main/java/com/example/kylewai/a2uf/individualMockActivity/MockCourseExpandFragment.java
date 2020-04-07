@@ -85,9 +85,9 @@ public class MockCourseExpandFragment extends Fragment {
         textView_name = view.findViewById(R.id.name);
         textView_name.setText(this.name);
         textView_description = view.findViewById(R.id.description);
-        textView_description.setText(this.description);
+        textView_description.setText("Description: \n" + this.description);
         textView_prereqs = view.findViewById(R.id.prereqs);
-        String prereqsString = "Prereqs: " + this.prereqs;
+        String prereqsString = "" + this.prereqs;
         textView_prereqs.setText(prereqsString);
         textView_instructors = view.findViewById(R.id.instructors);
         String instructorString = "Instructors:";
@@ -98,20 +98,21 @@ public class MockCourseExpandFragment extends Fragment {
         textView_instructors.setText(instructorString);
 
         textView_department = view.findViewById(R.id.department);
-        textView_department.setText(this.department);
+        textView_department.setText("Department: \n" + this.department);
 
         textView_meetTimes = view.findViewById(R.id.meetTimes);
-        String meetTimesString = "Meetings:";
+        String meetTimesString = "Meetings:\n";
         for(Map<String, String> meetTime : meetTimes){
-            meetTimesString += "\n" + meetTime.get("days");
-            meetTimesString += "\n" + meetTime.get("periodBegin");
-            meetTimesString += "\n" + meetTime.get("periodEnd");
-            meetTimesString += "\n" + meetTime.get("building");
-            meetTimesString += "\n" + meetTime.get("days");
+            meetTimesString += "\n Days: " + meetTime.get("days");
+            meetTimesString += "\n Period: " + meetTime.get("periodBegin");
+            meetTimesString += " - " + meetTime.get("periodEnd");
+            meetTimesString += "\n Building: " + meetTime.get("building");
+            //meetTimesString += "\n" + meetTime.get("days");
+            meetTimesString += "\n";
         }
         textView_meetTimes.setText(meetTimesString);
         textView_examTime = view.findViewById(R.id.examTime);
-        textView_examTime.setText(this.examTime);
+        textView_examTime.setText("Exam Time: \n" + this.examTime);
 
         Button dropButton = view.findViewById(R.id.dropButton);
         dropButton.setOnClickListener(new View.OnClickListener()

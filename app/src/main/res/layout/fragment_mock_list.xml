@@ -13,7 +13,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:src="@drawable/fab_icon"
-        android:layout_margin="16dp" />
+        android:layout_margin="16dp"
+        android:backgroundTint="@color/colorSecondary"/>
 
 
     <androidx.recyclerview.widget.RecyclerView

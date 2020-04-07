@@ -3,6 +3,7 @@ package com.example.kylewai.a2uf.forum;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -109,6 +110,7 @@ public class ForumFeedAdapter extends FirestoreRecyclerAdapter<Post, ForumFeedAd
             description = itemView.findViewById(R.id.description);
             major = itemView.findViewById(R.id.major);
             dateCreated = itemView.findViewById(R.id.dateCreated);
+            itemView.setBackgroundColor(Color.parseColor("#7db5fa"));
             likes = itemView.findViewById(R.id.num_likes);
             thumbs = itemView.findViewById(R.id.like_button);
             thumbs.setOnClickListener(new View.OnClickListener() {

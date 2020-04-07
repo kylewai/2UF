@@ -42,6 +42,26 @@
         <item name="android:gravity">center_vertical</item>
     </style>
 
+    <style name="class_cell_2">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginBottom">1dp</item>
+        <item name="android:layout_marginLeft">1dp</item>
+        <item name="android:layout_marginRight">0dp</item>
+        <item name="android:layout_marginTop">1dp</item>
+        <item name="android:layout_weight">2</item>
+        <item name="android:autoSizeMaxTextSize">100sp</item>
+        <item name="android:autoSizeMinTextSize">1sp</item>
+        <item name="android:autoSizeStepGranularity">1sp</item>
+        <item name="android:autoSizeTextType">uniform</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:background">@color/pewter</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:paddingHorizontal">1dp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
     <style name="time_cell">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">match_parent</item>
@@ -89,7 +109,7 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_width">0dp</item>
         <item name="android:padding">5dp</item>
-        <item name="android:background">#FFF</item>
+        <item name="android:background">#cad4db</item>
         <item name="android:layout_weight">2</item>
         <item name="android:textAlignment">center</item>
         <item name="android:gravity">center_vertical</item>
