@@ -2,6 +2,7 @@ package com.example.kylewai.a2uf.userSchedule;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -57,6 +58,11 @@ public class UserScheduleFragment extends Fragment {
     }
 
     @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        //Empty to avoid crash
+    }
+
+    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         Log.d("userscheda", "onAttach");
@@ -93,8 +99,8 @@ public class UserScheduleFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast toast = Toast.makeText(getActivity().getApplicationContext(), "User Schedule", Toast.LENGTH_LONG);
-                toast.show();
+//                Toast toast = Toast.makeText(getActivity().getApplicationContext(), "User Schedule", Toast.LENGTH_LONG);
+//                toast.show();
 
                 //Creating and opening a new activity for adding classes.
                 Intent intent = new Intent(getActivity(), AddClassPager.class); //Was: AddClassActivity.class
@@ -109,7 +115,6 @@ public class UserScheduleFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        Log.d("userscheda", "onStrat");
     }
 
     @Override
@@ -125,7 +130,6 @@ public class UserScheduleFragment extends Fragment {
     public void onPause() {
         userScheduleListener.remove();
         super.onPause();
-        Log.d("userscheda", "onPauseddd");
         Log.d("userscheda", "removed!");
     }
 
@@ -138,13 +142,11 @@ public class UserScheduleFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        Log.d("userscheda", "onResume");
         listenForUpdates();
     }
 
     private void listenForUpdates(){
         DocumentReference docRef = db.collection("users").document(this.uid);
-        Log.d("userscheda", "ListeningForUpdates");
         userScheduleListener = docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirebaseFirestoreException e) {
@@ -196,6 +198,10 @@ public class UserScheduleFragment extends Fragment {
     private HashMap<String, ArrayList<String>> fillWeeklySchedule(List<Map<String, String>> meetings){
         HashMap<String, ArrayList<String>> course_cells = new HashMap<>();
         ArrayList<String> cells_to_assign;
+        //Assign colors to course cells
+        int colorIndex = 0;
+        String[] colorArray = getResources().getStringArray(R.array.colors);
+        HashMap<String, Integer> usedCourses = new HashMap<>();
         for(int i = 0; i < meetings.size(); i++){
             Map<String, String> meetTime = meetings.get(i);
             String course = meetTime.get("course");
@@ -217,6 +223,16 @@ public class UserScheduleFragment extends Fragment {
             for(int k = 0; k < cells_to_assign.size(); k++){
                 String viewName = cells_to_assign.get(k);
                 cell = getView().findViewById(getResources().getIdentifier(viewName, "id", getContext().getPackageName()));
+                //Use previous color for this course or next color if different course
+                if(usedCourses.containsKey(course)){
+                    int previousColor = usedCourses.get(course);
+                    cell.setBackgroundColor(Color.parseColor(colorArray[previousColor]));
+                }
+                else {
+                    cell.setBackgroundColor(Color.parseColor(colorArray[colorIndex]));
+                    usedCourses.put(course, colorIndex);
+                    colorIndex++;
+                }
                 cell.setText(course);
             }
         }

@@ -1,9 +1,13 @@
 package com.example.kylewai.a2uf.individualMockActivity;
 
 
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.Typeface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -83,34 +87,47 @@ public class MockExpandAddClassFragment extends Fragment {
         textView_name = view.findViewById(R.id.name);
         textView_name.setText(this.name);
         textView_description = view.findViewById(R.id.description);
-        textView_description.setText("Description: \n" + this.description);
+        textView_description.setText(this.description);
         textView_prereqs = view.findViewById(R.id.prereqs);
-        String prereqsString = "" + this.prereqs;
+        String[] prereqsSplit = this.prereqs.split(":|\\.", -1);
+        String prereqsString = prereqsSplit[1].substring(1);
         textView_prereqs.setText(prereqsString);
-        textView_instructors = view.findViewById(R.id.instructors);
-        String instructorString = "Instructors:";
-        for (String instructor : instructors) {
-            instructorString += "\n" + instructor;
+        textView_coreqs = view.findViewById(R.id.coreqs);
+        TextView coreqs_label = view.findViewById(R.id.coreqs_label);
+        if(prereqsSplit.length == 3){
+            textView_coreqs.setVisibility(View.GONE);
+            coreqs_label.setVisibility(View.GONE);
         }
-        Log.d("ExpandFrag", instructorString);
+        else{
+            textView_coreqs.setText(prereqsSplit[3].substring(1));
+        }
+        textView_instructors = view.findViewById(R.id.instructors);
+        String instructorString = "";
+        int k = 0;
+        for(String instructor : instructors){
+            instructorString += (k == 0)? instructor : "\n" + instructor;
+            k++;
+        }
+
         textView_instructors.setText(instructorString);
 
         textView_department = view.findViewById(R.id.department);
-        textView_department.setText("Department: \n" + this.department);
+        textView_department.setText(this.department);
 
         textView_meetTimes = view.findViewById(R.id.meetTimes);
-        String meetTimesString = "Meetings:\n";
-        for (Map<String, String> meetTime : meetTimes) {
-            meetTimesString += "\n Days: " + meetTime.get("days");
-            meetTimesString += "\n Periods: " + meetTime.get("periodBegin");
+        String meetTimesString = "";
+        k = 0;
+        for(Map<String, String> meetTime : meetTimes){
+            meetTimesString += (k == 0)? "Days: " + meetTime.get("days") : "\n\nDays: " + meetTime.get("days");
+            meetTimesString += "\nPeriods: " + meetTime.get("periodBegin");
             meetTimesString += " - " + meetTime.get("periodEnd");
-            meetTimesString += "\n Building: " + meetTime.get("building");
-            meetTimesString += "\n Room: " + meetTime.get("room");
-            meetTimesString += "\n";
+            meetTimesString += "\nBuilding: " + meetTime.get("building");
+            meetTimesString += "\nRoom: " + meetTime.get("room");
+            k++;
         }
         textView_meetTimes.setText(meetTimesString);
         textView_examTime = view.findViewById(R.id.examTime);
-        textView_examTime.setText("Exam Time: \n" + this.examTime);
+        textView_examTime.setText(this.examTime);
 
         Button addButton = view.findViewById(R.id.Add_Class_Button);
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -150,16 +167,14 @@ public class MockExpandAddClassFragment extends Fragment {
                                 for (Map<String, String> course : mockMeetTimes) {
                                     //Check courseNumber
                                     if (course.get("classNumber").equals(classNumber)) {
-                                        Toast toast = Toast.makeText(view.getContext(), "Add Course Failure: Already Registered for this Class", Toast.LENGTH_LONG);
-                                        toast.show();
+                                        makeToast("Add Course Failure: Already Registered for this Class");
                                         //flagCheck.set(0, true);
                                         return;
                                     }
 
                                     //Check course code
                                     if (course.get("course").equals(courseCode)) {
-                                        Toast toast = Toast.makeText(view.getContext(), "Add Course Failure: Already Registered for this Class", Toast.LENGTH_LONG);
-                                        toast.show();
+                                        makeToast("Add Course Failure: Already Registered for this Class");
                                         return;
                                     }
 
@@ -192,8 +207,7 @@ public class MockExpandAddClassFragment extends Fragment {
                                             int toAddEndTime = periodToInt(meetTime.get("periodEnd"));
 
                                             if(beginTime <= toAddEndTime && toAddBeginTime <= endTime) {
-                                                Toast toast = Toast.makeText(view.getContext(), "Add Course Failure: Conflicting Times", Toast.LENGTH_LONG);
-                                                toast.show();
+                                                makeToast("Add Course Failure: Conflicting Times");
                                                 //flagCheck.set(0, true);
                                                 return;
                                             }
@@ -237,6 +251,7 @@ public class MockExpandAddClassFragment extends Fragment {
 
                                     //Store class info
                                     database.collection("classes").document(classNumber).set(course);
+                                    makeToast("Added " + courseCode);
                                 }
 
                             } else {
@@ -306,6 +321,18 @@ public class MockExpandAddClassFragment extends Fragment {
                 getActivity().getSupportFragmentManager().popBackStack();
             }
         });
+    }
+
+    private void makeToast(String message){
+        //Customize toast
+        Toast toast = Toast.makeText(getContext(), message, Toast.LENGTH_LONG);
+        View toastView = toast.getView();
+        toastView.getBackground().setColorFilter(ResourcesCompat.getColor(getResources(), R.color.colorSecondaryLight, null), PorterDuff.Mode.SRC_IN);
+        TextView toastText = toastView.findViewById(android.R.id.message);
+        toastText.setTextColor(ResourcesCompat.getColor(getResources(), R.color.textOnSecondary, null));
+        toastText.setTypeface(toastText.getTypeface(), Typeface.BOLD);
+        toastText.setShadowLayer(0, 0, 0, Color.TRANSPARENT);
+        toast.show();
     }
 
 }

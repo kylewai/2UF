@@ -91,7 +91,6 @@ public class MyPostsActivity extends AppCompatActivity {
                                     .build();
                             adapter = new MyPostFeedAdapter(firestoreRecyclerOptions, MyPostsActivity.this, false);
                             adapter.startListening();
-                            Log.d("MyPosty", "Listening");
                             recyclerView = findViewById(R.id.recyclerview);
                             recyclerView.setLayoutManager(new LinearLayoutManager(MyPostsActivity.this));
                             recyclerView.setAdapter(adapter);

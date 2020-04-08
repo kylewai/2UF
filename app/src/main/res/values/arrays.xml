@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="colors">
+        <item>#1a3142</item>
+        <item>#750c41</item>
+        <item>#542d6f</item>
+        <item>#202e74</item>
+        <item>#004731</item>
+        <item>#654321</item>
+    </string-array>
+</resources>

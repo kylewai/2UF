@@ -23,22 +23,34 @@
                 android:layout_marginTop="3dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginBottom="4dp"
+                android:clickable="true"
+                android:background="?attr/selectableItemBackground"
                 android:padding="10dp"
-                app:srcCompat="@drawable/before_like" />
+                app:srcCompat="@drawable/like" />
 
             <TextView
                 android:id="@+id/author"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_alignBottom="@id/like_button"
+                android:textColor="@color/textOnPrimary"
                 android:paddingLeft="13dp"
                 android:paddingTop="13dp"
-                android:paddingRight="13dp"
+                android:paddingRight="4dp"
                 android:paddingBottom="0dp" />
 
             <TextView
+                android:id="@+id/dateCreated"
+                android:layout_width="wrap_content"
+                android:textColor="@android:color/secondary_text_dark"
+                android:layout_toRightOf="@id/author"
+                android:layout_alignBaseline="@id/author"
+                android:layout_height="wrap_content"
+                android:text="- 24m" />
+
+            <TextView
                 android:id="@+id/description"
+                android:textColor="@color/textOnPrimary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/author"

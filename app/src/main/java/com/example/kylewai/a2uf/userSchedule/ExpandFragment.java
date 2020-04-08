@@ -1,10 +1,17 @@
 package com.example.kylewai.a2uf.userSchedule;
 
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.Typeface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -13,11 +20,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.kylewai.a2uf.PagerAdapter;
 import com.example.kylewai.a2uf.R;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -50,6 +60,7 @@ public class ExpandFragment extends Fragment {
     TextView textView_instructors;
     TextView textView_meetTimes;
     TextView textView_examTime;
+    TextView textView_coreqs;
     static PagerAdapter.FirstFragmentListener listener;
     int fragmentSelector;
 
@@ -99,34 +110,47 @@ public class ExpandFragment extends Fragment {
         textView_name = view.findViewById(R.id.name);
         textView_name.setText(this.name);
         textView_description = view.findViewById(R.id.description);
-        textView_description.setText("Description: \n" + this.description);
+        textView_description.setText(this.description);
         textView_prereqs = view.findViewById(R.id.prereqs);
-        String prereqsString = this.prereqs;
+        String[] prereqsSplit = this.prereqs.split(":|\\.", -1);
+        String prereqsString = prereqsSplit[1].substring(1);
         textView_prereqs.setText(prereqsString);
-        textView_instructors = view.findViewById(R.id.instructors);
-        String instructorString = "Instructors:";
-        for(String instructor : instructors){
-            instructorString += "\n" + instructor;
+        textView_coreqs = view.findViewById(R.id.coreqs);
+        TextView coreqs_label = view.findViewById(R.id.coreqs_label);
+        if(prereqsSplit.length == 3){
+            textView_coreqs.setVisibility(View.GONE);
+            coreqs_label.setVisibility(View.GONE);
         }
-        Log.d("ExpandFrag", instructorString);
+        else{
+            textView_coreqs.setText(prereqsSplit[3].substring(1));
+        }
+        textView_instructors = view.findViewById(R.id.instructors);
+        String instructorString = "";
+        int k = 0;
+        for(String instructor : instructors){
+            instructorString += (k == 0)? instructor : "\n" + instructor;
+            k++;
+        }
+
         textView_instructors.setText(instructorString);
 
         textView_department = view.findViewById(R.id.department);
-        textView_department.setText("Department: \n" + this.department);
+        textView_department.setText(this.department);
 
         textView_meetTimes = view.findViewById(R.id.meetTimes);
-        String meetTimesString = "Meetings:\n";
+        String meetTimesString = "";
+        k = 0;
         for(Map<String, String> meetTime : meetTimes){
-            meetTimesString += "\n Days: " + meetTime.get("days");
-            meetTimesString += "\n Period: " + meetTime.get("periodBegin");
+            meetTimesString += (k == 0)? "Days: " + meetTime.get("days") : "\n\nDays: " + meetTime.get("days");
+            meetTimesString += "\nPeriods: " + meetTime.get("periodBegin");
             meetTimesString += " - " + meetTime.get("periodEnd");
-            meetTimesString += "\n Building: " + meetTime.get("building");
-            meetTimesString += "\n Room: " + meetTime.get("room");
-            meetTimesString += "\n";
+            meetTimesString += "\nBuilding: " + meetTime.get("building");
+            meetTimesString += "\nRoom: " + meetTime.get("room");
+            k++;
         }
         textView_meetTimes.setText(meetTimesString);
         textView_examTime = view.findViewById(R.id.examTime);
-        textView_examTime.setText("Exam Time: \n" + this.examTime);
+        textView_examTime.setText(this.examTime);
 
         Button dropButton = view.findViewById(R.id.dropButton);
         //Don't want the drop button if fragmentSelector = 2 indicating this is the addcourseschedulefragment
@@ -137,39 +161,26 @@ public class ExpandFragment extends Fragment {
             dropButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    List<Map<String, String>> dropList = new ArrayList<>();
-                    for (Map<String, String> meetTime : meetTimes) {
-                        Map<String, String> dropClass = new HashMap<>();
-                        //dropClass.put("classNumber", );
-                        dropClass.put("classNumber", classNumber);
-                        dropClass.put("course", courseCode);
-                        dropClass.put("days", meetTime.get("days"));
-                        dropClass.put("periodBegin", meetTime.get("periodBegin"));
-                        dropClass.put("periodEnd", meetTime.get("periodEnd"));
+                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+                    alertDialog.setTitle("Delete Posts");
 
-                        dropList.add(dropClass);
-                    }
-
-                    final FirebaseFirestore database = FirebaseFirestore.getInstance();
-
-                    //Log.d("ArraySize", "Num Meets: " + dropList.size());
-                    //Toast toasty = Toast.makeText(view.getContext(), "Num Meets" + dropList.size(), Toast.LENGTH_LONG);
-                    //toasty.show();
-
-                    for (Map<String, String> dropClass : dropList) {
-                        database.collection("users").document(UserScheduleFragment.transferuid).update("weeklyMeetTimes", FieldValue.arrayRemove(dropClass)).addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                Log.d("dbUpdate", "DocumentSnapshot successfully updated!");
+                    alertDialog.setPositiveButton("Confirm",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dropClass();
+                                }
                             }
-                        })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Log.w("dbUpdate", "Error updating document", e);
-                                    }
-                                });
-                    }
+                    );
+
+                    alertDialog.setNegativeButton("Cancel",
+                            new Dialog.OnClickListener(){
+                                public void onClick(DialogInterface dialogInterface, int i){
+                                    dialogInterface.cancel();
+                                }
+                            }
+                    );
+                    alertDialog.show();
                 }
             });
         }
@@ -201,5 +212,54 @@ public class ExpandFragment extends Fragment {
                 }
             });
         }
+    }
+
+    private void makeToast(){
+        Toast toast = Toast.makeText(getContext(), "Dropped " + courseCode, Toast.LENGTH_LONG);
+        View toastView = toast.getView();
+        toastView.getBackground().setColorFilter(ResourcesCompat.getColor(getResources(), R.color.colorSecondaryLight, null), PorterDuff.Mode.SRC_IN);
+        TextView toastText = toastView.findViewById(android.R.id.message);
+        toastText.setTextColor(ResourcesCompat.getColor(getResources(), R.color.textOnSecondary, null));
+        toastText.setTypeface(toastText.getTypeface(), Typeface.BOLD);
+        toastText.setShadowLayer(0, 0, 0, Color.TRANSPARENT);
+        toast.show();
+    }
+
+    private void dropClass(){
+        List<Map<String, String>> dropList = new ArrayList<>();
+        for (Map<String, String> meetTime : meetTimes) {
+            Map<String, String> dropClass = new HashMap<>();
+            //dropClass.put("classNumber", );
+            dropClass.put("classNumber", classNumber);
+            dropClass.put("course", courseCode);
+            dropClass.put("days", meetTime.get("days"));
+            dropClass.put("periodBegin", meetTime.get("periodBegin"));
+            dropClass.put("periodEnd", meetTime.get("periodEnd"));
+
+            dropList.add(dropClass);
+        }
+
+        final FirebaseFirestore database = FirebaseFirestore.getInstance();
+
+        //Log.d("ArraySize", "Num Meets: " + dropList.size());
+        //Toast toasty = Toast.makeText(view.getContext(), "Num Meets" + dropList.size(), Toast.LENGTH_LONG);
+        //toasty.show();
+
+        for (Map<String, String> dropClass : dropList) {
+            database.collection("users").document(UserScheduleFragment.transferuid).update("weeklyMeetTimes", FieldValue.arrayRemove(dropClass)).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    Log.d("dbUpdate", "DocumentSnapshot successfully updated!");
+                }
+            })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w("dbUpdate", "Error updating document", e);
+                        }
+                    });
+        }
+        makeToast();
+        listener.onSwitch(courseCode, name, description, department, prereqs, instructors, meetTimes, examTime, classNumber);
     }
 }

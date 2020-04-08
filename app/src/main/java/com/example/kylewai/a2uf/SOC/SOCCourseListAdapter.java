@@ -26,6 +26,7 @@ import java.util.Map;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
@@ -55,10 +56,10 @@ public class SOCCourseListAdapter extends RecyclerView.Adapter<SOCCourseViewHold
     public void onBindViewHolder(@NonNull SOCCourseViewHolder holder, int position) {
         Section mCurrent = this.sectionList.get(position);
         if(position % 2 == 0){
-            holder.itemView.setBackgroundColor(Color.parseColor("#65a7f7"));
+            holder.itemView.setBackgroundColor(ResourcesCompat.getColor(holder.itemView.getResources(), R.color.pewter, null));
         }
         else{
-            holder.itemView.setBackgroundColor(Color.parseColor("#7db5fa"));
+            holder.itemView.setBackgroundColor(Color.parseColor("#FFFFFF"));
         }
         holder.sectionObj = mCurrent;
         String code = mCurrent.getCode();
@@ -151,7 +152,7 @@ class SOCCourseViewHolder extends RecyclerView.ViewHolder implements View.OnClic
         }
         else
         {
-            int fragmentSelector = 1;
+            int fragmentSelector = 2;
             fr = new ExpandFragment(sectionObj.getCode(), sectionObj.getName(), sectionObj.getDescription(), sectionObj.getDeptName(), sectionObj.getPrerequisites(), instructors, meetTimes, sectionObj.getFinalExam(), sectionObj.getClassNumber(), fragmentSelector);
         }
 

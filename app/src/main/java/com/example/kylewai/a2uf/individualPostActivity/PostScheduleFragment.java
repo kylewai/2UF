@@ -1,6 +1,7 @@
 package com.example.kylewai.a2uf.individualPostActivity;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -21,6 +22,7 @@ import com.example.kylewai.a2uf.com.example.kylewai.firebasemodel.Course;
 import com.example.kylewai.a2uf.com.example.kylewai.firebasemodel.Post;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -28,6 +30,7 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,6 +43,7 @@ public class PostScheduleFragment extends Fragment {
     Post data;
     TextView text_description;
     TextView text_author;
+    TextView dateCreated;
     FirebaseFirestore db;
     ImageView thumbs;
     String[]periods = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "E1", "E2", "E3"};
@@ -76,13 +80,41 @@ public class PostScheduleFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_post_schedule, container, false);
         text_description = view.findViewById(R.id.description);
         text_author = view.findViewById(R.id.author);
+        dateCreated = view.findViewById(R.id.dateCreated);
+        dateCreated.setText("- " + timeStampToTime(data.getDateCreated()));
         thumbs = view.findViewById(R.id.like_button);
+        initializeThumb();
         setLikeListener();
         setTextContent();
         return view;
     }
 
-    private void setLikeListener(){
+    private String timeStampToTime(Timestamp dateCreated){
+        Date date = dateCreated.toDate();
+        Date currDate = new Date();
+        long millisElapsed = currDate.getTime() - date.getTime();
+        String timeElapsed;
+        long unitsElapsed = millisElapsed;
+        if((unitsElapsed = unitsElapsed / 1000) < 60){
+            timeElapsed = unitsElapsed + "s";
+        }
+        else if((unitsElapsed = unitsElapsed / 60) < 60){
+            timeElapsed = unitsElapsed + "m";
+        }
+        else if((unitsElapsed = unitsElapsed / 60) < 24){
+            timeElapsed = unitsElapsed + "h";
+        }
+        else if((unitsElapsed = unitsElapsed / 24) < 365){
+            timeElapsed = unitsElapsed + "d";
+        }
+        else{
+            unitsElapsed = unitsElapsed / 365;
+            timeElapsed = unitsElapsed + "y";
+        }
+        return timeElapsed;
+    }
+
+    private void initializeThumb(){
         db.collection("users")
                 .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .collection("likedPosts")
@@ -94,12 +126,46 @@ public class PostScheduleFragment extends Fragment {
                         if(task.isSuccessful()){
                             DocumentSnapshot doc = task.getResult();
                             if(doc.exists()){
-                                thumbs.setImageResource(R.drawable.like);
+                                thumbs.setImageResource(R.drawable.liked_post);
                             }
-                            else{
-                                thumbs.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
+                        }
+                    }
+                });
+    }
+
+    private void setLikeListener(){
+        thumbs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                db.collection("users")
+                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                        .collection("likedPosts")
+                        .document(data.getDocumentId())
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    DocumentSnapshot doc = task.getResult();
+                                    //Already liked -> unlike
+                                    if (doc.exists()) {
+                                        FirebaseFirestore db = FirebaseFirestore.getInstance();
+                                        db.collection("posts").document(data.getDocumentId()).update("likes", FieldValue.increment(-1));
+                                        db.collection("users")
+                                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                .collection("likedPosts")
+                                                .document(data.getDocumentId())
+                                                .delete()
+                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                        thumbs.setImageResource(R.drawable.like);
+                                                    }
+                                                });
+                                    }
+                                    //Not yet liked -> like
+                                    else {
+                                        Log.i("PostySched", "Not yet liked");
                                         FirebaseFirestore db = FirebaseFirestore.getInstance();
                                         db.collection("posts").document(data.getDocumentId()).update("likes", FieldValue.increment(1));
                                         db.collection("users")
@@ -110,16 +176,15 @@ public class PostScheduleFragment extends Fragment {
                                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                     @Override
                                                     public void onComplete(@NonNull Task<Void> task) {
-                                                        thumbs.setImageResource(R.drawable.like);
-                                                        thumbs.setOnClickListener(null);
+                                                        thumbs.setImageResource(R.drawable.liked_post);
                                                     }
                                                 });
                                     }
-                                });
+                                }
                             }
-                        }
-                    }
-                });
+                        });
+            }
+        });
     }
 
     private void setTextContent(){
@@ -133,7 +198,10 @@ public class PostScheduleFragment extends Fragment {
     private HashMap<String, ArrayList<String>> fillWeeklySchedule(List<Map<String, String>> meetings){
         HashMap<String, ArrayList<String>> course_cells = new HashMap<>();
         ArrayList<String> cells_to_assign;
-
+        //Assign colors to course cells
+        int colorIndex = 0;
+        String[] colorArray = getResources().getStringArray(R.array.colors);
+        HashMap<String, Integer> usedCourses = new HashMap<>();
         for(int i = 0; i < meetings.size(); i++){
             Map<String, String> meetTime = meetings.get(i);
             String course = meetTime.get("course");
@@ -155,6 +223,16 @@ public class PostScheduleFragment extends Fragment {
             for(int k = 0; k < cells_to_assign.size(); k++){
                 String viewName = cells_to_assign.get(k);
                 cell = (TextView)getView().findViewById(getResources().getIdentifier(viewName, "id", getActivity().getPackageName()));
+                //Use previous color for this course or next color if different course
+                if(usedCourses.containsKey(course)){
+                    int previousColor = usedCourses.get(course);
+                    cell.setBackgroundColor(Color.parseColor(colorArray[previousColor]));
+                }
+                else {
+                    cell.setBackgroundColor(Color.parseColor(colorArray[colorIndex]));
+                    usedCourses.put(course, colorIndex);
+                    colorIndex++;
+                }
                 cell.setText(course);
             }
         }

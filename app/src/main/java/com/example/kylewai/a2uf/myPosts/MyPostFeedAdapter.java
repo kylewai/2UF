@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -29,6 +30,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -42,6 +44,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.view.ActionMode;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class MyPostFeedAdapter extends FirestoreRecyclerAdapter<Post, MyPostFeedAdapter.FeedPostViewHolder> {
@@ -130,8 +133,8 @@ public class MyPostFeedAdapter extends FirestoreRecyclerAdapter<Post, MyPostFeed
                                                         notifyDataSetChanged();
                                                     }
                                                 });
-                                        mode.finish();
                                     }
+                                    mode.finish();
                                 }
                             }
                     );
@@ -160,6 +163,12 @@ public class MyPostFeedAdapter extends FirestoreRecyclerAdapter<Post, MyPostFeed
 
     @Override
     protected void onBindViewHolder(@NonNull MyPostFeedAdapter.FeedPostViewHolder holder, int position, @NonNull Post model) {
+        if(position % 2 == 0){
+            holder.itemView.setBackgroundColor(ResourcesCompat.getColor(holder.itemView.getResources(), R.color.pewter, null));
+        }
+        else{
+            holder.itemView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+        }
         holder.setPost(model);
     }
 
@@ -216,6 +225,26 @@ public class MyPostFeedAdapter extends FirestoreRecyclerAdapter<Post, MyPostFeed
             description.setText(post.getDescription());
             major.setText(post.getMajor());
             likes.setText(String.valueOf(post.getLikes()));
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            db.collection("users")
+                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                    .collection("likedPosts")
+                    .document(mPost.getDocumentId())
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if(task.isSuccessful()){
+                                DocumentSnapshot doc = task.getResult();
+                                if(doc.exists()){
+                                    thumbs.setImageResource(R.drawable.liked_post);
+                                }
+                                else{
+                                    thumbs.setImageResource(R.drawable.like);
+                                }
+                            }
+                        }
+                    });
 
             Timestamp timeStamp = post.getDateCreated();
             Date date = timeStamp.toDate();

@@ -3,6 +3,7 @@ package com.example.kylewai.a2uf.mockList;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -10,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,11 +21,15 @@ import com.example.kylewai.a2uf.R;
 import com.example.kylewai.a2uf.com.example.kylewai.firebasemodel.UserMock;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.auth.User;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -157,6 +163,13 @@ public class MockListAdapter extends FirestoreRecyclerAdapter<UserMock, MockList
 
     @Override
     protected void onBindViewHolder(@NonNull MockListAdapter.MockListViewHolder holder, int position, @NonNull UserMock model) {
+//        if(position % 2 == 0){
+//            holder.itemView.setBackgroundColor(ResourcesCompat.getColor(holder.itemView.getResources(), R.color.pewter, null));
+//        }
+//        else{
+//            holder.itemView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+//        }
+        holder.itemView.setBackgroundColor(Color.parseColor("#FFFFFF"));
         holder.setMock(model, getSnapshots().getSnapshot(position).getId());
     }
 
@@ -175,6 +188,7 @@ public class MockListAdapter extends FirestoreRecyclerAdapter<UserMock, MockList
         CheckBox checkBox;
         UserMock userMock;
         String mockId;
+        ImageView star;
         public MockListViewHolder(final View itemView){
             super(itemView);
             itemView.setOnClickListener(this);
@@ -182,6 +196,7 @@ public class MockListAdapter extends FirestoreRecyclerAdapter<UserMock, MockList
             nameView = itemView.findViewById(R.id.name);
             dateCreated = itemView.findViewById(R.id.dateCreated);
             checkBox = itemView.findViewById(R.id.checkBox);
+            star = itemView.findViewById(R.id.star);
         }
 
         void setMock(UserMock userMock, String mockId){
@@ -203,6 +218,9 @@ public class MockListAdapter extends FirestoreRecyclerAdapter<UserMock, MockList
             this.userMock = userMock;
             nameView.setText(userMock.getMockName());
 
+            if(userMock.getFavorite()){
+                star.setVisibility(View.VISIBLE);
+            }
             Timestamp timeStamp = userMock.getDateCreated();
             Date date = timeStamp.toDate();
             Date currDate = new Date();

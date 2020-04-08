@@ -15,99 +15,16 @@
         android:orientation="vertical"
         android:padding="10dp">
 
-        <TextView
-            android:id="@+id/code"
-            android:layout_width="236dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:text="Code"
-            android:textColor="@color/textOnPrimary"
-            android:textSize="36sp"
-            android:transitionName="expand" />
-
         <Button
             android:id="@+id/dropButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/code"
+            android:layout_below="@id/close"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="0dp"
             android:layout_marginEnd="0dp"
             android:backgroundTint="@color/colorSecondaryLight"
             android:text="Drop" />
-
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="236dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/code"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="24dp"
-            android:text="Name"
-            android:textColor="@color/textOnPrimary"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/description"
-            android:layout_width="236dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/name"
-            android:layout_marginTop="8dp"
-            android:shadowDx="1"
-            android:text="description"
-            android:textColor="@color/textOnPrimary"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/department"
-            android:layout_width="236dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/description"
-            android:layout_marginTop="8dp"
-            android:text="department"
-            android:textColor="@color/textOnPrimary"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/prereqs"
-            android:layout_width="236dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/department"
-            android:layout_marginTop="8dp"
-            android:text="prereqs"
-            android:textColor="@color/textOnPrimary"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/instructors"
-            android:layout_width="236dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/prereqs"
-            android:layout_marginTop="8dp"
-            android:text="instructors"
-            android:textColor="@color/textOnPrimary"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/meetTimes"
-            android:layout_width="236dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/instructors"
-            android:layout_marginTop="8dp"
-            android:text="meetTimes"
-            android:textColor="@color/textOnPrimary"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/examTime"
-            android:layout_width="236dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/meetTimes"
-            android:layout_marginTop="8dp"
-            android:text="examTime"
-            android:textColor="@color/textOnPrimary"
-            android:textSize="20sp" />
 
         <Button
             android:id="@+id/close"
@@ -167,12 +84,204 @@
             android:background="@color/colorSecondary" />
 
         <View
-            android:id="@+id/divider7"
+            android:id="@+id/divider24"
             android:layout_width="236dp"
             android:layout_height="1dp"
-            android:layout_below="@+id/instructors"
+            android:layout_below="@id/coreqs"
             android:layout_marginTop="0dp"
             android:background="@color/colorSecondary" />
+
+        <View
+            android:id="@+id/divider21"
+            android:layout_width="236dp"
+            android:layout_height="1dp"
+            android:layout_below="@id/instructors"
+            android:layout_marginTop="0dp"
+            android:background="@color/colorSecondary" />
+
+        <View
+            android:id="@+id/divider22"
+            android:layout_width="236dp"
+            android:layout_height="1dp"
+            android:layout_below="@id/meetTimes"
+            android:layout_marginTop="0dp"
+            android:background="@color/colorSecondary" />
+
+        <View
+            android:id="@+id/divider23"
+            android:layout_width="236dp"
+            android:layout_height="1dp"
+            android:layout_below="@id/examTime"
+            android:layout_marginTop="0dp"
+            android:background="@color/colorSecondary" />
+
+        <TextView
+            android:id="@+id/code"
+            android:layout_width="236dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:text="Code"
+            android:textColor="@color/textOnPrimary"
+            android:textSize="30sp"
+            android:transitionName="expand" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="236dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/code"
+            android:layout_marginTop="24dp"
+            android:text="Name"
+            android:textColor="@color/textOnPrimary"
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/description_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/name"
+            android:layout_marginTop="8dp"
+            android:text="Description:"
+            android:textStyle="bold"
+            android:textColor="@color/textOnPrimary"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/description_label"
+            android:layout_marginTop="4dp"
+            android:textStyle="italic"
+            android:text="description this is very long description about course will it work"
+            android:textColor="@color/textOnPrimary"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/department_label"
+            android:layout_width="236dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/description"
+            android:layout_marginTop="8dp"
+            android:textStyle="bold"
+            android:text="Department:"
+            android:textColor="@color/textOnPrimary"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/department"
+            android:layout_width="236dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/department_label"
+            android:layout_marginTop="4dp"
+            android:text="department"
+            android:textColor="@color/textOnPrimary"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/prereqs_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/department"
+            android:layout_marginTop="8dp"
+            android:textStyle="bold"
+            android:text="Prereqs:"
+            android:textColor="@color/textOnPrimary"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/prereqs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/prereqs_label"
+            android:layout_marginTop="4dp"
+            android:text="prereqs"
+            android:textColor="@color/textOnPrimary"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/coreqs_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/prereqs"
+            android:layout_marginTop="8dp"
+            android:textStyle="bold"
+            android:text="Coreqs:"
+            android:textColor="@color/textOnPrimary"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/coreqs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/coreqs_label"
+            android:layout_marginTop="4dp"
+            android:text="prereqs"
+            android:textColor="@color/textOnPrimary"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/instructors_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/coreqs"
+            android:layout_marginTop="8dp"
+            android:textStyle="bold"
+            android:text="Instructors:"
+            android:textColor="@color/textOnPrimary"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/instructors"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/instructors_label"
+            android:layout_marginTop="4dp"
+            android:text="instructors"
+            android:textColor="@color/textOnPrimary"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/meetTimes_label"
+            android:layout_width="236dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/instructors"
+            android:layout_marginTop="8dp"
+            android:textStyle="bold"
+            android:text="Meetings:"
+            android:textColor="@color/textOnPrimary"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/meetTimes"
+            android:layout_width="236dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/meetTimes_label"
+            android:layout_marginTop="4dp"
+            android:text="meetTimes"
+            android:textColor="@color/textOnPrimary"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/examTime_label"
+            android:layout_width="236dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/meetTimes"
+            android:layout_marginTop="8dp"
+            android:textStyle="bold"
+            android:text="Exam Time:"
+            android:textColor="@color/textOnPrimary"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/examTime"
+            android:layout_width="236dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/examTime_label"
+            android:layout_marginTop="4dp"
+            android:text="examTime"
+            android:textColor="@color/textOnPrimary"
+            android:textSize="14sp" />
 
     </RelativeLayout>
 </ScrollView>

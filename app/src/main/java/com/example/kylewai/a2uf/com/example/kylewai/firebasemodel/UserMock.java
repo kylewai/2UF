@@ -14,21 +14,26 @@ import java.util.Map;
 public class UserMock implements Parcelable {
     List<String> classes;
     Timestamp dateCreated;
+    boolean favorite;
     String mockId; //NOT USED!!!
     String mockName;
     List<Map<String, String>> weeklyMeetTimes;
 
     public UserMock(){}
 
-    public UserMock(List<String> classes, Timestamp dateCreated, String mockId, String mockName, List<Map<String, String>> weeklyMeetTimes){
+    public UserMock(List<String> classes, Timestamp dateCreated, String mockId,
+                    String mockName, List<Map<String, String>> weeklyMeetTimes,
+                    boolean favorite){
         this.classes = classes;
         this.dateCreated = dateCreated;
         this.mockId = mockId;
         this.mockName = mockName;
         this.weeklyMeetTimes = weeklyMeetTimes;
+        this.favorite = favorite;
     }
 
     protected UserMock(Parcel in) {
+        favorite = in.readByte() != 0;
         classes = in.createStringArrayList();
         dateCreated = in.readParcelable(Timestamp.class.getClassLoader());
         mockId = in.readString();
@@ -60,6 +65,11 @@ public class UserMock implements Parcelable {
         }
     };
 
+
+    public boolean getFavorite(){
+        return favorite;
+    }
+
     public List<String> getClasses() {
         return classes;
     }
@@ -87,6 +97,7 @@ public class UserMock implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeByte((byte) (favorite ? 1 : 0));
         parcel.writeStringList(classes);
         parcel.writeParcelable(dateCreated, i);
         parcel.writeString(mockId);

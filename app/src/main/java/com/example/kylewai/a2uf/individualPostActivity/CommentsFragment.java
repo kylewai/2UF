@@ -82,7 +82,7 @@ public class CommentsFragment extends Fragment {
         FirestoreRecyclerOptions<Comment> firestoreRecyclerOptions = new FirestoreRecyclerOptions.Builder<Comment>()
                 .setQuery(query, Comment.class)
                 .build();
-        adapter = new CommentsRecyclerAdapter(firestoreRecyclerOptions);
+        adapter = new CommentsRecyclerAdapter(firestoreRecyclerOptions, getContext());
         recyclerView = view.findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);

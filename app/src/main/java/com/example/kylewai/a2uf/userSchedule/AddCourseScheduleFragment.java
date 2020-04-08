@@ -1,6 +1,7 @@
 package com.example.kylewai.a2uf.userSchedule;
 
 
+import android.graphics.Color;
 import android.net.sip.SipSession;
 import android.os.Bundle;
 import android.util.Log;
@@ -129,7 +130,10 @@ public class AddCourseScheduleFragment extends Fragment {
     private HashMap<String, ArrayList<String>> fillWeeklySchedule(List<Map<String, String>> meetings){
         HashMap<String, ArrayList<String>> course_cells = new HashMap<>();
         ArrayList<String> cells_to_assign;
-
+        //Assign colors to course cells
+        int colorIndex = 0;
+        String[] colorArray = getResources().getStringArray(R.array.colors);
+        HashMap<String, Integer> usedCourses = new HashMap<>();
         for(int i = 0; i < meetings.size(); i++){
             Map<String, String> meetTime = meetings.get(i);
             String course = meetTime.get("course");
@@ -152,6 +156,16 @@ public class AddCourseScheduleFragment extends Fragment {
             for(int k = 0; k < cells_to_assign.size(); k++){
                 String viewName = cells_to_assign.get(k);
                 cell = (TextView)getView().findViewById(getResources().getIdentifier(viewName, "id", getActivity().getPackageName()));
+                //Use previous color for this course or next color if different course
+                if(usedCourses.containsKey(course)){
+                    int previousColor = usedCourses.get(course);
+                    cell.setBackgroundColor(Color.parseColor(colorArray[previousColor]));
+                }
+                else {
+                    cell.setBackgroundColor(Color.parseColor(colorArray[colorIndex]));
+                    usedCourses.put(course, colorIndex);
+                    colorIndex++;
+                }
                 cell.setText(course);
             }
         }

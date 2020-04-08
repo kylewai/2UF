@@ -4,8 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.res.ResourcesCompat;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -116,7 +120,7 @@ public class MakePostActivity extends AppCompatActivity{
                                                             @Override
                                                             public void onComplete(@NonNull Task<Void> task) {
                                                                 if(task.isSuccessful()){
-                                                                    Toast.makeText(MakePostActivity.this, "Post Sent", Toast.LENGTH_LONG).show();
+                                                                    makeToast();
                                                                     Intent intent = new Intent(MakePostActivity.this, MainActivity.class);
                                                                     startActivity(intent);
                                                                 }
@@ -176,6 +180,17 @@ public class MakePostActivity extends AppCompatActivity{
                 });
     }
 
+    private void makeToast(){
+        //Customize toast
+        Toast toast = Toast.makeText(this, "Post sent!", Toast.LENGTH_LONG);
+        View toastView = toast.getView();
+        toastView.getBackground().setColorFilter(ResourcesCompat.getColor(getResources(), R.color.colorSecondaryLight, null), PorterDuff.Mode.SRC_IN);
+        TextView toastText = toastView.findViewById(android.R.id.message);
+        toastText.setTextColor(ResourcesCompat.getColor(getResources(), R.color.textOnSecondary, null));
+        toastText.setTypeface(toastText.getTypeface(), Typeface.BOLD);
+        toastText.setShadowLayer(0, 0, 0, Color.TRANSPARENT);
+        toast.show();
+    }
 
 
 }

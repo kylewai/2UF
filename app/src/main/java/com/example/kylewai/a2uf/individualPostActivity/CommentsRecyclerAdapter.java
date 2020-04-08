@@ -1,9 +1,14 @@
 package com.example.kylewai.a2uf.individualPostActivity;
 
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.kylewai.a2uf.R;
 import com.example.kylewai.a2uf.com.example.kylewai.firebasemodel.Comment;
@@ -14,16 +19,26 @@ import com.google.firebase.Timestamp;
 import java.util.Date;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class CommentsRecyclerAdapter extends FirestoreRecyclerAdapter<Comment, CommentsRecyclerAdapter.CommentViewHolder> {
 
-    public CommentsRecyclerAdapter(@NonNull FirestoreRecyclerOptions<Comment> options) {
+    Context context;
+
+    public CommentsRecyclerAdapter(@NonNull FirestoreRecyclerOptions<Comment> options, Context context) {
         super(options);
+        this.context = context;
     }
 
     @Override
     protected void onBindViewHolder(@NonNull CommentsRecyclerAdapter.CommentViewHolder holder, int position, @NonNull Comment model) {
+        if(position % 2 == 0){
+            holder.itemView.setBackgroundColor(ResourcesCompat.getColor(holder.itemView.getResources(), R.color.pewter, null));
+        }
+        else{
+            holder.itemView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+        }
         holder.setComment(model);
     }
 

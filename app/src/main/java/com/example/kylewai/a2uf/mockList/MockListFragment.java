@@ -114,8 +114,8 @@ public class MockListFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getContext(), VERTICAL);
-        recyclerView.addItemDecoration(dividerItemDecoration);
+//        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getContext(), VERTICAL);
+//        recyclerView.addItemDecoration(dividerItemDecoration);
 
         Log.i("MockListFrag", "firstAdapter");
         spinner = view.findViewById(R.id.spinner);
@@ -196,7 +196,7 @@ public class MockListFragment extends Fragment {
                                             QuerySnapshot d = task.getResult();
                                             if(d.isEmpty()){
                                                 DocumentReference doc = db.collection("userMocks").document(uid).collection("mockInfo").document();
-                                                UserMock mock = new UserMock(new ArrayList<String>(), Timestamp.now(), "", mockName, new ArrayList<Map<String, String>>());
+                                                UserMock mock = new UserMock(new ArrayList<String>(), Timestamp.now(), "", mockName, new ArrayList<Map<String, String>>(), false);
                                                 doc.set(mock)
                                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                             @Override

@@ -40,6 +40,7 @@ public class PostScheduleExpandFragment extends Fragment {
     TextView textView_description;
     TextView textView_department;
     TextView textView_prereqs;
+    TextView textView_coreqs;
     TextView textView_instructors;
     TextView textView_meetTimes;
     TextView textView_examTime;
@@ -71,34 +72,48 @@ public class PostScheduleExpandFragment extends Fragment {
         textView_name = view.findViewById(R.id.name);
         textView_name.setText(this.name);
         textView_description = view.findViewById(R.id.description);
-        textView_description.setText("Description: \n" + this.description);
+        textView_description.setText(this.description);
         textView_prereqs = view.findViewById(R.id.prereqs);
-        String prereqsString = "" + this.prereqs;
+        String[] prereqsSplit = this.prereqs.split(":|\\.", -1);
+        String prereqsString = prereqsSplit[1].substring(1);
         textView_prereqs.setText(prereqsString);
+        textView_coreqs = view.findViewById(R.id.coreqs);
+        TextView coreqs_label = view.findViewById(R.id.coreqs_label);
+        Log.i("Postym", prereqsSplit.length + "");
+        if(prereqsSplit.length == 3){
+            textView_coreqs.setVisibility(View.GONE);
+            coreqs_label.setVisibility(View.GONE);
+        }
+        else{
+            textView_coreqs.setText(prereqsSplit[3].substring(1));
+        }
         textView_instructors = view.findViewById(R.id.instructors);
-        String instructorString = "Instructors:";
+        String instructorString = "";
+        int k = 0;
         for(String instructor : instructors){
-            instructorString += "\n" + instructor;
+            instructorString += (k == 0)? instructor : "\n" + instructor;
+            k++;
         }
 
         textView_instructors.setText(instructorString);
 
         textView_department = view.findViewById(R.id.department);
-        textView_department.setText("Department: \n" + this.department);
+        textView_department.setText(this.department);
 
         textView_meetTimes = view.findViewById(R.id.meetTimes);
-        String meetTimesString = "Meetings:\n";
+        String meetTimesString = "";
+        k = 0;
         for(Map<String, String> meetTime : meetTimes){
-            meetTimesString += "\n Days: " + meetTime.get("days");
-            meetTimesString += "\n Periods: " + meetTime.get("periodBegin");
+            meetTimesString += (k == 0)? "Days: " + meetTime.get("days") : "\n\nDays: " + meetTime.get("days");
+            meetTimesString += "\nPeriods: " + meetTime.get("periodBegin");
             meetTimesString += " - " + meetTime.get("periodEnd");
-            meetTimesString += "\n Building: " + meetTime.get("building");
-            meetTimesString += "\n Room: " + meetTime.get("room");
-            meetTimesString += "\n";
+            meetTimesString += "\nBuilding: " + meetTime.get("building");
+            meetTimesString += "\nRoom: " + meetTime.get("room");
+            k++;
         }
         textView_meetTimes.setText(meetTimesString);
         textView_examTime = view.findViewById(R.id.examTime);
-        textView_examTime.setText("Exam Time: \n" + this.examTime);
+        textView_examTime.setText(this.examTime);
         return view;
     }
 
