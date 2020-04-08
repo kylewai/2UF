@@ -61,14 +61,18 @@ public class ExpandFragment extends Fragment {
     TextView textView_meetTimes;
     TextView textView_examTime;
     TextView textView_coreqs;
+    TextView textView_credits;
     static PagerAdapter.FirstFragmentListener listener;
     int fragmentSelector;
+    String credits;
 
     public ExpandFragment(){}
 
     public ExpandFragment(String courseCode, String name, String description,
                           String department, String prereqs,
-                          List<String> instructors, List<Map<String, String>> meetTimes, String examTime, String classNumber, int fragmentSelector) {
+                          List<String> instructors, List<Map<String, String>> meetTimes,
+                          String examTime, String classNumber, int fragmentSelector,
+                          String credits) {
         // Required empty public constructor
         this.fragmentSelector = fragmentSelector;
         this.courseCode = courseCode;
@@ -80,12 +84,13 @@ public class ExpandFragment extends Fragment {
         this.meetTimes = meetTimes;
         this.examTime = examTime;
         this.classNumber = classNumber;
+        this.credits = credits;
     }
 
     public ExpandFragment(String courseCode, String name, String description,
                           String department, String prereqs,
                           List<String> instructors, List<Map<String, String>> meetTimes, String examTime, String classNumber,
-                          PagerAdapter.FirstFragmentListener listener) {
+                          PagerAdapter.FirstFragmentListener listener, String credits) {
         // Required empty public constructor
         ExpandFragment.listener = listener;
         this.courseCode = courseCode;
@@ -97,6 +102,7 @@ public class ExpandFragment extends Fragment {
         this.meetTimes = meetTimes;
         this.examTime = examTime;
         this.classNumber = classNumber;
+        this.credits = credits;
     }
 
 
@@ -109,6 +115,8 @@ public class ExpandFragment extends Fragment {
         textView_code.setText(this.courseCode);
         textView_name = view.findViewById(R.id.name);
         textView_name.setText(this.name);
+        textView_credits = view.findViewById(R.id.credits);
+        textView_credits.setText(this.credits);
         textView_description = view.findViewById(R.id.description);
         textView_description.setText(this.description);
         textView_prereqs = view.findViewById(R.id.prereqs);
@@ -214,7 +222,7 @@ public class ExpandFragment extends Fragment {
             closeButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    listener.onSwitch(courseCode, name, description, department, prereqs, instructors, meetTimes, examTime, classNumber);
+                    listener.onSwitch(courseCode, name, description, department, prereqs, instructors, meetTimes, examTime, classNumber, credits);
                 }
             });
         }
@@ -266,6 +274,6 @@ public class ExpandFragment extends Fragment {
                     });
         }
         makeToast();
-        listener.onSwitch(courseCode, name, description, department, prereqs, instructors, meetTimes, examTime, classNumber);
+        listener.onSwitch(courseCode, name, description, department, prereqs, instructors, meetTimes, examTime, classNumber, credits);
     }
 }

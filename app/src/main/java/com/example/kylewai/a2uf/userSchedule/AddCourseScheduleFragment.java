@@ -236,6 +236,7 @@ public class AddCourseScheduleFragment extends Fragment {
         final List<String> instructors = course.getInstructors();
         final List<Map<String, String>> meetTimes = course.getMeetTimes();
         final String examTime = course.getExamTime();
+        final String credits = course.getCredits();
 //        LayoutInflater inflater = LayoutInflater.from(getActivity());
 //        final View course_expand_view = inflater.inflate(R.layout.fragment_course_expand, null);
 //
@@ -258,7 +259,7 @@ public class AddCourseScheduleFragment extends Fragment {
 //                Transition transition = TransitionInflater.from(getActivity()).inflateTransition(R.transition.expand_transition);
 //                TransitionManager.go(expand_scene, transition);
                 int fragmentSelector = 2;
-                Fragment fr = new ExpandFragment(courseCode, name, description, department, prereqs, instructors, meetTimes, examTime, classNumber, fragmentSelector);
+                Fragment fr = new ExpandFragment(courseCode, name, description, department, prereqs, instructors, meetTimes, examTime, classNumber, fragmentSelector, credits);
                 fr.setSharedElementEnterTransition(new ChangeBounds());
                 fr.setSharedElementReturnTransition(new ChangeBounds());
                 fr.setEnterTransition(new ChangeBounds());

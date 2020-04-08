@@ -17,14 +17,14 @@
 
             <ImageView
                 android:id="@+id/like_button"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
-                android:layout_marginRight="3dp"
-                android:layout_marginTop="3dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_alignParentRight="true"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="3dp"
                 android:layout_marginBottom="4dp"
-                android:clickable="true"
                 android:background="?attr/selectableItemBackground"
+                android:clickable="true"
                 android:padding="10dp"
                 app:srcCompat="@drawable/like" />
 

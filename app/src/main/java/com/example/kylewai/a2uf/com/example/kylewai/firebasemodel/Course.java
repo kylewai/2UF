@@ -9,6 +9,7 @@ import java.util.Map;
 public class Course {
     @DocumentId
     private String classNumber;
+    private String credits;
     private String code;
     private String name;
     private String prereqs;
@@ -26,7 +27,7 @@ public class Course {
 
     public Course(String code, String name, String prereqs,
                   String department, String description, String examTime,
-                  List<String> instructors, List<Map<String, String>> meetTimes){
+                  List<String> instructors, List<Map<String, String>> meetTimes, String credits){
         this.code = code;
         this.name = name;
         this.prereqs = prereqs;
@@ -36,8 +37,13 @@ public class Course {
         this.instructors = instructors;
         this.examTime = examTime;
         this.meetTimes = meetTimes;
+        this.credits = credits;
     }
 
+
+    public String getCredits() {
+        return credits;
+    }
 
     public String getClassNumber() {
         return classNumber;

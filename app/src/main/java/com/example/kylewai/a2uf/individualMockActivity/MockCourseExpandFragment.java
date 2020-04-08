@@ -1,6 +1,9 @@
 package com.example.kylewai.a2uf.individualMockActivity;
 
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
@@ -47,6 +50,7 @@ public class MockCourseExpandFragment extends Fragment {
     List<String> instructors;
     List<Map<String, String>> meetTimes;
     String examTime;
+    String credits;
 
     TextView textView_code;
     TextView textView_name;
@@ -57,6 +61,7 @@ public class MockCourseExpandFragment extends Fragment {
     TextView textView_instructors;
     TextView textView_meetTimes;
     TextView textView_examTime;
+    TextView textView_credits;
     static MockAddClassPagerAdapter.FirstFragmentListener mListener;
 
     public MockCourseExpandFragment(){}
@@ -64,7 +69,7 @@ public class MockCourseExpandFragment extends Fragment {
     public MockCourseExpandFragment(String courseCode, String name, String description,
                                     String department, String prereqs,
                                     List<String> instructors, List<Map<String, String>> meetTimes, String examTime, String classNumber, String mockId,
-                                    MockAddClassPagerAdapter.FirstFragmentListener listener) {
+                                    MockAddClassPagerAdapter.FirstFragmentListener listener, String credits) {
         // Required empty public constructor
         mListener = listener;
         this.mockId = mockId;
@@ -77,6 +82,7 @@ public class MockCourseExpandFragment extends Fragment {
         this.meetTimes = meetTimes;
         this.examTime = examTime;
         this.classNumber = classNumber;
+        this.credits = credits;
     }
 
 
@@ -89,6 +95,8 @@ public class MockCourseExpandFragment extends Fragment {
         textView_code.setText(this.courseCode);
         textView_name = view.findViewById(R.id.name);
         textView_name.setText(this.name);
+        textView_credits = view.findViewById(R.id.credits);
+        textView_credits.setText(this.credits == null ? "" : this.credits);
         textView_description = view.findViewById(R.id.description);
         textView_description.setText(this.description);
         textView_prereqs = view.findViewById(R.id.prereqs);
@@ -139,43 +147,29 @@ public class MockCourseExpandFragment extends Fragment {
         textView_examTime.setText(this.examTime);
 
         Button dropButton = view.findViewById(R.id.dropButton);
-        dropButton.setOnClickListener(new View.OnClickListener()
-        {
+        dropButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
-                List<Map<String, String>> meetTimesToDrop = new ArrayList<>();
-                Map<String, String> dropClass = new HashMap<>();
-                //dropClass.put("classNumber", );
-                for(Map<String, String> meetTime : meetTimes) {
-                    dropClass.clear();
-                    dropClass.put("classNumber", classNumber);
-                    dropClass.put("course", courseCode);
-                    dropClass.put("days", meetTime.get("days"));
-                    dropClass.put("periodBegin", meetTime.get("periodBegin"));
-                    dropClass.put("periodEnd", meetTime.get("periodEnd"));
-                    Log.d("dbUpdate", dropClass.toString());
-                    final FirebaseFirestore database = FirebaseFirestore.getInstance();
-                    database.collection("userMocks")
-                            .document(UserScheduleFragment.transferuid)
-                            .collection("mockInfo")
-                            .document(mockId)
-                            .update("weeklyMeetTimes", FieldValue.arrayRemove(dropClass))
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    Log.d("dbUpdate", "DocumentSnapshot successfully updated!");
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Log.w("dbUpdate", "Error updating document", e);
-                                }
-                            });
-                }
-                makeToast();
-                mListener.onSwitch(courseCode, name, description, department, prereqs, instructors, meetTimes, examTime, classNumber);
+            public void onClick(View view) {
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+                alertDialog.setTitle("Delete Posts");
+
+                alertDialog.setPositiveButton("Confirm",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dropClass();
+                            }
+                        }
+                );
+
+                alertDialog.setNegativeButton("Cancel",
+                        new Dialog.OnClickListener(){
+                            public void onClick(DialogInterface dialogInterface, int i){
+                                dialogInterface.cancel();
+                            }
+                        }
+                );
+                alertDialog.show();
             }
         });
 
@@ -194,7 +188,7 @@ public class MockCourseExpandFragment extends Fragment {
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mListener.onSwitch(courseCode, name, description, department, prereqs, instructors, meetTimes, examTime, classNumber);
+                mListener.onSwitch(courseCode, name, description, department, prereqs, instructors, meetTimes, examTime, classNumber, credits);
             }
         });
     }
@@ -209,6 +203,41 @@ public class MockCourseExpandFragment extends Fragment {
         toastText.setTypeface(toastText.getTypeface(), Typeface.BOLD);
         toastText.setShadowLayer(0, 0, 0, Color.TRANSPARENT);
         toast.show();
+    }
+
+    private void dropClass(){
+        List<Map<String, String>> meetTimesToDrop = new ArrayList<>();
+        Map<String, String> dropClass = new HashMap<>();
+        //dropClass.put("classNumber", );
+        for(Map<String, String> meetTime : meetTimes) {
+            dropClass.clear();
+            dropClass.put("classNumber", classNumber);
+            dropClass.put("course", courseCode);
+            dropClass.put("days", meetTime.get("days"));
+            dropClass.put("periodBegin", meetTime.get("periodBegin"));
+            dropClass.put("periodEnd", meetTime.get("periodEnd"));
+            Log.d("dbUpdate", dropClass.toString());
+            final FirebaseFirestore database = FirebaseFirestore.getInstance();
+            database.collection("userMocks")
+                    .document(UserScheduleFragment.transferuid)
+                    .collection("mockInfo")
+                    .document(mockId)
+                    .update("weeklyMeetTimes", FieldValue.arrayRemove(dropClass))
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Log.d("dbUpdate", "DocumentSnapshot successfully updated!");
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w("dbUpdate", "Error updating document", e);
+                        }
+                    });
+        }
+        makeToast();
+        mListener.onSwitch(courseCode, name, description, department, prereqs, instructors, meetTimes, examTime, classNumber, credits);
     }
 
 }

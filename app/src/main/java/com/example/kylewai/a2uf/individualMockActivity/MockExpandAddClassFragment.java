@@ -51,6 +51,8 @@ public class MockExpandAddClassFragment extends Fragment {
     List<String> instructors;
     List<Map<String, String>> meetTimes;
     String examTime;
+    String credits;
+
     TextView textView_code;
     TextView textView_name;
     TextView textView_description;
@@ -60,6 +62,7 @@ public class MockExpandAddClassFragment extends Fragment {
     TextView textView_instructors;
     TextView textView_meetTimes;
     TextView textView_examTime;
+    TextView textView_credits;
     String mockId;
 
     public MockExpandAddClassFragment(Section sectionObj, String mockId) {
@@ -74,6 +77,7 @@ public class MockExpandAddClassFragment extends Fragment {
         this.meetTimes = convertMeetTimes(sectionObj.getMeetTimes());
         this.examTime = sectionObj.getFinalExam();
         this.classNumber = sectionObj.getClassNumber();
+        this.credits = sectionObj.getCredits();
     }
 
 
@@ -85,6 +89,8 @@ public class MockExpandAddClassFragment extends Fragment {
         textView_code = view.findViewById(R.id.code);
         textView_code.setText(this.courseCode);
         textView_name = view.findViewById(R.id.name);
+        textView_credits = view.findViewById(R.id.credits);
+        textView_credits.setText(this.credits);
         textView_name.setText(this.name);
         textView_description = view.findViewById(R.id.description);
         textView_description.setText(this.description);
@@ -252,7 +258,7 @@ public class MockExpandAddClassFragment extends Fragment {
                                     Map<String, Object> addClass = new HashMap<>();
 
                                     //meetTimes.add(addWeeklyMeetTime);
-                                    Course course = new Course(courseCode, name, prereqs, department, description, examTime, instructors, meetTimes);
+                                    Course course = new Course(courseCode, name, prereqs, department, description, examTime, instructors, meetTimes, credits);
 
 
                                     //Store class info

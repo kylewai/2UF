@@ -30,6 +30,14 @@
             android:background="@color/colorSecondary" />
 
         <View
+            android:id="@+id/divider30"
+            android:layout_width="236dp"
+            android:layout_height="1dp"
+            android:layout_below="@+id/credits"
+            android:layout_marginTop="0dp"
+            android:background="@color/colorSecondary" />
+
+        <View
             android:id="@+id/divider18"
             android:layout_width="236dp"
             android:layout_height="1dp"
@@ -106,10 +114,31 @@
             android:textSize="22sp" />
 
         <TextView
-            android:id="@+id/description_label"
+            android:id="@+id/credits_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/name"
+            android:layout_marginTop="8dp"
+            android:text="Credits:"
+            android:textStyle="bold"
+            android:textColor="@color/textOnPrimary"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/credits"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/credits_label"
+            android:layout_marginTop="4dp"
+            android:text="3"
+            android:textColor="@color/textOnPrimary"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/description_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/credits"
             android:layout_marginTop="8dp"
             android:text="Description:"
             android:textStyle="bold"

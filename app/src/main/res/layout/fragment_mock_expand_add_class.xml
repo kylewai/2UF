@@ -13,7 +13,7 @@
         android:orientation="vertical">
 
         <View
-            android:id="@+id/divider8"
+            android:id="@+id/divider16"
             android:layout_width="236dp"
             android:layout_height="1dp"
             android:layout_below="@+id/code"
@@ -21,7 +21,7 @@
             android:background="@color/colorSecondary" />
 
         <View
-            android:id="@+id/divider24"
+            android:id="@+id/divider17"
             android:layout_width="236dp"
             android:layout_height="1dp"
             android:layout_below="@+id/name"
@@ -29,7 +29,15 @@
             android:background="@color/colorSecondary" />
 
         <View
-            android:id="@+id/divider25"
+            android:id="@+id/divider30"
+            android:layout_width="236dp"
+            android:layout_height="1dp"
+            android:layout_below="@+id/credits"
+            android:layout_marginTop="0dp"
+            android:background="@color/colorSecondary" />
+
+        <View
+            android:id="@+id/divider18"
             android:layout_width="236dp"
             android:layout_height="1dp"
             android:layout_below="@+id/description"
@@ -37,23 +45,23 @@
             android:background="@color/colorSecondary" />
 
         <View
-            android:id="@+id/divider26"
+            android:id="@+id/divider19"
             android:layout_width="236dp"
             android:layout_height="1dp"
-            android:layout_below="@+id/department"
+            android:layout_below="@id/department"
             android:layout_marginTop="0dp"
             android:background="@color/colorSecondary" />
 
         <View
-            android:id="@+id/divider27"
+            android:id="@+id/divider20"
             android:layout_width="236dp"
             android:layout_height="1dp"
-            android:layout_below="@+id/prereqs"
+            android:layout_below="@id/prereqs"
             android:layout_marginTop="0dp"
             android:background="@color/colorSecondary" />
 
         <View
-            android:id="@+id/divider28"
+            android:id="@+id/divider24"
             android:layout_width="236dp"
             android:layout_height="1dp"
             android:layout_below="@id/coreqs"
@@ -105,10 +113,31 @@
             android:textSize="22sp" />
 
         <TextView
-            android:id="@+id/description_label"
+            android:id="@+id/credits_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/name"
+            android:layout_marginTop="8dp"
+            android:text="Credits:"
+            android:textStyle="bold"
+            android:textColor="@color/textOnPrimary"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/credits"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/credits_label"
+            android:layout_marginTop="4dp"
+            android:text="3"
+            android:textColor="@color/textOnPrimary"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/description_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/credits"
             android:layout_marginTop="8dp"
             android:text="Description:"
             android:textStyle="bold"

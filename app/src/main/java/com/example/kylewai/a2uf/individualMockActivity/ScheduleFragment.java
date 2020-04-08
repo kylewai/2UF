@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -78,12 +79,7 @@ public class ScheduleFragment extends Fragment {
     public void onPause() {
         mockListener.remove();
         super.onPause();
-    }
-
-    @Override
-    public void onDestroy() {
-        mockListener.remove();
-        super.onDestroy();
+        Log.d("Schedy", "Removed");
     }
 
     @Override
@@ -92,8 +88,40 @@ public class ScheduleFragment extends Fragment {
         listenForUpdates();
     }
 
+    private void resetSchedule(){
+        ArrayList<String> textViewIDs = new ArrayList<>();
+        String[]days = {"M", "T", "W", "R", "F", "S"};
+        for(int i = 0; i < 14; i++){
+            for(int j = 0; j < days.length; j++) {
+                textViewIDs.add(days[j] + periods[i]);
+            }
+        }
+        for(int i = 0; i < textViewIDs.size(); i++){
+            int row = periodToInt(textViewIDs.get(i).substring(1));
+            TextView textView = (TextView)getView().findViewById(getResources().getIdentifier(textViewIDs.get(i), "id", getActivity().getPackageName()));
+            textView.setText("");
+            if(row % 2 == 0){
+                textView.setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.pewter, null));
+            }
+            else{
+                textView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            }
+
+        }
+    }
+
+    private int periodToInt(String period){
+        switch(period){
+            case "E1": return 12;
+            case "E2": return 13;
+            case "E3": return 14;
+            default: return Integer.parseInt(period);
+        }
+    }
+
     private void listenForUpdates(){
         DocumentReference docRef = db.collection("userMocks").document(UserScheduleFragment.transferuid).collection("mockInfo").document(getArguments().getString("mockId"));
+        Log.d("Schedy", "Listening!");
         mockListener = docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirebaseFirestoreException e) {
@@ -102,9 +130,13 @@ public class ScheduleFragment extends Fragment {
                     return;
                 }
                 if (snapshot != null && snapshot.exists()) {
+                    Log.d("Schedy", "Got updates");
                     UserMock mock = snapshot.toObject(UserMock.class);
+                    while(getContext() == null){};
                     if(getContext() != null) {
                         List<Map<String, String>> meetings = mock.getWeeklyMeetTimes();
+                        Log.d("Schedy", "hey");
+                        resetSchedule();
                         HashMap<String, ArrayList<String>> course_cells = fillWeeklySchedule(meetings);
                         getClassInfo(course_cells);
                     }
@@ -225,6 +257,7 @@ public class ScheduleFragment extends Fragment {
         final List<String> instructors = course.getInstructors();
         final List<Map<String, String>> meetTimes = course.getMeetTimes();
         final String examTime = course.getExamTime();
+        final String credits = course.getCredits();
 //        LayoutInflater inflater = LayoutInflater.from(getActivity());
 //        final View course_expand_view = inflater.inflate(R.layout.fragment_course_expand, null);
 //
@@ -241,7 +274,7 @@ public class ScheduleFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Log.d("Schedafrag", "woe");
-                mListener.onSwitch(courseCode, name, description, department, prereqs, instructors, meetTimes, examTime, classNumber);
+                mListener.onSwitch(courseCode, name, description, department, prereqs, instructors, meetTimes, examTime, classNumber, credits);
 //                ViewGroup sceneRoot = (ViewGroup) getActivity().findViewById(R.id.scene_root).getParent().getParent();
 //                TableLayout tableLayout = getView().findViewById(R.id.table_layout);
 //                Scene schedule_scene = new Scene(container, tableLayout);

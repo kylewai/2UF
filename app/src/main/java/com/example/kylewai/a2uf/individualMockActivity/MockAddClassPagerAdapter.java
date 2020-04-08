@@ -33,12 +33,12 @@ public class MockAddClassPagerAdapter extends FragmentStatePagerAdapter {
                              String department, String prereqs,
                              List<String> instructors,
                              List<Map<String, String>> meetTimes,
-                             String examTime, String classNumber){
+                             String examTime, String classNumber, String credits){
 
             fm.beginTransaction().remove(firstFragment).commit();
             if(firstFragment instanceof ScheduleFragment){
                 firstFragment = new MockCourseExpandFragment(courseCode, name, description, department, prereqs,
-                        instructors, meetTimes, examTime, classNumber, mockId, listener);
+                        instructors, meetTimes, examTime, classNumber, mockId, listener, credits);
             }
             else{
                 firstFragment = ScheduleFragment.newInstance(userMock, mockId, listener);

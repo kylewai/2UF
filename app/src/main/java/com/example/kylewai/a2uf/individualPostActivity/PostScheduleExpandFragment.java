@@ -34,6 +34,7 @@ public class PostScheduleExpandFragment extends Fragment {
     List<String> instructors;
     List<Map<String, String>> meetTimes;
     String examTime;
+    String credits;
 
     TextView textView_code;
     TextView textView_name;
@@ -44,6 +45,7 @@ public class PostScheduleExpandFragment extends Fragment {
     TextView textView_instructors;
     TextView textView_meetTimes;
     TextView textView_examTime;
+    TextView textView_credits;
 
     public PostScheduleExpandFragment(){}
 
@@ -58,6 +60,7 @@ public class PostScheduleExpandFragment extends Fragment {
         this.meetTimes = course.getMeetTimes();
         this.examTime = course.getExamTime();
         this.classNumber = course.getClassNumber();
+        this.credits = course.getCredits();
     }
 
 
@@ -71,6 +74,8 @@ public class PostScheduleExpandFragment extends Fragment {
         textView_code.setText(this.courseCode);
         textView_name = view.findViewById(R.id.name);
         textView_name.setText(this.name);
+        textView_credits = view.findViewById(R.id.credits);
+        textView_credits.setText(this.credits == null ? "" : this.credits);
         textView_description = view.findViewById(R.id.description);
         textView_description.setText(this.description);
         textView_prereqs = view.findViewById(R.id.prereqs);

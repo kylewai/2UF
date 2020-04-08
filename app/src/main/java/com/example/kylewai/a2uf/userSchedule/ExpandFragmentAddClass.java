@@ -48,6 +48,8 @@ public class ExpandFragmentAddClass extends Fragment {
     String coreqs;
     List<String> instructors;
     List<Map<String, String>> meetTimes;
+    String credits;
+
     String examTime;
     TextView textView_code;
     TextView textView_name;
@@ -58,13 +60,14 @@ public class ExpandFragmentAddClass extends Fragment {
     TextView textView_instructors;
     TextView textView_meetTimes;
     TextView textView_examTime;
+    TextView textView_credits;
 
     public ExpandFragmentAddClass(){}
 
     public ExpandFragmentAddClass(String courseCode, String name, String description,
                                   String department, String prereqs, String coreqs,
                                   List<String> instructors, List<Map<String, String>> meetTimes,
-                                  String examTime, String classNumber) {
+                                  String examTime, String classNumber, String credits) {
         // Required empty public constructor
         this.courseCode = courseCode;
         this.name = name;
@@ -76,6 +79,7 @@ public class ExpandFragmentAddClass extends Fragment {
         this.meetTimes = meetTimes;
         this.examTime = examTime;
         this.classNumber = classNumber;
+        this.credits = credits;
     }
 
 
@@ -88,6 +92,8 @@ public class ExpandFragmentAddClass extends Fragment {
         textView_code.setText(this.courseCode);
         textView_name = view.findViewById(R.id.name);
         textView_name.setText(this.name);
+        textView_credits = view.findViewById(R.id.credits);
+        textView_credits.setText(this.credits);
         textView_description = view.findViewById(R.id.description);
         textView_description.setText(this.description);
         textView_prereqs = view.findViewById(R.id.prereqs);
@@ -292,7 +298,7 @@ public class ExpandFragmentAddClass extends Fragment {
                                     Map<String, Object> addClass = new HashMap<>();
 
                                     //meetTimes.add(addWeeklyMeetTime);
-                                    Course course = new Course(courseCode, name, prereqs, department, description, examTime, instructors, meetTimes);
+                                    Course course = new Course(courseCode, name, prereqs, department, description, examTime, instructors, meetTimes, credits);
 
 
                                     //Store class info

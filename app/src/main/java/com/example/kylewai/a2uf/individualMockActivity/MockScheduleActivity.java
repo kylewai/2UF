@@ -38,6 +38,7 @@ public class MockScheduleActivity extends AppCompatActivity {
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = findViewById(R.id.pager);
+        viewPager.setOffscreenPageLimit(2);
         final MockAddClassPagerAdapter adapter = new MockAddClassPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount(), data, mockId);
 
         viewPager.setAdapter(adapter);

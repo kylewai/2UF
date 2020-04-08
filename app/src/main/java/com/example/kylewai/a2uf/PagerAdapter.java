@@ -21,16 +21,17 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
     FragmentManager fm;
     Fragment firstFragment;
     FirstFragmentListener listener;
+
     public final class FirstFragmentListener{
         public void onSwitch(String courseCode, String name, String description,
                              String department, String prereqs,
                              List<String> instructors,
                              List<Map<String, String>> meetTimes,
-                             String examTime, String classNumber){
+                             String examTime, String classNumber, String credits){
             fm.beginTransaction().remove(firstFragment).commit();
             if(firstFragment instanceof UserScheduleFragment){
                 firstFragment = new ExpandFragment(courseCode, name, description, department, prereqs,
-                        instructors, meetTimes, examTime, classNumber, listener);
+                        instructors, meetTimes, examTime, classNumber, listener, credits);
             }
             else{
                 firstFragment = UserScheduleFragment.newInstance(uid, listener);

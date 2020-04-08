@@ -145,7 +145,11 @@ class SOCCourseViewHolder extends RecyclerView.ViewHolder implements View.OnClic
 
         if(fragmentDecider == 1)
         {
-            fr = new ExpandFragmentAddClass(sectionObj.getCode(), sectionObj.getName(), sectionObj.getDescription(), sectionObj.getDeptName(), sectionObj.getPrerequisites(), sectionObj.getPrerequisites(), instructors, meetTimes, sectionObj.getFinalExam(), sectionObj.getClassNumber());
+            fr = new ExpandFragmentAddClass(sectionObj.getCode(), sectionObj.getName(),
+                    sectionObj.getDescription(), sectionObj.getDeptName(),
+                    sectionObj.getPrerequisites(), sectionObj.getPrerequisites(),
+                    instructors, meetTimes, sectionObj.getFinalExam(), sectionObj.getClassNumber(),
+                    sectionObj.getCredits());
         }
         else if(fragmentDecider == 2){
             fr = new MockExpandAddClassFragment(sectionObj, mAdapter.mockId);
@@ -153,7 +157,11 @@ class SOCCourseViewHolder extends RecyclerView.ViewHolder implements View.OnClic
         else
         {
             int fragmentSelector = 2;
-            fr = new ExpandFragment(sectionObj.getCode(), sectionObj.getName(), sectionObj.getDescription(), sectionObj.getDeptName(), sectionObj.getPrerequisites(), instructors, meetTimes, sectionObj.getFinalExam(), sectionObj.getClassNumber(), fragmentSelector);
+            fr = new ExpandFragment(sectionObj.getCode(), sectionObj.getName(),
+                    sectionObj.getDescription(), sectionObj.getDeptName(),
+                    sectionObj.getPrerequisites(), instructors, meetTimes,
+                    sectionObj.getFinalExam(), sectionObj.getClassNumber(),
+                    fragmentSelector, sectionObj.getCredits());
         }
 
         //Fragment fr = new ExpandFragment(sectionObj.getCode(), sectionObj.getName(), sectionObj.getDescription(), sectionObj.getDeptName(), sectionObj.getPrerequisites(), sectionObj.getPrerequisites(), instructors, meetTimes, sectionObj.getFinalExam(), sectionObj.getClassNumber());
