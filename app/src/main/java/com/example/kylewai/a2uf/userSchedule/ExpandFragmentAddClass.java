@@ -98,11 +98,17 @@ public class ExpandFragmentAddClass extends Fragment {
         textView_description.setText(this.description);
         textView_prereqs = view.findViewById(R.id.prereqs);
         String[] prereqsSplit = this.prereqs.split(":|\\.", -1);
-        String prereqsString = prereqsSplit[1].substring(1);
+        String prereqsString;
+        if(this.prereqs.equals("")) {
+            prereqsString = "";
+        }
+        else{
+            prereqsString = prereqsSplit[1].substring(1);
+        }
         textView_prereqs.setText(prereqsString);
         textView_coreqs = view.findViewById(R.id.coreqs);
         TextView coreqs_label = view.findViewById(R.id.coreqs_label);
-        if(prereqsSplit.length == 3){
+        if(prereqsSplit.length <= 3){
             textView_coreqs.setVisibility(View.GONE);
             coreqs_label.setVisibility(View.GONE);
         }

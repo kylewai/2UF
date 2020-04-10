@@ -176,7 +176,7 @@ public class ExpandFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
-                    alertDialog.setTitle("Delete Posts");
+                    alertDialog.setTitle("Drop " + courseCode + "?");
 
                     alertDialog.setPositiveButton("Confirm",
                             new DialogInterface.OnClickListener() {
