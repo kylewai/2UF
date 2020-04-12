@@ -128,7 +128,6 @@ public class ForumFragment extends Fragment {
                                             favoritePosts.add("aaaaaaaa");
                                         }
                                         Query query = db.collection("posts")
-                                                .whereEqualTo("author", username)
                                                 .whereIn(FieldPath.documentId(), favoritePosts).orderBy("dateCreated", Query.Direction.DESCENDING);
                                         FirestoreRecyclerOptions<Post> firestoreRecyclerOptions = new FirestoreRecyclerOptions.Builder<Post>()
                                                 .setQuery(query, Post.class)

@@ -96,12 +96,15 @@ public class ForumFeedAdapter extends FirestoreRecyclerAdapter<Post, ForumFeedAd
                     //Favorite
                     else {
                         for (String postId : selected) {
+                            Log.d("Helpy", "what");
                             //Add to favorites
                             db.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                     .update("favoritePosts", FieldValue.arrayUnion(postId))
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
+                                            Log.d("Helpy", "what");
+                                            Log.d("Helpy", FirebaseAuth.getInstance().getCurrentUser().getUid());
                                         }
                                     });
                         }
