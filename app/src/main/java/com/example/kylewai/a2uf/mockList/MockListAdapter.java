@@ -228,7 +228,7 @@ public class MockListAdapter extends FirestoreRecyclerAdapter<UserMock, MockList
             String timeElapsed;
             long unitsElapsed = millisElapsed;
             if((unitsElapsed = unitsElapsed / 1000) < 60){
-                timeElapsed = "Created " + unitsElapsed + "seconds ago";
+                timeElapsed = "Created " + unitsElapsed + " seconds ago";
             }
             else if((unitsElapsed = unitsElapsed / 60) < 60){
                 timeElapsed = "Created " + unitsElapsed + " minutes ago";
