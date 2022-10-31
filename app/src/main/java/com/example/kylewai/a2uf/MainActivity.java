@@ -120,8 +120,6 @@ public class MainActivity extends AppCompatActivity {
 
         viewPager = findViewById(R.id.pager);
         viewPager.setOffscreenPageLimit(4);
-        Log.d("MainC", "Yeahnew");
-        Log.d("MainC", uid);
         final PagerAdapter adapter = new PagerAdapter
                 (getSupportFragmentManager(), tabLayout.getTabCount(), uid);
 
@@ -145,7 +143,5 @@ public class MainActivity extends AppCompatActivity {
            public void onTabReselected(TabLayout.Tab tab) {
            }
        });
-
-
     }
 }

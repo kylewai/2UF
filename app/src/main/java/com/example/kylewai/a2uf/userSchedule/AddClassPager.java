@@ -42,8 +42,6 @@ public class AddClassPager extends AppCompatActivity {
 
         final ViewPager viewPager = findViewById(R.id.pager);
         viewPager.setOffscreenPageLimit(4);
-        //Log.d("MainC", "Yeahnew");
-        //Log.d("MainC", uid);
         final PagerAdapterUserScheduleAddClass adapter = new PagerAdapterUserScheduleAddClass(getSupportFragmentManager(), tabLayout.getTabCount(), UserID);
 
         viewPager.setAdapter(adapter);

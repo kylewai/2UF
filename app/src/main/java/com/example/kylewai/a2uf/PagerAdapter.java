@@ -48,7 +48,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
         this.fm = fm;
         this.mNumOfTabs = NumOfTabs;
         this.uid = uid;
-        listener = new FirstFragmentListener();
+        this.listener = new FirstFragmentListener();
     }
 
     @Override

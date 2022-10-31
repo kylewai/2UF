@@ -38,7 +38,7 @@ import java.util.List;
 //Lists courses in SOC
 public class SOCFragment extends Fragment {
 
-    private static final String BASEENDPOINT = "https://one.ufl.edu/apix/soc/schedule/?category=RES&term=2201";
+    private static final String BASEENDPOINT = "https://one.ufl.edu/apix/soc/schedule/?category=RES&term=2228";
     private String endPoint;
     private List<Section> sectionList;
     private RequestQueue requestQueue;

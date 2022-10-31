@@ -74,7 +74,6 @@ public class UserScheduleFragment extends Fragment {
         Bundle args = new Bundle();
         args.putString("uid", uid);
         UserScheduleFragment.listener = listener;
-        Log.d("userscheda", "man");
         userFrag.setArguments(args);
         return userFrag;
     }
@@ -87,10 +86,8 @@ public class UserScheduleFragment extends Fragment {
         transferuid = uid;
         db = FirebaseFirestore.getInstance();
         this.container = container;
-        Log.d("userscheda", "oncreate");
         //Horrible workaround for having to use fragment transitions to prevent previous transitions from showing
         //up again.
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         View view = inflater.inflate(R.layout.fragment_user_schedule, container, false);
 
         //Gets floating action button and gives it the functionality of opening a new
@@ -99,9 +96,6 @@ public class UserScheduleFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Toast toast = Toast.makeText(getActivity().getApplicationContext(), "User Schedule", Toast.LENGTH_LONG);
-//                toast.show();
-
                 //Creating and opening a new activity for adding classes.
                 Intent intent = new Intent(getActivity(), AddClassPager.class); //Was: AddClassActivity.class
                 String message = uid;
@@ -121,7 +115,6 @@ public class UserScheduleFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getData(view);
-        Log.d("userscheda", "onviewcreated");
         listenForUpdates();
 //        setSceneForTransition();
     }
@@ -147,23 +140,20 @@ public class UserScheduleFragment extends Fragment {
 
     private void listenForUpdates(){
         DocumentReference docRef = db.collection("users").document(this.uid);
-        userScheduleListener = docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirebaseFirestoreException e) {
-                if(e != null){
-                    Log.d("UserScheduleFragment", "Error listening for update");
-                    return;
+        userScheduleListener = docRef.addSnapshotListener((snapshot, e) -> {
+            if(e != null){
+                Log.d("UserScheduleFragment", "Error listening for update");
+                return;
+            }
+            if (snapshot != null && snapshot.exists()) {
+                AppUser user = snapshot.toObject(AppUser.class);
+                if(getContext() != null) {
+                    List<Map<String, String>> meetings = user.getWeeklyMeetTimes();
+                    HashMap<String, ArrayList<String>> course_cells = fillWeeklySchedule(meetings);
+                    getClassInfo(course_cells);
                 }
-                if (snapshot != null && snapshot.exists()) {
-                    AppUser user = snapshot.toObject(AppUser.class);
-                    if(getContext() != null) {
-                        List<Map<String, String>> meetings = user.getWeeklyMeetTimes();
-                        HashMap<String, ArrayList<String>> course_cells = fillWeeklySchedule(meetings);
-                        getClassInfo(course_cells);
-                    }
-                } else {
-                    Log.d("UserScheduleFragment", "Current data: null");
-                }
+            } else {
+                Log.d("UserScheduleFragment", "Current data: null");
             }
         });
     }
@@ -268,13 +258,10 @@ public class UserScheduleFragment extends Fragment {
             docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    Log.d("UserSchedule", "Complete");
                     if (task.isSuccessful()) {
                         DocumentSnapshot document = task.getResult();
                         if (document.exists()) {
-                            Log.d("UserSchedule", "got");
                             Course course = document.toObject(Course.class);
-                            Log.d("UserSchedule", "Finally" + course.getCode());
 
                             for(String cell : cells){
                                 addCourseOnClickListener(course, cell, classNumber);
